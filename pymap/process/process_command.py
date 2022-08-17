@@ -28,10 +28,10 @@ class RunProcess:
                 stdout=subprocess.PIPE,
                 # stdin=subprocess.PIPE,
                 universal_newlines=True,
-                
+                input=std_in.encode()
             )
 
-            res = res.communicate(input=std_in.encode())[0]
+            # res = res.communicate(input='data_to_write')[0]
 
 
             log.info(res.stderr)
