@@ -4,7 +4,7 @@ import logging as log
 
 def open_file(fn: str) -> list:
     with open(fn, "r") as f:
-        return f.read()
+        return f.readlines()
 
 
 def save_file(fn: str, data: list) -> list:
