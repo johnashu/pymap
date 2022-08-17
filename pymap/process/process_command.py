@@ -9,18 +9,22 @@ class RunProcess:
             return False, "No context provided"
         command_list = [prog, method]
         for k, v in context.items():
-            command_list += [f"--{k}", v]
+            command_list += [f"--{k}", f"{v}"]
 
         log.info(command_list)
+        log.info(" ".join(command_list))
 
-        res = subprocess.run(
-            command_list,
-            stderr=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            universal_newlines=True,
-        )
+        try:
+            res = subprocess.run(
+                command_list,
+                stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                universal_newlines=True,
+            )
 
-        log.info(res.stderr)
-        log.info(res.stdout)
+            log.info(res.stderr)
+            log.info(res.stdout)
+        except subprocess.SubprocessError as e:
+            log.error(e)
 
         return True, res
