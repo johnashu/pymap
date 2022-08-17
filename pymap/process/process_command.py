@@ -16,6 +16,8 @@ class RunProcess:
         if args:
             command_list += args
 
+        command_list = [x for x in command_list if x]
+
         log.info(command_list)
         log.info(" ".join(command_list))
 
