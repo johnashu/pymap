@@ -16,3 +16,14 @@ api_data_fn = "api_data"
 
 prog = "marker"
 
+base_fields = {
+    "rpcaddr": "127.0.0.1",
+    "rpcport": 7445,
+    "keystore": "/Users/alex/data/atlas-1/keystore/UTC--2022-06-14T05-46-17.312327000Z--73bc690093b9dd0400c91886184a60cc127b2c33",
+    "password": "password",
+    "namePrefix": "validator",
+    "lockedNum": 1000000,
+    "signerPriv": "0x",
+    "validator": "0x",
+    "voteNum": 10000,
+}
