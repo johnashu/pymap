@@ -20,6 +20,8 @@ class Methods(RunProcess, PrintStuff):
             setattr(self, k, str(v))
 
     def new_validator(self, datadir: str = "") -> None:
+        if not datadir:
+            datadir = take_input(str(), "Enter Directory to save keystore: ")
         args = ["account", "new"]
         context = {"datadir": datadir}
         self.run_method("", context, args=args, prog="atlas")
