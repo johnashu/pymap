@@ -22,9 +22,10 @@ class Methods(RunProcess, PrintStuff):
     def new_validator(self, datadir: str = "") -> None:
         if not datadir:
             datadir = take_input(str, "Enter Directory to save keystore: ")
+            password = take_input(str, "Enter Keystore password: ")
         args = ["account", "new"]
         context = {"datadir": datadir}
-        self.run_method("", context, args=args, prog="atlas")
+        self.run_method("", context, args=args, prog="atlas", std_in = password)
 
     def create_account(self) -> None:
         """

@@ -5,7 +5,7 @@ from typing import Tuple
 
 class RunProcess:
     def run_method(
-        self, method: str, context: dict, args: list = [], prog: str = marker
+        self, method: str, context: dict, args: list = [], prog: str = marker, std_in: str = ''
     ) -> Tuple[bool, str]:
         if not context:
             return False, "No context provided"
@@ -26,8 +26,11 @@ class RunProcess:
                 command_list,
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE,
+                stdin=subprocess.PIPE,
                 universal_newlines=True,
+                input=std_in.encode()
             )
+
 
             log.info(res.stderr)
             log.info(res.stdout)
