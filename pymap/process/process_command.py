@@ -37,5 +37,6 @@ class RunProcess:
             log.info(p.communicate()[1])
         except subprocess.SubprocessError as e:
             log.error(e)
+            return False, e
 
         return True, res
