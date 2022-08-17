@@ -30,3 +30,6 @@ base_fields = {
 }
 
 ignore = ("binaries",)
+main_menu = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "messages", "fullmenu.txt"
+)
