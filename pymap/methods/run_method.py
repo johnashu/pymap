@@ -11,7 +11,9 @@ class Methods(RunProcess):
             setattr(self, k, str(v))
 
     def create_account(self) -> None:
-        # Create account
+        """
+        https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount
+        """
 
         context = {**self.base_context, **{"namePrefix": "validator"}}
         self.run_method("createAccount", context)
