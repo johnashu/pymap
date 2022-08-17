@@ -28,7 +28,7 @@ class RunProcess:
                 stdout=subprocess.PIPE,
                 # stdin=subprocess.PIPE,
                 universal_newlines=True,
-                input=std_in.encode()
+                input=std_in
             )
 
             # res = res.communicate(input='data_to_write')[0]
