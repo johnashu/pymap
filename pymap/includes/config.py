@@ -14,7 +14,8 @@ version = "1.0.0"
 
 api_data_fn = "api_data"
 
-prog = "marker"
+marker = "marker"
+atlas = "atlas"
 
 base_fields = {
     "rpcaddr": "127.0.0.1",
@@ -27,3 +28,5 @@ base_fields = {
     "validator": "0x",
     "voteNum": 10000,
 }
+
+ignore = ("binaries",)

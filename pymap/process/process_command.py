@@ -4,12 +4,17 @@ from typing import Tuple
 
 
 class RunProcess:
-    def run_method(self, method: str, context: dict) -> Tuple[bool, str]:
+    def run_method(
+        self, method: str, context: dict, args: list = [], prog: str = marker
+    ) -> Tuple[bool, str]:
         if not context:
             return False, "No context provided"
         command_list = [os.path.join(envs.binaries, prog), method]
         for k, v in context.items():
-            command_list += [f"--{k}", f"{v}"]
+            if k not in ignore:
+                command_list += [f"--{k}", f"{v}"]
+        if args:
+            command_list += args
 
         log.info(command_list)
         log.info(" ".join(command_list))

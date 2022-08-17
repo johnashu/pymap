@@ -7,4 +7,5 @@ print(from_env)
 
 m = Methods(**from_env)
 
+# m.new_validator(datadir="test")
 m.create_account()
