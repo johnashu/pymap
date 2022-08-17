@@ -18,7 +18,7 @@ def create_data_path(pth: str, data_path: str = "data") -> str:
     cwd = os.getcwd()
     p = join(cwd, data_path, pth)
     if not exists(p):
-        os.mkdir(p)
+        os.makedirs(p)
     return p
 
 
