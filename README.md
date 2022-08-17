@@ -4,14 +4,15 @@ Python interface for validators for interacting with the MAP protocol
 
 # Install Python / pip
 
+```bash
 sudo apt update && sudo apt upgrade -y
 
 apt install python3-pip
 
 pip3 install -r requirements.txt
+```
 
-
-# Create env file
+# Create .env file
 
 Data to be included in the `.env` file.  
 
