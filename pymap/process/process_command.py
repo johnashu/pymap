@@ -26,10 +26,12 @@ class RunProcess:
                 command_list,
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE,
-                stdin=subprocess.PIPE,
+                # stdin=subprocess.PIPE,
                 universal_newlines=True,
-                input=std_in.encode()
+                
             )
+
+            res = res.communicate(input=std_in.encode())[0]
 
 
             log.info(res.stderr)
