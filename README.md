@@ -31,5 +31,7 @@ validator="0x"
 voteNum=10000
 ```
 
+run `example.py` to get started..
+
 # Check Logs
 tail -f /var/log/syslog
