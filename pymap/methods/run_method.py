@@ -21,7 +21,7 @@ class Methods(RunProcess, PrintStuff):
 
     def new_validator(self, datadir: str = "") -> None:
         if not datadir:
-            datadir = take_input(str(), "Enter Directory to save keystore: ")
+            datadir = take_input(str, "Enter Directory to save keystore: ")
         args = ["account", "new"]
         context = {"datadir": datadir}
         self.run_method("", context, args=args, prog="atlas")
@@ -37,20 +37,20 @@ class Methods(RunProcess, PrintStuff):
     def locked_map(self, locked_num: int = 0) -> None:
         # Lock MAP in Validator - Stake
         if locked_num == 0:
-            locked_num = take_input(int(), "Enter amount of MAP to lock: ")
+            locked_num = take_input(int, "Enter amount of MAP to lock: ")
         context = {**self.base_context, **{"lockedNum": locked_num}}
         self.run_method("lockedMAP", context)
 
     def authorise_validator_signer(self, signer_pkey: str = "") -> None:
         if not signer_pkey:
-            signer_pkey = take_input(str(), "Enter Signer Private Key: ")
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
         context = {**self.base_context, **{"signerPriv": signer_pkey}}
         self.run_method("authorizeValidatorSigner", context)
 
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
         if vote_num == 0:
-            vote_num = take_input(int(), "Enter amount of MAP to vote with: ")
-            validator = take_input(str(), "Enter validator to vote for: ")
+            vote_num = take_input(int, "Enter amount of MAP to vote with: ")
+            validator = take_input(str, "Enter validator to vote for: ")
         context = {**self.base_context, **{"validator": validator, "voteNum": vote_num}}
         self.run_method("vote", context)
 
