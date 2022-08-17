@@ -22,20 +22,19 @@ class RunProcess:
         log.info(" ".join(command_list))
 
         try:
-            res = subprocess.run(
+            p = subprocess.Popen(
                 command_list,
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE,
-                # stdin=subprocess.PIPE,
+                stdin=subprocess.PIPE,
                 universal_newlines=True,
-                input=std_in
             )
 
-            # res = res.communicate(input='data_to_write')[0]
-
-
-            log.info(res.stderr)
-            log.info(res.stdout)
+            if std_in:
+                res = p.communicate(input=std_in)[0]
+            
+            log.info(p.communicate()[0])
+            log.info(p.communicate()[1])
         except subprocess.SubprocessError as e:
             log.error(e)
 

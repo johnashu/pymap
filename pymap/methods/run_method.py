@@ -1,7 +1,7 @@
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.tools.utils import take_input
-
+from getpass import getpass
 
 class Methods(RunProcess, PrintStuff):
 
@@ -22,10 +22,10 @@ class Methods(RunProcess, PrintStuff):
     def new_validator(self, datadir: str = "") -> None:
         if not datadir:
             datadir = take_input(str, "Enter Directory to save keystore: ")
-            password = take_input(str, "Enter Keystore password: ")
+            password = getpass(prompt="Enter Keystore password: ")
         args = ["account", "new"]
         context = {"datadir": datadir}
-        self.run_method("", context, args=args, prog="atlas", std_in = password)
+        self.run_method("", context, args=args, prog="atlas", std_in = f'{password}\n{password}\n')
 
     def create_account(self) -> None:
         """
