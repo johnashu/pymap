@@ -8,4 +8,5 @@ print(from_env)
 m = Methods(**from_env)
 
 # m.new_validator(datadir="test")
-m.create_account()
+# m.create_account()
+m.get_total_votes_for_eligible_validator()
