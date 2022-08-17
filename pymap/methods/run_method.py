@@ -37,3 +37,11 @@ class Methods(RunProcess):
     def authorise_validator_signer(self, signer_pkey: int) -> None:
         context = {**self.base_context, **{"signerPriv": signer_pkey}}
         self.run_method("authorizeValidatorSigner", context)
+
+    def vote(self, vote_num: int, validator: str) -> None:
+        context = {**self.base_context, **{"validator": validator}}
+        self.run_method("vote", context)
+
+    def get_total_votes_for_eligible_validator(self) -> None:
+        context = {"rpcaddr": self.rpcaddr, "rpcport": self.rpcport}
+        self.run_method("getTotalVotesForEligibleValidators", context)
