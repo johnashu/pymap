@@ -41,27 +41,27 @@ class Methods(RunProcess, PrintStuff):
         """
 
         context = {**self.base_context, **{"namePrefix": "validator"}}
-        self.run_method("createAccount", context)
+        self.run_method("createAccount", context, shell=True)
 
     def locked_map(self, locked_num: int = 0) -> None:
         # Lock MAP in Validator - Stake
         if locked_num == 0:
             locked_num = take_input(int, "Enter amount of MAP to lock: ")
         context = {**self.base_context, **{"lockedNum": locked_num}}
-        self.run_method("lockedMAP", context)
+        self.run_method("lockedMAP", context, shell=True)
 
     def authorise_validator_signer(self, signer_pkey: str = "") -> None:
         if not signer_pkey:
             signer_pkey = take_input(str, "Enter Signer Private Key: ")
         context = {**self.base_context, **{"signerPriv": signer_pkey}}
-        self.run_method("authorizeValidatorSigner", context)
+        self.run_method("authorizeValidatorSigner", context, shell=True)
 
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
         if vote_num == 0:
             vote_num = take_input(int, "Enter amount of MAP to vote with: ")
             validator = take_input(str, "Enter validator to vote for: ")
         context = {**self.base_context, **{"validator": validator, "voteNum": vote_num}}
-        self.run_method("vote", context)
+        self.run_method("vote", context, shell=True)
 
     def get_total_votes_for_eligible_validator(self) -> None:
         context = {"rpcaddr": self.rpcaddr, "rpcport": self.rpcport}
