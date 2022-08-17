@@ -34,11 +34,11 @@ class RunProcess:
                 p.communicate(input=std_in)[0]
 
             out, err = p.communicate()
-            
+
             log.info(out)
-            log.info(err)
+            log.error(err)
         except subprocess.SubprocessError as e:
             log.error(e)
-            return False, e
+            return False, ('error', e)
 
         return True, (out, err)
