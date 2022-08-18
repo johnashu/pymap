@@ -65,5 +65,7 @@ class Methods(RunProcess, PrintStuff):
         self.run_method("vote", context)
 
     def get_total_votes_for_eligible_validator(self) -> None:
-        context = {"rpcaddr": self.rpcaddr, "rpcport": self.rpcport}
+        context = {"rpcaddr": self.rpcaddr}
+        if self.rpcport:
+            context.update({"rpcport": self.rpcport})
         self.run_method("getTotalVotesForEligibleValidators", context)
