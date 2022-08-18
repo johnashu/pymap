@@ -29,6 +29,7 @@ class AtlasMethods:
         miner_validator: str = "0x98efa292822eb7b3045c491e8ae4e82b3b1ac005",
         unlock: str = "0x98efa292822eb7b3045c491e8ae4e82b3b1ac005",
         syncmode: str = "full",
+        password: str = ''
     ) -> None:
         if not datadir:
             datadir = take_input(str, "Enter Directory to save keystore: ")
@@ -41,7 +42,7 @@ class AtlasMethods:
             "miner.validator": miner_validator,
             "unlock": unlock,
         }
-        self.run_method("", context, prog="atlas")
+        self.run_method("", context, prog="atlas", std_in=f"{password}\n")
 
 
 # ./atlas --datadir ./node --syncmode "full" --port 30321 --mine --miner.validator 0x98efa292822eb7b3045c491e8ae4e82b3b1ac005 --unlock 0x98efa292822eb7b3045c491e8ae4e82b3b1ac005
