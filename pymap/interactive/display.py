@@ -2,21 +2,20 @@ from colorama import Style
 
 
 class PrintStuff:
-    def __init__(self, reset: int = 0, **kw):
-        self.reset = reset
+    def __init__(self, **kw):
         self.print_stars = "*" * 93
         self.reset_stars = self.print_stars + Style.RESET_ALL
         super(PrintStuff, self).__init__()
 
-    def stars(self) -> None:
+    def stars(self, reset=0) -> None:
         p = self.print_stars
-        if self.reset:
+        if reset:
             p = self.reset_stars
         print(p)
 
-    def string_stars(self) -> str:
+    def string_stars(self, reset=0) -> str:
         p = self.print_stars
-        if self.reset:
+        if reset:
             p = self.reset_stars
         return p
 

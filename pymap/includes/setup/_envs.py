@@ -9,8 +9,8 @@ class Envs:
         config = dotenv_values(find_dotenv())
 
         for k, v in config.items():
-            if not v:
-                raise ValueError(f"No value for key {k} - Please update .env file!")
+            # if not v:
+            #     raise ValueError(f"No value for key {k} - Please update .env file!")
             try:
                 setattr(self, k, int(v))
             except (SyntaxError, ValueError):
