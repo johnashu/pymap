@@ -10,7 +10,7 @@ print(from_env)
 if __name__ == "__main__":
     # m = MarkerMethods(**from_env)
     i = InteractiveSetup(**from_env)
-    # i.start()'
+    i.start()
 
     rpc = RpcMethods()
     res = rpc.get_validators(endpoint=rpc_url)

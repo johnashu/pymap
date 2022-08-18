@@ -1,10 +1,12 @@
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
+from pymap.methods.altas_methods import AtlasMethods
 from pymap.tools.utils import take_input
-from getpass import getpass
+
+# from getpass import getpass
 
 
-class MarkerMethods(RunProcess, PrintStuff):
+class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
@@ -20,21 +22,21 @@ class MarkerMethods(RunProcess, PrintStuff):
         for k, v in base_fields.items():
             setattr(self, k, str(v))
 
-    def new_validator(self, datadir: str = "") -> None:
-        if not datadir:
-            datadir = take_input(str, "Enter Directory to save keystore: ")
-            pw1, pw2 = "1", "2"
-            while 1:
-                pw1 = getpass(prompt="Enter Keystore password: ")
-                pw2 = getpass(prompt="Re-Enter Keystore password: ")
-                if pw1 != pw2:
-                    print("Passwords do NOT match, Please try again!")
-                else:
-                    break
+    # def new_validator(self, datadir: str = "") -> None:
+    #     if not datadir:
+    #         datadir = take_input(str, "Enter Directory to save keystore: ")
+    #         pw1, pw2 = "1", "2"
+    #         while 1:
+    #             pw1 = getpass(prompt="Enter Keystore password: ")
+    #             pw2 = getpass(prompt="Re-Enter Keystore password: ")
+    #             if pw1 != pw2:
+    #                 print("Passwords do NOT match, Please try again!")
+    #             else:
+    #                 break
 
-        args = ["account", "new"]
-        context = {"datadir": datadir}
-        self.run_method("", context, args=args, prog="atlas", std_in=f"{pw1}\n{pw2}\n")
+    #     args = ["account", "new"]
+    #     context = {"datadir": datadir}
+    #     self.run_method("", context, args=args, prog="atlas", std_in=f"{pw1}\n{pw2}\n")
 
     def create_account(self) -> None:
         """
