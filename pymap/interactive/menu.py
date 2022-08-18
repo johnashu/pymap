@@ -39,7 +39,7 @@ class Menu(Methods):
             except ValueError:
                 os.system("clear")
                 self.whitespace()
-                self(reset=1).stars
+                self.stars(reset=1)
                 print(
                     "* "
                     + Fore.RED
@@ -47,7 +47,7 @@ class Menu(Methods):
                     + Style.RESET_ALL
                     + ": Only numbers are possible, please try your selection on the main menu once again."
                 )
-                self(reset=1).stars
+                self.stars(reset=1)
                 self.whitespace()
                 input("* Press ENTER to return to the main menu")
                 self.run_full_node()
@@ -56,16 +56,16 @@ class Menu(Methods):
 
     def finish_node(self):
         self.stars()
-        print("* Thanks for using the setup! Goodbye.")
+        print("* Thanks for using the tool! Goodbye.")
         self.stars()
         raise SystemExit(0)
 
     def reboot_server(self) -> str:
-        self(reset=1).stars
+        self.stars(reset=1)
         question = askYesNo(
             Fore.RED
             + "WARNING: YOU WILL MISS BLOCKS WHILE YOU REBOOT YOUR ENTIRE SERVER.\n\n"
-            + "Reconnect after a few moments & Run the Validator Toolbox Menu again with: python3 ~/validator-toolbox/toolbox/start.py\n"
+            + "Reconnect after a few moments & Run the Validator Toolbox Menu again\n"
             + Fore.WHITE
             + "Are you sure you would like to proceed with rebooting your server?\n\nType 'Yes' or 'No' to continue"
         )

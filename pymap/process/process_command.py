@@ -5,7 +5,13 @@ from typing import Tuple
 
 class RunProcess:
     def run_method(
-        self, method: str, context: dict, args: list = [], prog: str = marker, std_in: str = '', shell=False
+        self,
+        method: str,
+        context: dict,
+        args: list = [],
+        prog: str = marker,
+        std_in: str = "",
+        shell=False,
     ) -> Tuple[bool, str]:
         if not context:
             return False, "No context provided"
@@ -33,15 +39,15 @@ class RunProcess:
 
             if std_in:
                 p.communicate(input=std_in)[0]
-            else: 
-                p.communicate(input='\n')[0]
+            else:
+                p.communicate(input="\n")[0]
 
             out, err = p.communicate()
 
             log.info(out)
             log.error(err)
-        except subprocess.SubprocessError as e:
+        except (FileNotFoundError, subprocess.SubprocessError) as e:
             log.error(e)
-            return False, ('error', e)
+            return False, (command_list, e)
 
         return True, (out, err)
