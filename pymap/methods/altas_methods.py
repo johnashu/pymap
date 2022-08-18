@@ -37,7 +37,8 @@ class AtlasMethods:
             "datadir": datadir,
             "syncmode": syncmode,
             "port": port,
-            "mine --miner.validator": miner_validator,
+            "mine": "",
+            "miner.validator": miner_validator,
             "unlock": unlock,
         }
         self.run_method("", context, prog="atlas")
