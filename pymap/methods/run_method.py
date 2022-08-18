@@ -57,9 +57,22 @@ class Methods(RunProcess, PrintStuff):
         context = {**self.base_context, **{"signerPriv": signer_pkey}}
         self.run_method("authorizeValidatorSigner", context)
 
+    def register(self, commission: int = 0, signer_pkey: str = "") -> None:
+        if not signer_pkey:
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
+        if not commission:
+            # TODO: allow float input -> convert to Wei.
+            commission = take_input(int, "Enter Commission of validator")
+        context = {
+            **self.base_context,
+            **{"signerPriv": signer_pkey, "commission": commission},
+        }
+        self.run_method("register", context)
+
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
         if vote_num == 0:
             vote_num = take_input(int, "Enter amount of MAP to vote with: ")
+        if not validator:
             validator = take_input(str, "Enter validator to vote for: ")
         context = {**self.base_context, **{"validator": validator, "voteNum": vote_num}}
         self.run_method("vote", context)

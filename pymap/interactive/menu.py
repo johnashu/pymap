@@ -1,6 +1,5 @@
 import os
-from colorama import Style, Fore, Back
-from pymap.tools.file_op import open_file
+from colorama import Style, Fore
 from pymap.tools.utils import askYesNo
 from pymap.includes.config import main_menu
 from pymap.methods.run_method import Methods
@@ -10,17 +9,6 @@ class Menu(Methods):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
-    def menu_reset(self) -> None:
-        print(Style.RESET_ALL)
-        for x in open_file(main_menu):
-            x = x.strip()
-            try:
-                x = eval(x)
-            except SyntaxError:
-                pass
-            if x:
-                print(x)
-
     def run_full_node(self) -> None:
         menu_options = {
             0: self.finish_node,
@@ -28,12 +16,13 @@ class Menu(Methods):
             2: self.new_validator,
             3: self.create_account,
             4: self.locked_map,
-            5: self.authorise_validator_signer,
-            6: self.vote,
+            5: self.register,
+            6: self.authorise_validator_signer,
+            7: self.vote,
             999: self.reboot_server,
         }
         while True:
-            self.menu_reset()
+            self.display_from_file(main_menu)
             try:
                 option = int(input("Enter your option: "))
             except ValueError:
