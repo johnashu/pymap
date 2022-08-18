@@ -31,6 +31,7 @@ def get_validators(
     API Reference
     -------------
 
+
     """
 
     method = "istanbul_getValidators"
