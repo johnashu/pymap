@@ -1,44 +1,49 @@
-from pymap.rpc.request import rpc_request, _default_endpoint, _default_timeout
+from pymap.rpc.request import RpcRequest, _default_endpoint, _default_timeout
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
 
 
-def get_validators(
-    endpoint=_default_endpoint,
-    timeout=_default_timeout,
-) -> list:
-    """
-    Determine whether we are selected as validators who can participate in block generation
+class RpcMethods(RpcRequest):
+    def __init__(self) -> None:
+        pass
 
-    Parameters
-    ----------
-    endpoint: :obj:`str`, optional
-        Endpoint to send request to
-    timeout: :obj:`int`, optional
-        Timeout in seconds
+    def get_validators(
+        self,
+        endpoint=_default_endpoint,
+        timeout=_default_timeout,
+    ) -> list:
+        """
+        Determine whether we are selected as validators who can participate in block generation
 
-    Returns
-    -------
-    Json Response
+        Parameters
+        ----------
+        endpoint: :obj:`str`, optional
+            Endpoint to send request to
+        timeout: :obj:`int`, optional
+            Timeout in seconds
 
-    Raises
-    ------
-    InvalidRPCReplyError
-        If received unknown result from endpoint
+        Returns
+        -------
+        Json Response
 
-    API Reference
-    -------------
+        Raises
+        ------
+        InvalidRPCReplyError
+            If received unknown result from endpoint
+
+        API Reference
+        -------------
 
 
-    """
+        """
 
-    method = "istanbul_getValidators"
-    params = []
-    try:
-        return rpc_request(method, params=params, endpoint=endpoint, timeout=timeout)[
-            "result"
-        ]
-    except KeyError as e:
-        raise InvalidRPCReplyError(method, endpoint) from e
+        method = "istanbul_getValidators"
+        params = []
+        try:
+            return self.rpc_request(
+                method, params=params, endpoint=endpoint, timeout=timeout
+            )["result"]
+        except KeyError as e:
+            raise InvalidRPCReplyError(method, endpoint) from e
