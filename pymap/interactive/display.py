@@ -1,4 +1,5 @@
-from colorama import Style
+from colorama import Style, Fore, Back
+from pymap.tools.file_op import open_file
 
 
 class PrintStuff:
@@ -58,6 +59,17 @@ class PrintStuff:
         
         """
         print(p)
+
+    def display_from_file(self, fn) -> None:
+        print(Style.RESET_ALL)
+        for x in open_file(fn):
+            x = x.strip()
+            try:
+                x = eval(x)
+            except SyntaxError:
+                pass
+            if x:
+                print(x)
 
 
 # whitespace = PrintStuff.whitespace

@@ -4,8 +4,9 @@ print("*  [1] Check Vote Statistics          - This Nodes Current Stats")
 print("*  [2] Create New Validator")
 print("*  [3] Create New Account")
 print("*  [4] Lock MAP in Validator")
-print("*  [5] Authorise Signer")
-print("*  [6] Vote for Validator")
+print("*  [5] Register Validator")
+print("*  [6] Authorise Signer")
+print("*  [7] Vote for Validator")
 
 *********************************************************************************************
 print("*[999] Reboot Server             - " + Fore.YELLOW + Back.RED + "WARNING: You may miss blocks during a reboot!" + Style.RESET_ALL)
