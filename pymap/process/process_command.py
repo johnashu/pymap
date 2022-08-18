@@ -24,8 +24,7 @@ class RunProcess:
 
         command_list = [x for x in command_list if x]
 
-        log.info(command_list)
-        log.info(" ".join(command_list))
+        log.info(f'Command to Process:\n\t{" ".join(command_list)}')
 
         try:
             p = subprocess.Popen(
