@@ -19,6 +19,7 @@ class Menu(MarkerMethods):
             5: self.register,
             6: self.authorise_validator_signer,
             7: self.vote,
+            8: self.join_network,
             999: self.reboot_server,
         }
         while True:
