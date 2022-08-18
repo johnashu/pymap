@@ -33,3 +33,5 @@ ignore = ("binaries",)
 main_menu = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "messages", "fullmenu.txt"
 )
+
+rpc_url = "https://poc3-rpc.maplabs.io"

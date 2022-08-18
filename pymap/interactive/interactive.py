@@ -1,4 +1,4 @@
-from pymap.methods.run_method import Methods
+from pymap.methods.marker_methods import MarkerMethods
 from pymap.includes.config import envs, base_fields
 from pymap.interactive.menu import Menu
 

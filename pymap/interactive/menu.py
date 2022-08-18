@@ -2,10 +2,10 @@ import os
 from colorama import Style, Fore
 from pymap.tools.utils import askYesNo
 from pymap.includes.config import main_menu
-from pymap.methods.run_method import Methods
+from pymap.methods.marker_methods import MarkerMethods
 
 
-class Menu(Methods):
+class Menu(MarkerMethods):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
