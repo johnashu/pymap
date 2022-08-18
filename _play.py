@@ -1,4 +1,4 @@
-# from pymap.methods.run_method import Methods
+# from pymap.methods.marker_methods import MarkerMethods
 from pymap.includes.config import envs, base_fields
 
 
@@ -22,7 +22,7 @@ class PrintStuff:
         super(PrintStuff, self).__init__()
 
 
-class Methods(RPC, PrintStuff):
+class MarkerMethods(RPC, PrintStuff):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
@@ -32,14 +32,14 @@ class Methods(RPC, PrintStuff):
             k: v for k, v in base_fields.items() if k in self.base_fields
         }
         print(self.rpcaddr)
-        super(Methods, self).__init__(**base_fields)
+        super(MarkerMethods, self).__init__(**base_fields)
 
     def set_fields(self, **base_fields) -> None:
         for k, v in base_fields.items():
             setattr(self, k, str(v))
 
 
-class Menu(Methods):
+class Menu(MarkerMethods):
     def __init__(self, **base_fields: dict) -> None:
         # super().__init__(**base_fields)
         super(Menu, self).__init__(**base_fields)

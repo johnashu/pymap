@@ -4,7 +4,7 @@ from pymap.tools.utils import take_input
 from getpass import getpass
 
 
-class Methods(RunProcess, PrintStuff):
+class MarkerMethods(RunProcess, PrintStuff):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
@@ -14,7 +14,7 @@ class Methods(RunProcess, PrintStuff):
             k: v for k, v in base_fields.items() if k in self.base_fields and v
         }
         print(self.base_context)
-        super(Methods, self).__init__(**base_fields)
+        super(MarkerMethods, self).__init__(**base_fields)
 
     def set_fields(self, **base_fields) -> None:
         for k, v in base_fields.items():
