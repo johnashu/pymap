@@ -1,9 +1,34 @@
 import subprocess
 from pymap.includes.config import *
 from typing import Tuple
+import asyncio
 
 
 class RunProcess:
+    async def watch(self, stream, prefix="", std_in: str = ""):
+        async for line in stream:
+            log.info(f"{prefix}  {line.decode().strip()}")
+
+    async def create_process(self, cmd):
+
+        p = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+
+        return p
+
+    async def run(self, cmd, std_in: str = ""):
+        p = await self.create_process(cmd)
+        if std_in:
+            p.stdin.write(std_in)
+        asyncio.get_running_loop().set_exception_handler(lambda loop, context: None)
+        await asyncio.gather(
+            self.watch(p.stdout, "INFO:"), self.watch(p.stderr, "ERROR:")
+        )
+
     def run_method(
         self,
         method: str,
@@ -29,26 +54,6 @@ class RunProcess:
         log.info(f'Command to Process:\n\t{" ".join(command_list)}')
 
         try:
-            p = subprocess.Popen(
-                command_list,
-                stderr=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stdin=subprocess.PIPE,
-                universal_newlines=True,
-                shell=shell,
-            )
-
-            if std_in:
-                p.communicate(input=std_in)[0]
-            else:
-                p.communicate(input="\n")[0]
-
-            out, err = p.communicate()
-
-            log.info(out)
-            log.error(err)
-        except (FileNotFoundError, subprocess.SubprocessError) as e:
-            log.error(e)
-            return False, (command_list, e)
-
-        return True, (out, err)
+            asyncio.run(self.run(command_list, bytes(std_in, "utf-8")))
+        except KeyboardInterrupt:
+            pass
