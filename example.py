@@ -15,7 +15,7 @@ if __name__ == "__main__":
     res = rpc._get_validators(endpoint=rpc_url)
     print(res)
 
-    balance = rpc.get_balance(address, endpoint=rpc_url)
+    balance = rpc.get_balance(address)
     print(balance)
 
     i = InteractiveSetup(**from_env)
