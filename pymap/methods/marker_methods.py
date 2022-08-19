@@ -57,6 +57,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
         self.run_method("deregister", self.base_context)
 
     def revert_register(self):
+        """cancel deregister"""
         self.run_method("revertRegister", self.base_context)
 
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
@@ -66,6 +67,28 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
             validator = take_input(str, "Enter validator to vote for: ")
         context = {**self.base_context, **{"validator": validator, "voteNum": vote_num}}
         self.run_method("vote", context)
+
+    def activate_votes(self, validator: str = "") -> None:
+        if not validator:
+            validator = take_input(str, "Enter validator to activate votes for: ")
+        context = {**self.base_context, **{"validator": validator}}
+        self.run_method("activate", context)
+
+    def revoke_pending_votes(self, validator: str = "", amount: int = 0) -> None:
+        if amount == 0:
+            amount = take_input(int, "Enter amount of votes to revoke: ")
+        if not validator:
+            validator = take_input(str, "Enter validator to activate votes for: ")
+        context = {**self.base_context, **{"validator": validator, "mapValue": amount}}
+        self.run_method("revokePending", context)
+
+    def revoke_active_votes(self, validator: str = "", amount: int = 0) -> None:
+        if amount == 0:
+            amount = take_input(int, "Enter amount of votes to revoke: ")
+        if not validator:
+            validator = take_input(str, "Enter validator to activate votes for: ")
+        context = {**self.base_context, **{"validator": validator, "mapValue": amount}}
+        self.run_method("revokeActive", context)
 
     def get_total_votes_for_eligible_validator(self) -> None:
         context = {"rpcaddr": self.rpcaddr}
