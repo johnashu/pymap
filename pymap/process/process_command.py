@@ -2,6 +2,7 @@ import subprocess
 from pymap.includes.config import *
 from typing import Tuple
 import asyncio
+import logging
 
 
 class RunProcess:
@@ -24,7 +25,6 @@ class RunProcess:
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
-        asyncio.get_running_loop().set_exception_handler(lambda loop, context: None)
         await asyncio.gather(
             self.watch(p.stdout, "INFO:"), self.watch(p.stderr, "ERROR:")
         )
@@ -54,6 +54,7 @@ class RunProcess:
         log.info(f'Command to Process:\n\t{" ".join(command_list)}')
 
         try:
+            logging.getLogger('asyncio').setLevel(logging.CRITICAL)
             asyncio.run(self.run(command_list, bytes(std_in, "utf-8")))
         except KeyboardInterrupt:
             pass
