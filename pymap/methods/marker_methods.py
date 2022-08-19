@@ -3,7 +3,6 @@ from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
 from pymap.methods.rpc_methods import RpcMethods
 from pymap.tools.handle_input import HandleInput
-from pymap.tools.utils import take_input
 
 
 class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInput):
@@ -32,29 +31,24 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     # Locking, Unlocking & Withdrawal
     def locked_map(self, context: dict = dict(lockedNum=int())) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("lockedMAP", context)
 
     def unlock_map(self, context: dict = dict(mapValue=int())) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("unlockMap", context)
 
     def get_account_nonvoting_locked_gold(
         self, context: dict = dict(target=str())
     ) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("getAccountNonvotingLockedGold ", context)
 
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("getPendingWithdrawals", context)
 
     def withdraw_map(self, context: dict = dict(withdrawIndex=int())) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("withdrawMap", context)
 
@@ -62,21 +56,18 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
     def make_ECDSA_signature_from_signer(
         self, context: dict = dict(validator=str(), signerPriv=str())
     ) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("makeECDSASignatureFromSigner", context)
 
     def make_BLS_proof_of_possession_from_signer(
         self, context: dict = dict(validator=str(), signerPriv=str())
     ) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("MakeBLSProofOfPossessionFromSigner", context)
 
     def authorise_validator_signer(
         self, context: dict = dict(signerPriv=str())
     ) -> None:
-
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("authorizeValidatorSigner", context)
 
