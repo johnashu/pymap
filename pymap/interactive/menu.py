@@ -17,9 +17,13 @@ class Menu(MarkerMethods):
             3: self.create_account,
             4: self.locked_map,
             5: self.register,
-            6: self.authorise_validator_signer,
-            7: self.vote,
-            8: self.join_network,
+            6: self.deregister,
+            7: self.revert_register,
+            8: self.authorise_validator_signer,
+            9: self.vote,
+            10: self.join_network,
+            11: self.make_ECDSA_signature_from_signer,
+            12: self.make_BLS_proof_of_possession_from_signer,
             999: self.reboot_server,
         }
         while True:
@@ -28,18 +32,7 @@ class Menu(MarkerMethods):
                 option = int(input("Enter your option: "))
             except ValueError:
                 os.system("clear")
-                self.whitespace()
-                self.stars(reset=1)
-                print(
-                    "* "
-                    + Fore.RED
-                    + "WARNING"
-                    + Style.RESET_ALL
-                    + ": Only numbers are possible, please try your selection on the main menu once again."
-                )
-                self.stars(reset=1)
-                self.whitespace()
-                input("* Press ENTER to return to the main menu")
+                self.error_input()
                 self.run_full_node()
             os.system("clear")
             menu_options[option]()

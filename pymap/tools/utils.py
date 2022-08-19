@@ -1,5 +1,10 @@
 from decimal import Decimal, ROUND_DOWN
 import logging as log
+import requests, re
+
+
+def camel_to_snake(string):
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", string).lower()
 
 
 def round_down(amount: str, decimals: int) -> float:
@@ -59,3 +64,9 @@ def take_input(_type: object, msg: str) -> None:
         if p:
             break
     return _in
+
+
+words = ("makeECDSASignatureFromSigner", "makeBLSProofOfPossessionFromSigner")
+for x in words:
+    w = camel_to_snake(x)
+    print(w)

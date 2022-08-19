@@ -53,6 +53,12 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
         }
         self.run_method("register", context)
 
+    def deregister(self):
+        self.run_method("deregister", self.base_context)
+
+    def revert_register(self):
+        self.run_method("revertRegister", self.base_context)
+
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
         if vote_num == 0:
             vote_num = take_input(int, "Enter amount of MAP to vote with: ")
@@ -66,3 +72,29 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
         if self.rpcport:
             context.update({"rpcport": self.rpcport})
         self.run_method("getTotalVotesForEligibleValidators", context)
+
+    def make_ECDSA_signature_from_signer(
+        self, validator: str = 0, signer_pkey: str = ""
+    ) -> None:
+        if not signer_pkey:
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
+        if not validator:
+            validator = take_input(str, "Enter validator")
+        context = {
+            **self.base_context,
+            **{"signerPriv": signer_pkey, "validator": validator},
+        }
+        self.run_method("makeECDSASignatureFromSigner", context)
+
+    def make_BLS_proof_of_possession_from_signer(
+        self, validator: str = 0, signer_pkey: str = ""
+    ) -> None:
+        if not signer_pkey:
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
+        if not validator:
+            validator = take_input(str, "Enter validator")
+        context = {
+            **self.base_context,
+            **{"signerPriv": signer_pkey, "validator": validator},
+        }
+        self.run_method("MakeBLSProofOfPossessionFromSigner", context)

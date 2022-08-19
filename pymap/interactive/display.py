@@ -20,9 +20,8 @@ class PrintStuff:
             p = self.reset_stars
         return p
 
-    @classmethod
     def whitespace(self) -> None:
-        print("\n" * 8)
+        print("\n" * 2)
 
     def intro_message(self):
         p = f"""
@@ -70,6 +69,20 @@ class PrintStuff:
                 pass
             if x:
                 print(x)
+
+    def error_input(self) -> None:
+        self.whitespace()
+        self.stars(reset=1)
+        print(
+            "* "
+            + Fore.RED
+            + "WARNING"
+            + Style.RESET_ALL
+            + ": Only numbers are possible, please try your selection on the main menu once again."
+        )
+        self.stars(reset=1)
+        self.whitespace()
+        input("* Press ENTER to return to the main menu")
 
 
 # whitespace = PrintStuff.whitespace
