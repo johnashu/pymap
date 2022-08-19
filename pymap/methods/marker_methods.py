@@ -2,10 +2,11 @@ from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
 from pymap.methods.rpc_methods import RpcMethods
+from pymap.methods.handle_input import HandleInput
 from pymap.tools.utils import take_input
 
 
-class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods):
+class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInput):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
