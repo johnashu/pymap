@@ -16,20 +16,27 @@ class Menu(MarkerMethods):
             2: self.new_validator,
             3: self.create_account,
             4: self.locked_map,
-            5: self.register,
-            6: self.deregister,
-            7: self.revert_register,
-            8: self.authorise_validator_signer,
-            9: self.vote,
-            10: self.activate_votes,
-            11: self.revoke_pending_votes,
-            12: self.revoke_active_votes,
-            13: self.join_network,
-            14: self.make_ECDSA_signature_from_signer,
-            15: self.make_BLS_proof_of_possession_from_signer,
+            5: self.unlock_map,
+            6: self.get_account_nonvoting_locked_gold,
+            7: self.get_pending_withdrawals,
+            8: self.withdraw_map,
+            9: self.register,
+            10: self.deregister,
+            11: self.revert_register,
+            12: self.authorise_validator_signer,
+            13: self.vote,
+            14: self.activate_votes,
+            15: self.revoke_pending_votes,
+            16: self.revoke_active_votes,
+            17: self.join_network,
+            18: self.make_ECDSA_signature_from_signer,
+            19: self.make_BLS_proof_of_possession_from_signer,
+            20: self.get_balance,
+            21: self.check_if_selected,
             999: self.reboot_server,
         }
         while True:
+            os.system("clear")
             self.display_from_file(main_menu)
             try:
                 option = int(input("Enter your option: "))
@@ -37,8 +44,8 @@ class Menu(MarkerMethods):
                 os.system("clear")
                 self.error_input()
                 self.run_full_node()
-            os.system("clear")
             menu_options[option]()
+            input("Press Enter to show menu or CTRL+C to exit..")
 
     def finish_node(self):
         self.stars()

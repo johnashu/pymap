@@ -6,7 +6,7 @@ from .exceptions import RequestsError, RequestsTimeoutError, RPCError
 
 from pymap.includes.config import *
 
-_default_endpoint = "http://localhost:9000"
+_default_endpoint = rpc_url
 _default_timeout = 30
 
 
