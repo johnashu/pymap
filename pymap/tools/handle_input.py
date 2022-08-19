@@ -29,7 +29,4 @@ class HandleInput:
             else:
                 self.__dict__[k] = i
             local[k] = i
-            print(local)
-
-        print(local)
         return local
