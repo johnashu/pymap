@@ -16,3 +16,17 @@ def g():
 m = {f: "hello from F", g: "Hello from G"}
 
 print(m[f])
+
+
+class A:
+
+    x = 1
+
+    def f(self):
+        d = {"x": 3}
+        for k, v in d.items():
+            self.__dict__[k] = 4
+        print(self.x)
+
+
+A().f()

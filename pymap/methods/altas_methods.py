@@ -6,43 +6,39 @@ class AtlasMethods:
     def __init__(self, **kw) -> None:
         super(AtlasMethods, self).__init__(**kw)
 
-    def new_validator(self, datadir: str = "") -> None:
-        if not datadir:
-            datadir = take_input(
-                str, f"Enter Directory to save keystore ({self.datadir}): "
-            )
-            if not datadir:
-                datadir = self.datadir
-            pw1, pw2 = "1", "2"
-            while 1:
-                pw1 = getpass(prompt="Enter Keystore password: ")
-                pw2 = getpass(prompt="Re-Enter Keystore password: ")
-                if pw1 != pw2:
-                    print("Passwords do NOT match, Please try again!")
-                else:
-                    break
+    def new_validator(self, context: dict = dict(datadir = str())) -> None:
+        context.update(self.handle_input(context))
+        pw1, pw2 = "1", "2"
+        while 1:
+            pw1 = getpass(prompt="Enter Keystore password: ")
+            pw2 = getpass(prompt="Re-Enter Keystore password: ")
+            if pw1 != pw2:
+                print("Passwords do NOT match, Please try again!")
+            else:
+                break
 
         args = ["account", "new"]
-        context = {"datadir": datadir}
         self.run_method("", context, args=args, prog="atlas", std_in=f"{pw1}\n{pw2}\n")
 
     def join_network(
         self,
-        datadir: str = "./node",
-        port: int = 30321,
-        miner_validator: str = "0x98efa292822eb7b3045c491e8ae4e82b3b1ac005",
-        unlock: str = "0x98efa292822eb7b3045c491e8ae4e82b3b1ac005",
-        syncmode: str = "full",
-    ) -> None:
-        if not datadir:
-            datadir = take_input(str, "Enter Directory to save keystore: ")
-
-        context = {
-            "datadir": datadir,
-            "syncmode": syncmode,
-            "port": port,
-            "mine": "",
-            "miner.validator": miner_validator,
-            "unlock": unlock,
+        context: dict ={
+            "datadir": str(),
+            "syncmode": str(),
+            "port": int(),
+            "miner.validator": str(),
+            "unlock": str(),
         }
+    ) -> None:
+        context.update(self.handle_input(context))
+        context.update({'mine': ''})
+
+        # context = {
+        #     "datadir": datadir,
+        #     "syncmode": syncmode,
+        #     "port": port,
+        #     "mine": "",
+        #     "miner.validator": miner_validator,
+        #     "unlock": unlock,
+        # }
         self.run_method("", context, prog="atlas", shell=True)
