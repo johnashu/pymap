@@ -1,6 +1,9 @@
 from decimal import Decimal, ROUND_DOWN
 import logging as log
-import requests, re
+import re
+
+import itertools
+from types import FunctionType
 
 
 def camel_to_snake(string):
@@ -59,14 +62,33 @@ def take_input(_type: object, msg: str) -> None:
         try:
             _type(_in)
         except ValueError:
-            print(f"\n\tPlease Enter ONLY {type(_type)}\n")
+            print(f"\n\tPlease Enter input of type [ {_type.__name__.title()} ] \n")
             p = False
         if p:
             break
     return _in
 
 
-# words = ("getAccountNonvotingLockedGold",)
-# for x in words:
-#     w = camel_to_snake(x)
-#     print(w)
+def listMethods(cls):
+    return set(
+        x
+        for x, y in cls.__dict__.items()
+        if isinstance(y, (FunctionType, classmethod, staticmethod))
+    )
+
+
+def listParentMethods(cls):
+    return set(
+        itertools.chain.from_iterable(
+            listMethods(c).union(listParentMethods(c)) for c in cls.__bases__
+        )
+    )
+
+
+def list_subclass_methods(cls, is_narrow):
+    methods = listMethods(cls)
+    if is_narrow:
+        parentMethods = listParentMethods(cls)
+        return set(cls for cls in methods if not (cls in parentMethods))
+    else:
+        return methods
