@@ -4,6 +4,9 @@ import re
 
 import itertools
 from types import FunctionType
+import inspect
+
+myself = lambda: inspect.stack()[1][3]
 
 
 def camel_to_snake(string):
@@ -55,8 +58,8 @@ def askYesNo(question: str) -> bool:
 
 
 def take_input(_type: object, msg: str) -> None:
-    p = True
     while True:
+        p = True
         _in = input(msg)
         print(_in)
         try:

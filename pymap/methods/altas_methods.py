@@ -8,7 +8,11 @@ class AtlasMethods:
 
     def new_validator(self, datadir: str = "") -> None:
         if not datadir:
-            datadir = take_input(str, "Enter Directory to save keystore: ")
+            datadir = take_input(
+                str, f"Enter Directory to save keystore ({self.datadir}): "
+            )
+            if not datadir:
+                datadir = self.datadir
             pw1, pw2 = "1", "2"
             while 1:
                 pw1 = getpass(prompt="Enter Keystore password: ")
