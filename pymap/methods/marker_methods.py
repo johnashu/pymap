@@ -1,10 +1,11 @@
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
+from pymap.methods.rpc_methods import RpcMethods
 from pymap.tools.utils import take_input
 
 
-class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
+class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
@@ -28,12 +29,66 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
         context = {**self.base_context, **{"namePrefix": "validator"}}
         self.run_method("createAccount", context)
 
+    # Locking, Unlocking & Withdrawal
     def locked_map(self, locked_num: int = 0) -> None:
         # Lock MAP in Validator - Stake
         if locked_num == 0:
             locked_num = take_input(int, "Enter amount of MAP to lock: ")
         context = {**self.base_context, **{"lockedNum": locked_num}}
         self.run_method("lockedMAP", context)
+
+    def unlock_map(self, unlock: int = 0) -> None:
+        if unlock == 0:
+            unlock = take_input(int, "Enter amount of MAP to unlock: ")
+        context = {**self.base_context, **{"mapValue ": unlock}}
+        self.run_method("unlockMap ", context)
+
+    def get_account_nonvoting_locked_gold(self, validator: str = "") -> None:
+        if not validator:
+            validator = take_input(str, "Enter validator to check non voting maps: ")
+        context = {**self.base_context, **{"target": validator}}
+        self.run_method("getAccountNonvotingLockedGold ", context)
+
+    def get_pending_withdrawals(self, validator: str = "") -> None:
+        if not validator:
+            validator = take_input(
+                str, "Enter validator to check map that can be withdrawn at present: "
+            )
+        context = {**self.base_context, **{"target": validator}}
+        self.run_method("getPendingWithdrawals", context)
+
+    def withdraw_map(self, index: int = 0) -> None:
+        if index == 0:
+            index = take_input(int, "Enter withdraw index from getPendingWithdrawals: ")
+        context = {**self.base_context, **{"withdrawIndex ": index}}
+        self.run_method("withdrawMap ", context)
+
+    # SIGNING AND REGISTERING
+    def make_ECDSA_signature_from_signer(
+        self, validator: str = 0, signer_pkey: str = ""
+    ) -> None:
+        if not signer_pkey:
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
+        if not validator:
+            validator = take_input(str, "Enter validator")
+        context = {
+            **self.base_context,
+            **{"signerPriv": signer_pkey, "validator": validator},
+        }
+        self.run_method("makeECDSASignatureFromSigner", context)
+
+    def make_BLS_proof_of_possession_from_signer(
+        self, validator: str = 0, signer_pkey: str = ""
+    ) -> None:
+        if not signer_pkey:
+            signer_pkey = take_input(str, "Enter Signer Private Key: ")
+        if not validator:
+            validator = take_input(str, "Enter validator")
+        context = {
+            **self.base_context,
+            **{"signerPriv": signer_pkey, "validator": validator},
+        }
+        self.run_method("MakeBLSProofOfPossessionFromSigner", context)
 
     def authorise_validator_signer(self, signer_pkey: str = "") -> None:
         if not signer_pkey:
@@ -59,6 +114,8 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
     def revert_register(self):
         """cancel deregister"""
         self.run_method("revertRegister", self.base_context)
+
+    # VOTING
 
     def vote(self, vote_num: int = 0, validator: str = "") -> None:
         if vote_num == 0:
@@ -95,29 +152,3 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods):
         if self.rpcport:
             context.update({"rpcport": self.rpcport})
         self.run_method("getTotalVotesForEligibleValidators", context)
-
-    def make_ECDSA_signature_from_signer(
-        self, validator: str = 0, signer_pkey: str = ""
-    ) -> None:
-        if not signer_pkey:
-            signer_pkey = take_input(str, "Enter Signer Private Key: ")
-        if not validator:
-            validator = take_input(str, "Enter validator")
-        context = {
-            **self.base_context,
-            **{"signerPriv": signer_pkey, "validator": validator},
-        }
-        self.run_method("makeECDSASignatureFromSigner", context)
-
-    def make_BLS_proof_of_possession_from_signer(
-        self, validator: str = 0, signer_pkey: str = ""
-    ) -> None:
-        if not signer_pkey:
-            signer_pkey = take_input(str, "Enter Signer Private Key: ")
-        if not validator:
-            validator = take_input(str, "Enter validator")
-        context = {
-            **self.base_context,
-            **{"signerPriv": signer_pkey, "validator": validator},
-        }
-        self.run_method("MakeBLSProofOfPossessionFromSigner", context)

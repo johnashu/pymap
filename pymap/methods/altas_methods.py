@@ -42,6 +42,3 @@ class AtlasMethods:
             "unlock": unlock,
         }
         self.run_method("", context, prog="atlas", shell=True)
-
-
-# ./atlas --datadir ./node --syncmode "full" --port 30321 --mine --miner.validator 0x98efa292822eb7b3045c491e8ae4e82b3b1ac005 --unlock 0x98efa292822eb7b3045c491e8ae4e82b3b1ac005

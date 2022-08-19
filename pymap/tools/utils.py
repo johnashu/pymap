@@ -66,7 +66,7 @@ def take_input(_type: object, msg: str) -> None:
     return _in
 
 
-words = ("makeECDSASignatureFromSigner", "makeBLSProofOfPossessionFromSigner")
-for x in words:
-    w = camel_to_snake(x)
-    print(w)
+# words = ("getAccountNonvotingLockedGold",)
+# for x in words:
+#     w = camel_to_snake(x)
+#     print(w)
