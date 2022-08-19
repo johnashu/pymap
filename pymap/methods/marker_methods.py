@@ -40,8 +40,8 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods):
     def unlock_map(self, unlock: int = 0) -> None:
         if unlock == 0:
             unlock = take_input(int, "Enter amount of MAP to unlock: ")
-        context = {**self.base_context, **{"mapValue ": unlock}}
-        self.run_method("unlockMap ", context)
+        context = {**self.base_context, **{"mapValue": unlock}}
+        self.run_method("unlockMap", context)
 
     def get_account_nonvoting_locked_gold(self, validator: str = "") -> None:
         if not validator:
@@ -60,8 +60,8 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods):
     def withdraw_map(self, index: int = 0) -> None:
         if index == 0:
             index = take_input(int, "Enter withdraw index from getPendingWithdrawals: ")
-        context = {**self.base_context, **{"withdrawIndex ": index}}
-        self.run_method("withdrawMap ", context)
+        context = {**self.base_context, **{"withdrawIndex": index}}
+        self.run_method("withdrawMap", context)
 
     # SIGNING AND REGISTERING
     def make_ECDSA_signature_from_signer(
