@@ -21,9 +21,12 @@ class Menu(MarkerMethods):
             7: self.revert_register,
             8: self.authorise_validator_signer,
             9: self.vote,
-            10: self.join_network,
-            11: self.make_ECDSA_signature_from_signer,
-            12: self.make_BLS_proof_of_possession_from_signer,
+            10: self.activate_votes,
+            11: self.revoke_pending_votes,
+            12: self.revoke_active_votes,
+            13: self.join_network,
+            14: self.make_ECDSA_signature_from_signer,
+            15: self.make_BLS_proof_of_possession_from_signer,
             999: self.reboot_server,
         }
         while True:
