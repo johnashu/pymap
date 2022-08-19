@@ -20,7 +20,7 @@ class AtlasMethods:
         args = ["account", "new"]
         self.run_method("", context, args=args, prog="atlas", std_in=f"{pw1}\n{pw2}\n")
 
-def join_network(
+    def join_network(
         self,
         context: dict ={
             "datadir": str(),
