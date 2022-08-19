@@ -8,7 +8,7 @@ class HandleInput:
         super(HandleInput, self).__init__()
 
     def handle_input(self, context: dict) -> None:
-        local = {k: v for k, v in context.items() if not v}
+        local = {k: v for k, v in context.items() if k not in self.base_fields}
         for k, v in local.items():
             try:
                 arg = self.__dict__[k]
