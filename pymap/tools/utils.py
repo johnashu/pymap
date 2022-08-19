@@ -61,7 +61,8 @@ def take_input(_type: object, msg: str) -> None:
     while True:
         p = True
         _in = input(msg)
-        print(_in)
+        if not _in:
+            break
         try:
             _type(_in)
         except ValueError:
