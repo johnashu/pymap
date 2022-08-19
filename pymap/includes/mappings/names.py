@@ -7,4 +7,9 @@ name_map = {
     "validator": "Validator Address",
     "commission": "Commission of validator",
     "voteNum": "amount of MAP to vote with",
+    "datadir": 'Data Directory',
+    'miner.validator': 'Validator Address to mine',
+    'unlock': 'Address to unlock to',
+    'syncmode': 'Syncing mode required',
+    'port': 'Port to run Node on'
 }
