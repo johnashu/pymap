@@ -54,7 +54,7 @@ class RunProcess:
         log.info(f'Command to Process:\n\t{" ".join(command_list)}')
 
         try:
-            logging.getLogger('asyncio').setLevel(logging.CRITICAL)
+            logging.getLogger("asyncio").setLevel(logging.CRITICAL)
             asyncio.run(self.run(command_list, bytes(std_in, "utf-8")))
         except KeyboardInterrupt:
             pass
