@@ -1,4 +1,5 @@
 from pymap.tools.utils import take_input
+from pymap.includes.mappings.names import name_map
 import logging as log
 
 
@@ -11,20 +12,23 @@ class HandleInput:
         for k, v in local.items():
             print(k, type(v))
             try:
-                arg = eval(f"self.{k}")
+                arg = self.__dict__[k]
             except AttributeError:
                 arg = ""
-            i = take_input(
-                type(v), f"Please Enter {' '.join(k.split('_')).title()} ({arg}): "
+
+            display = (
+                " ".join(k.split("_")).title()
+                if not name_map.get(k)
+                else name_map.get(k)
             )
-            print(arg, i)
+            i = take_input(type(v), f"Please Enter {display} ({arg}): ")
             if not i:
                 try:
-                    i = eval(f"self.{k}")
+                    i = self.__dict__[k]
                 except AttributeError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
-                exec(f"self.{k} = {i}")
+                self.__dict__[k] = i
             local[k] = i
             print(local)
 
