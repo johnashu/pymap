@@ -10,10 +10,9 @@ class HandleInput:
     def handle_input(self, context: dict) -> None:
         local = {k: v for k, v in context.items() if not v}
         for k, v in local.items():
-            print(k, type(v))
             try:
                 arg = self.__dict__[k]
-            except AttributeError:
+            except KeyError:
                 arg = ""
 
             display = (
@@ -25,7 +24,7 @@ class HandleInput:
             if not i:
                 try:
                     i = self.__dict__[k]
-                except AttributeError as e:
+                except KeyError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
                 self.__dict__[k] = i
