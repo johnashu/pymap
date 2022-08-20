@@ -1,4 +1,5 @@
 name_map = {
+    "namePrefix": "type of address, i.e. `validator`",
     "target": "the validator address",
     "lockedNum": "amount of MAP to lock",
     "mapValue": "the amount of Map",
@@ -7,9 +8,9 @@ name_map = {
     "validator": "Validator Address",
     "commission": "Commission of validator",
     "voteNum": "amount of MAP to vote with",
-    "datadir": 'Data Directory',
-    'miner.validator': 'Validator Address to mine',
-    'unlock': 'Address to unlock to',
-    'syncmode': 'Syncing mode required',
-    'port': 'Port to run Node on'
+    "datadir": "Data Directory",
+    "miner.validator": "Validator Address to mine",
+    "unlock": "Address to unlock to",
+    "syncmode": "Syncing mode required",
+    "port": "Port to run Node on",
 }

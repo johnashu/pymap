@@ -6,7 +6,7 @@ class AtlasMethods:
     def __init__(self, **kw) -> None:
         super(AtlasMethods, self).__init__(**kw)
 
-    def new_validator(self, context: dict = dict(datadir = str())) -> None:
+    def new_validator(self, context: dict = dict(datadir=str())) -> None:
         context.update(self.handle_input(context))
         pw1, pw2 = "1", "2"
         while 1:
@@ -22,16 +22,16 @@ class AtlasMethods:
 
     def join_network(
         self,
-        context: dict ={
+        context: dict = {
             "datadir": str(),
             "syncmode": str(),
             "port": int(),
             "miner.validator": str(),
             "unlock": str(),
-        }
+        },
     ) -> None:
         context.update(self.handle_input(context))
-        context.update({'mine': ''})
+        context.update({"mine": ""})
 
         # context = {
         #     "datadir": datadir,

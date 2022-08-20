@@ -20,19 +20,31 @@ Some of this information will be gathered during setup and will need to be updat
 
 
 ```bash
-binaries=/atlas/build/bin
-rpcaddr=127.0.0.1
-rpcport=7445
-keystore=~/test/keystore/UTC--2022-08-17T17-41-16.086417459Z--635dad5a10ddd1662517dc85e3bc4ca9ce9f6f03
+binaries=/home/atlas/build/bin
+
+# Marker
+rpcaddr=https://poc3-rpc.maplabs.io 
+rpcport=
+keystore=/home/test/keystore/UTC--2022-08-17T17-41-16.086417459Z--635dad5a10ddd1662517dc85e3bc4ca9ce9f6f03
 password=password
 namePrefix=validator
 lockedNum=1000000
 signerPriv="0x"
 validator="0x"
 voteNum=10000
+commission=40000
+
+# Atlas 
+datadir=./node
+miner.validator=0x98efa292822eb7b3045c491e8ae4e82b3b1ac005
+unlock=0x98efa292822eb7b3045c491e8ae4e82b3b1ac005
+syncmode=full
+port=30321
+
 ```
 
 run `example.py` to get started..
 
 # Check Logs
 tail -f /var/log/syslog
+

@@ -21,12 +21,11 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         for k, v in base_fields.items():
             setattr(self, k, str(v))
 
-    def create_account(self) -> None:
+    def create_account(self, context: dict = dict(namePrefix=str())) -> None:
         """
-        https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount
-        """
+        https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
 
-        context = {**self.base_context, **{"namePrefix": "validator"}}
+        context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("createAccount", context)
 
     # Locking, Unlocking & Withdrawal
