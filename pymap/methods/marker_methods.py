@@ -9,13 +9,12 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password", "mine")
 
-    def __init__(self, **base_fields: dict) -> None:
-        self.set_fields(**base_fields)
-        self.base_context = {
-            k: v for k, v in base_fields.items() if k in self.base_fields and v
-        }
+    def __init__(self, **kw: dict) -> None:
+        self.base_field_keys = kw.keys()
+        self.set_fields(**kw)
+        self.base_context = {k: v for k, v in kw.items() if k in self.base_fields and v}
         print(self.base_context)
-        super(MarkerMethods, self).__init__(**base_fields)
+        super(MarkerMethods, self).__init__(**kw)
 
     def set_fields(self, **base_fields) -> None:
         for k, v in base_fields.items():

@@ -1,11 +1,20 @@
-from pymap.tools.utils import take_input
-from pymap.includes.mappings.names import name_map
 import logging as log
+import os
+from pymap.tools.utils import take_input
+from pymap.tools.file_op import save_file
+from pymap.includes.mappings.names import name_map
 
 
 class HandleInput:
     def __init__(self, reset: int = 0, **kw):
         super(HandleInput, self).__init__()
+
+    def update_env(self, keys: list) -> None:
+        to_write = ""
+        for k in keys:
+            line = f"{k}={self.__dict__[k]}\n"
+            to_write += line
+        save_file(os.path.join(os.getcwd(), ".env"), to_write)
 
     def handle_input(self, context: dict) -> None:
         local = {k: v for k, v in context.items() if k not in self.base_fields}
@@ -29,4 +38,6 @@ class HandleInput:
             else:
                 self.__dict__[k] = i
             local[k] = i
+        print(self.base_field_keys)
+        self.update_env(self.base_field_keys)
         return local
