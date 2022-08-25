@@ -12,7 +12,7 @@ class RunProcess:
             if save_keystore:
                 ks = l.split(":")
                 if ks[0].endswith('secret key file'):
-                    self.keystore = ks[-1]
+                    self.keystore = ks[-1].strip()
                     self.update_env(self.base_field_keys)
             log.info(f"{prefix}  {l}")
 
