@@ -10,7 +10,7 @@ class RunProcess:
         async for line in stream:
             l = line.decode().strip()
             if save_keystore:
-                print(l)
+                print(l.split(':')[0])
 
             log.info(f"{prefix}  {l}")
 
