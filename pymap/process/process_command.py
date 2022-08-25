@@ -51,7 +51,7 @@ class RunProcess:
         command_list = [os.path.join(envs.binaries, prog), method]
         for k, v in context.items():
             if k not in ignore:
-                if v and k != 'password':
+                if v or k == 'password':
                     command_list += [f"--{k}", f"{v}"]
         if args:
             command_list += args
