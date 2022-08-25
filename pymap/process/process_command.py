@@ -21,8 +21,10 @@ class RunProcess:
 
         return p
 
-    async def run(self, cmd, std_in: str = ""):
+    async def run(self, cmd, std_in: str = "", save_keystore:bool = False):
         p = await self.create_process(cmd)
+        if save_keystore:
+            print(p.stdout)
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
@@ -36,7 +38,8 @@ class RunProcess:
         args: list = [],
         prog: str = marker,
         std_in: str = "",
-        shell=False,
+        shell: bool=False,
+        save_keystore: bool=False
     ) -> Tuple[bool, str]:
         if not context:
             return False, "No context provided"
@@ -54,6 +57,6 @@ class RunProcess:
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
-            asyncio.run(self.run(command_list, bytes(std_in, "utf-8")))
+            asyncio.run(self.run(command_list, bytes(std_in, "utf-8"), save_keystore=save_keystore))
         except KeyboardInterrupt:
             pass
