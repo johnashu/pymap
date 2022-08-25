@@ -6,11 +6,14 @@ import logging
 
 
 class RunProcess:
-    async def watch(self, stream, prefix="",  save_keystore:bool = False):
+    async def watch(self, stream, prefix="", save_keystore: bool = False):
         async for line in stream:
             l = line.decode().strip()
             if save_keystore:
-                print(l.split(':')[-1])
+                ks = l.split(":")[-1]
+                self.keystore = ks
+                self.update_env(self.base_field_keys)
+                print("self.keystore", self.keystore)
 
             log.info(f"{prefix}  {l}")
 
@@ -25,12 +28,13 @@ class RunProcess:
 
         return p
 
-    async def run(self, cmd, std_in: str = "", save_keystore:bool = False):
+    async def run(self, cmd, std_in: str = "", save_keystore: bool = False):
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
-            self.watch(p.stdout, "INFO:", save_keystore=save_keystore), self.watch(p.stderr, "ERROR:", save_keystore=save_keystore)
+            self.watch(p.stdout, "INFO:", save_keystore=save_keystore),
+            self.watch(p.stderr, "ERROR:", save_keystore=save_keystore),
         )
 
     def run_method(
@@ -40,8 +44,8 @@ class RunProcess:
         args: list = [],
         prog: str = marker,
         std_in: str = "",
-        shell: bool=False,
-        save_keystore: bool=False
+        shell: bool = False,
+        save_keystore: bool = False,
     ) -> Tuple[bool, str]:
         if not context:
             return False, "No context provided"
@@ -59,6 +63,10 @@ class RunProcess:
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
-            asyncio.run(self.run(command_list, bytes(std_in, "utf-8"), save_keystore=save_keystore))
+            asyncio.run(
+                self.run(
+                    command_list, bytes(std_in, "utf-8"), save_keystore=save_keystore
+                )
+            )
         except KeyboardInterrupt:
             pass
