@@ -3,6 +3,7 @@ from pymap.includes.config import *
 from typing import Tuple
 import asyncio
 import logging
+import shlex
 
 
 class RunProcess:
@@ -11,7 +12,7 @@ class RunProcess:
             l = line.decode().strip()
             if save_keystore:
                 ks = l.split(":")
-                if ks[0].endswith('secret key file'):
+                if ks[0].endswith("secret key file"):
                     self.keystore = ks[-1].strip()
                     self.update_env(self.base_field_keys)
             log.info(f"{prefix}  {l}")
@@ -51,9 +52,11 @@ class RunProcess:
         command_list = [os.path.join(envs.binaries, prog), method]
         for k, v in context.items():
             if k not in ignore:
-                if v or k == 'password':
-                    val = f"{v}" if k != 'password' else ''
-                    command_list += [f"--{k}", val]
+                if v:
+                    command_list += [f"--{k}", f"{v}"]
+                elif k == "password":
+                    command_list += shlex.split(f"--{k} {v}")
+
         if args:
             command_list += args
 
