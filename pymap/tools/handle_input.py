@@ -17,8 +17,8 @@ class HandleInput:
         save_file(os.path.join(os.getcwd(), ".env"), to_write)
 
     def handle_input(self, context: dict) -> None:
-        local = {k: v for k, v in context.items() if k not in self.base_fields}
-        for k, v in local.items():
+        # local = {k: v for k, v in context.items() if k not in self.base_fields}
+        for k, v in context.items():
             try:
                 arg = self.__dict__[k]
             except KeyError:
@@ -37,7 +37,7 @@ class HandleInput:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
                 self.__dict__[k] = i
-            local[k] = i
+            context[k] = i
         print(self.base_field_keys)
         self.update_env(self.base_field_keys)
-        return local
+        return context

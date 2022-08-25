@@ -12,7 +12,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
     def __init__(self, **kw: dict) -> None:
         self.base_field_keys = kw.keys()
         self.set_fields(**kw)
-        self.base_context = {k: v for k, v in kw.items() if k in self.base_fields and v}
+        self.base_context = {k: v for k, v in kw.items() if k in self.base_fields}
         print(self.base_context)
         super(MarkerMethods, self).__init__(**kw)
 
@@ -25,6 +25,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
 
         context.update(self.handle_input({**self.base_context, **context}))
+        print(context)
         self.run_method("createAccount", context)
 
     # Locking, Unlocking & Withdrawal
