@@ -10,9 +10,10 @@ class RunProcess:
         async for line in stream:
             l = line.decode().strip()
             if save_keystore:
-                ks = l.split(":")[-1]
-                self.keystore = ks
-                self.update_env(self.base_field_keys)
+                ks = l.split(":")
+                if ks[0].endswith('secret key file'):
+                    self.keystore = ks[-1]
+                    self.update_env(self.base_field_keys)
             log.info(f"{prefix}  {l}")
 
     async def create_process(self, cmd):
