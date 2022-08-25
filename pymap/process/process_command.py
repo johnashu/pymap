@@ -52,7 +52,8 @@ class RunProcess:
         for k, v in context.items():
             if k not in ignore:
                 if v or k == 'password':
-                    command_list += [f"--{k}", f"{v}"]
+                    val = f"{v}" if k != 'password' else ""
+                    command_list += [f"--{k}", val]
         if args:
             command_list += args
 
