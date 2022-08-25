@@ -13,8 +13,6 @@ class RunProcess:
                 ks = l.split(":")[-1]
                 self.keystore = ks
                 self.update_env(self.base_field_keys)
-                print("self.keystore", self.keystore)
-
             log.info(f"{prefix}  {l}")
 
     async def create_process(self, cmd):
@@ -52,7 +50,8 @@ class RunProcess:
         command_list = [os.path.join(envs.binaries, prog), method]
         for k, v in context.items():
             if k not in ignore:
-                command_list += [f"--{k}", f"{v}"]
+                if v:
+                    command_list += [f"--{k}", f"{v}"]
         if args:
             command_list += args
 
