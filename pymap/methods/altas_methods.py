@@ -39,13 +39,4 @@ class AtlasMethods:
     ) -> None:
         context.update(self.handle_input(context))
         context.update({"mine": ""})
-
-        # context = {
-        #     "datadir": datadir,
-        #     "syncmode": syncmode,
-        #     "port": port,
-        #     "mine": "",
-        #     "miner.validator": miner_validator,
-        #     "unlock": unlock,
-        # }
         self.run_method("", context, prog="atlas", shell=True)
