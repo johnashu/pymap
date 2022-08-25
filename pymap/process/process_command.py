@@ -6,9 +6,13 @@ import logging
 
 
 class RunProcess:
-    async def watch(self, stream, prefix="", std_in: str = ""):
+    async def watch(self, stream, prefix="",  save_keystore:bool = False):
         async for line in stream:
-            log.info(f"{prefix}  {line.decode().strip()}")
+            l = line.decode().strip()
+            if save_keystore:
+                print(l)
+
+            log.info(f"{prefix}  {l}")
 
     async def create_process(self, cmd):
 
@@ -23,12 +27,10 @@ class RunProcess:
 
     async def run(self, cmd, std_in: str = "", save_keystore:bool = False):
         p = await self.create_process(cmd)
-        if save_keystore:
-            print(p.stdout)
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
-            self.watch(p.stdout, "INFO:"), self.watch(p.stderr, "ERROR:")
+            self.watch(p.stdout, "INFO:", save_keystore=save_keystore), self.watch(p.stderr, "ERROR:", save_keystore=save_keystore)
         )
 
     def run_method(
