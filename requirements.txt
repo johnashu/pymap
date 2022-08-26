@@ -1,3 +1,5 @@
 python-dotenv
 colorama
 requests
+pycryptodome
+pycrypto

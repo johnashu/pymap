@@ -33,6 +33,7 @@ class Menu(MarkerMethods):
             19: self.make_BLS_proof_of_possession_from_signer,
             20: self.get_balance,
             21: self.check_if_selected,
+            22: self.find_pk,
             999: self.reboot_server,
         }
         while True:

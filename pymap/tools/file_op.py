@@ -13,14 +13,14 @@ def save_file(fn: str, data: list) -> list:
 
 
 def open_json(fn: str) -> json:
-    with open(f"{fn}.json", "r", encoding="utf-8") as j:
+    with open(f"{fn}", "r", encoding="utf-8") as j:
         return json.load(j)
 
 
 def save_json(fn: str, d: dict) -> json:
-    with open(f"{fn}.json", "w", encoding="utf-8") as j:
+    with open(f"{fn}", "w", encoding="utf-8") as j:
         json.dump(d, j, indent=4, ensure_ascii=False)
-        log.info(f"File - {fn}.json Created")
+        log.info(f"File - {fn} Created")
 
 
 def open_csv(fn: str) -> dict:
@@ -31,7 +31,7 @@ def open_csv(fn: str) -> dict:
 
 def save_csv(fn: str, data: list, header: list, inc: int = 1) -> None:
     try:
-        with open(f"{fn}.csv", "w", newline="", encoding="utf-8") as csvfile:
+        with open(f"{fn}", "w", newline="", encoding="utf-8") as csvfile:
             w = csv.DictWriter(csvfile, fieldnames=header, delimiter=",")
             w.writeheader()
             for x in data:
@@ -39,4 +39,4 @@ def save_csv(fn: str, data: list, header: list, inc: int = 1) -> None:
     except PermissionError:  # file is open, rename and try again.
         save_csv(f"{fn}-{inc}", data, header, inc=inc + 1)
 
-    log.info(f"File - {fn}.csv Created")
+    log.info(f"File - {fn} Created")

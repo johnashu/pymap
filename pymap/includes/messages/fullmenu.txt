@@ -21,6 +21,7 @@ print("*  [18] Make ECDSA Signature From Signer")
 print("*  [19] Make BLS Proof Of Possession From Signer")
 print("*  [20] Get Balance")
 print("*  [21] Check if Elected")
+print("*  [22] Private Key From Keystore")
 
 *********************************************************************************************
 print("*[999] Reboot Server             - " + Fore.YELLOW + Back.RED + "WARNING: You may miss blocks during a reboot!" + Style.RESET_ALL)
