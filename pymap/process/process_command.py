@@ -55,7 +55,7 @@ class RunProcess:
                 if v:
                     command_list += [f"--{k}", f"{v}"]
                 elif k == "password":
-                    command_list += shlex.split(f"--{k} {v}")
+                    command_list += shlex.split(f'--{k} "{v}"')
 
         if args:
             command_list += args

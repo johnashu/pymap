@@ -11,9 +11,13 @@ class AtlasMethods:
         pw1, pw2 = "1", "2"
         while 1:
             pw1 = getpass(prompt="Enter Keystore password: ")
+            if not pw1:
+                continue
             pw2 = getpass(prompt="Re-Enter Keystore password: ")
             if pw1 != pw2:
                 print("Passwords do NOT match, Please try again!")
+            if not pw2:
+                continue
             else:
                 break
 
