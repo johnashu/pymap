@@ -97,7 +97,7 @@ def list_subclass_methods(cls, is_narrow):
     else:
         return methods
 
+
 # p = '5024518800000000000000'
 # r = readable_price(p)
 # print(r)
-
