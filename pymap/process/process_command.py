@@ -64,7 +64,7 @@ class RunProcess:
 
         # log.info(command_list)
         
-        log.info(f'{self.print_stars}\nCommand to Process:\n\t{" ".join(command_list)}\n\n{self.print_stars}')
+        log.info(f'{self.print_stars}\n\nCommand to Process:\n\n\t{" ".join(command_list)}\n\n{self.print_stars}')
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
