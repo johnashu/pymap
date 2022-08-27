@@ -42,7 +42,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
     def get_account_nonvoting_locked_gold(
         self, context: dict = dict(target=str())
     ) -> None:
-        context.update(self.handle_input({**self.base_context, **context}))
+        context.update(self.handle_input({**self.base_context, **context}, password=False))
         self.run_method("getAccountNonvotingLockedGold ", context)
 
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
