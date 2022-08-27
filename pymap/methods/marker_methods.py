@@ -1,3 +1,4 @@
+from wsgiref.validate import validator
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
@@ -87,7 +88,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     # VOTING
 
-    def vote(self, context: dict = dict(voteNum=int(), signerPriv=str())) -> None:
+    def vote(self, context: dict = dict(voteNum=int(), signerPriv=str(), validator=str())) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("vote", context)
 
