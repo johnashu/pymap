@@ -16,9 +16,9 @@ class HandleInput:
             to_write += line
         save_file(os.path.join(os.getcwd(), ".env"), to_write)
 
-    def handle_input(self, context: dict, password: bool = True) -> None:
-        if not password:
-            context = {k: v for k, v in context.items() if k != 'password'}
+    def handle_input(self, context: dict, remove: tuple = ()) -> None:
+        if remove:
+            context = {k: v for k, v in context.items() if k not in remove}
         for k, v in context.items():
             try:
                 arg = self.__dict__[k]
