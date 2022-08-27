@@ -1,0 +1,34 @@
+cat<<-EOF > /etc/systemd/system/atlasNode.service
+[Unit]
+Description=atlasNode daemon
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+WorkingDirectory=/root
+ExecStart=startNode.sh
+SyslogIdentifier=atlasNode
+StartLimitInterval=0
+LimitNOFILE=65536
+LimitNPROC=65536
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo chmod +x startNode.sh
+
+sudo systemctl daemon-reload
+
+sudo chmod 755 /etc/systemd/system/atlasNode.service
+
+sudo systemctl enable atlasNode.service
+
+sudo service atlasNode start
+
+sudo service atlasNode status
+
+tail -f /var/log/syslog

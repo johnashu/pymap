@@ -43,4 +43,4 @@ class AtlasMethods:
     ) -> None:
         context.update(self.handle_input(context))
         context.update({"mine": ""})
-        self.run_method("", context, prog="atlas", shell=True)
+        self.run_method("", context, prog="atlas")
