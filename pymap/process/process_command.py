@@ -54,8 +54,8 @@ class RunProcess:
             if k not in ignore:
                 if v:
                     command_list += [f"--{k}", f"{v}"]
-                elif k == "password":
-                    command_list += shlex.split(f'--{k} "{v}"')
+                # elif k == "password":
+                #     command_list += shlex.split(f'--{k} "{v}"')
 
         if args:
             command_list += args
