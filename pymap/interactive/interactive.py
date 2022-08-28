@@ -1,5 +1,4 @@
-from pymap.methods.marker_methods import MarkerMethods
-from pymap.includes.config import envs, base_fields
+from pymap.includes.config import envs
 from pymap.interactive.menu import Menu
 from pymap.tools.key_from_keystore import pk_from_store
 
