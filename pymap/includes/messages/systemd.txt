@@ -7,9 +7,8 @@ After=network-online.target
 Type=simple
 Restart=always
 RestartSec=1
-User=root
 WorkingDirectory=/root
-ExecStart=startNode.sh
+ExecStart=bash startNode.sh
 SyslogIdentifier=atlasNode
 StartLimitInterval=0
 LimitNOFILE=65536
@@ -18,17 +17,3 @@ LimitNPROC=65536
 [Install]
 WantedBy=multi-user.target
 EOF
-
- chmod +x startNode.sh
-
- chmod 644 /etc/systemd/system/atlasNode.service
-
- systemctl daemon-reload 
-
- systemctl enable atlasNode.service
-
- service atlasNode start
-
- service atlasNode status
-
-tail -f /var/log/syslog

@@ -9,12 +9,12 @@ class HandleInput:
     def __init__(self, reset: int = 0, **kw):
         super(HandleInput, self).__init__()
 
-    def update_env(self, keys: list) -> None:
+    def update_env(self, keys: list, fn=".env") -> None:
         to_write = ""
         for k in keys:
             line = f"{k}={self.__dict__[k]}\n"
             to_write += line
-        save_file(os.path.join(os.getcwd(), ".env"), to_write)
+        save_file(os.path.join(os.getcwd(), fn), to_write)
 
     def handle_input(self, context: dict, remove: tuple = ()) -> None:
         if remove:

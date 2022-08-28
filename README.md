@@ -21,30 +21,53 @@ Some of this information will be gathered during setup and will need to be updat
 
 ```bash
 binaries=/home/atlas/build/bin
-
-# Marker
-rpcaddr=https://poc3-rpc.maplabs.io 
-rpcport=
-keystore=/home/test/keystore/UTC--2022-08-17T17-41-16.086417459Z--635dad5a10ddd1662517dc85e3bc4ca9ce9f6f03
+rpcaddr=https://poc3-rpc.maplabs.io
+rpcport=False
+keystore=
 password=password
+passwordFile=/home/password
 namePrefix=validator
 lockedNum=1000000
-signerPriv="0x"
-validator="0x"
+signerPriv=0x
+validator=0x
 voteNum=10000
 commission=40000
-
-# Atlas 
-datadir=./node
-miner.validator=0x98efa292822eb7b3045c491e8ae4e82b3b1ac005
-unlock=0x98efa292822eb7b3045c491e8ae4e82b3b1ac005
+datadir=werwerrrrrrrrrrrrrrrrrr
+miner.validator=0x
+unlock=0x
 syncmode=full
 port=30321
+validator_wallet=0x
 
 ```
 
 run `example.py` to get started..
 
+
+# Service control.
+
+
+a password file is required for the service to run correctly!
+
+
+```bash
+
+ chmod +x startNode.sh
+
+ chmod 644 /etc/systemd/system/atlasNode.service
+
+ service atlasNode stop
+
+ systemctl daemon-reload 
+
+ systemctl enable atlasNode.service
+
+ service atlasNode start
+
+ service atlasNode status
+
+```
+ 
 # Check Logs
 tail -f /var/log/syslog
 

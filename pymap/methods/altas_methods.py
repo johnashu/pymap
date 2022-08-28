@@ -1,5 +1,6 @@
-from pymap.tools.utils import take_input
+import os
 from getpass import getpass
+from pymap.tools.file_op import save_file
 
 
 class AtlasMethods:
@@ -29,6 +30,13 @@ class AtlasMethods:
             prog="atlas",
             std_in=f"{pw1}\n{pw2}\n",
             save_keystore=True,
+        )
+        to_write = pw1
+        save_file(
+            self.passwordFile
+            if self.passwordFile
+            else os.path.join(os.getcwd(), "password"),
+            to_write,
         )
 
     def join_network(
