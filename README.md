@@ -37,7 +37,6 @@ miner.validator=0x
 unlock=0x
 syncmode=full
 port=30321
-validator_wallet=0x
 
 ```
 
