@@ -1,7 +1,4 @@
-from audioop import add
-from webbrowser import get
-from pymap.methods.marker_methods import MarkerMethods
-from pymap.includes.config import envs, base_fields, rpc_url
+from pymap.includes.config import envs, rpc_url
 from pymap.interactive.interactive import InteractiveSetup
 from pymap.methods.rpc_methods import RpcMethods
 
