@@ -1,4 +1,3 @@
-from wsgiref.validate import validator
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
@@ -48,6 +47,25 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
             )
         )
         self.run_method("getAccountNonvotingLockedGold ", context)
+
+    def get_account_total_locked_gold(self, context: dict = dict(target=str())) -> None:
+        context.update(
+            self.handle_input(
+                {**self.base_context, **context}, remove=("password", "keystore")
+            )
+        )
+        self.run_method("getAccountTotalLockedGold", context)
+
+    def get_active_votes_for_validator_by_account(
+        self, context: dict = dict(target=str())
+    ) -> None:
+        context.update(
+            self.handle_input(
+                {**self.base_context, **context},
+                # remove=("password", "keystore")
+            )
+        )
+        self.run_method("getActiveVotesForValidatorByAccount", context)
 
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
