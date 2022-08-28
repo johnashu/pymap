@@ -19,16 +19,16 @@ LimitNPROC=65536
 WantedBy=multi-user.target
 EOF
 
-sudo chmod +x startNode.sh
+ chmod +x startNode.sh
 
-sudo systemctl daemon-reload
+ chmod 644 /etc/systemd/system/atlasNode.service
 
-sudo chmod 755 /etc/systemd/system/atlasNode.service
+ systemctl daemon-reload 
 
-sudo systemctl enable atlasNode.service
+ systemctl enable atlasNode.service
 
-sudo service atlasNode start
+ service atlasNode start
 
-sudo service atlasNode status
+ service atlasNode status
 
 tail -f /var/log/syslog

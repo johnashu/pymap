@@ -21,7 +21,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     def set_fields(self, **base_fields) -> None:
         for k, v in base_fields.items():
-            setattr(self, k, str(v))
+            setattr(self, k, str(v) if not isinstance(v, bool) else v)
 
     def create_account(self, context: dict = dict(namePrefix=str())) -> None:
         """
@@ -42,7 +42,11 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
     def get_account_nonvoting_locked_gold(
         self, context: dict = dict(target=str())
     ) -> None:
-        context.update(self.handle_input({**self.base_context, **context}, remove=('password', 'keystore')))
+        context.update(
+            self.handle_input(
+                {**self.base_context, **context}, remove=("password", "keystore")
+            )
+        )
         self.run_method("getAccountNonvotingLockedGold ", context)
 
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
@@ -87,7 +91,9 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     # VOTING
 
-    def vote(self, context: dict = dict(voteNum=int(), signerPriv=str(), validator=str())) -> None:
+    def vote(
+        self, context: dict = dict(voteNum=int(), signerPriv=str(), validator=str())
+    ) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("vote", context)
 
