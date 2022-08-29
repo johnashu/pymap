@@ -66,7 +66,23 @@ class AtlasMethods:
         ),
     ) -> None:
         context.update(self.handle_input(context))
-        cmd = create_systemd(context)
-        self.run_method(cmd, {}, prog="atlas", shell=True)
-        self.run_method("systemctl enable atlasNode.service", {}, prog="", shell=True)
-        self.run_method("service atlasNode start", {}, prog="", shell=True)
+        create_systemd(context)
+        self.run_method(
+            ["mv", "atlasNode.service", "/etc/systemd/system/atlasNode.service"],
+            {},
+            prog="",
+        )
+
+        self.run_method(
+            [
+                "bash",
+                os.path.join(
+                    input(os.path.dirname(os.path.abspath(__file__))),
+                    "..",
+                    "scripts",
+                    "startNode.sh",
+                ),
+            ],
+            {},
+            prog="",
+        )

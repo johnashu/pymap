@@ -1,7 +1,18 @@
 from pymap.tools.file_op import save_file
+import logging as log
 
-template = """
-cat<<-EOF > /etc/systemd/system/atlasNode.service
+
+def create_systemd(
+    context: dict = dict(
+        working_dir="",
+        binary="",
+        password="",
+        datadir="",
+        validator="",
+        unlock="",
+    )
+) -> None:
+    template = """
 [Unit]
 Description=atlasNode daemon
 After=network-online.target
@@ -19,21 +30,9 @@ LimitNPROC=65536
 
 [Install]
 WantedBy=multi-user.target
-EOF
-
 """
 
-
-def create_systemd(
-    context: dict = dict(
-        working_dir="/root",
-        binary="/root/atlas/build/bin/atlas",
-        password="password",
-        datadir="/root/pymap/admin",
-        validator="0x64a1c184fd6ed7a064102619ae77fda7cc29ceb8",
-        unlock="0x64a1c184fd6ed7a064102619ae77fda7cc29ceb8",
-    )
-) -> None:
     sysd = template.format(*[x for x in context.values()])
-    print(sysd)
+    log.info(sysd)
+    save_file("atlasNode.service", sysd)
     return sysd

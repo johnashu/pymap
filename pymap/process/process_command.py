@@ -46,9 +46,13 @@ class RunProcess:
         std_in: str = "",
         shell: bool = False,
         save_keystore: bool = False,
+        return_command: bool = False,
     ) -> Tuple[bool, str]:
 
-        command_list = [os.path.join(envs.binaries, prog) if prog else "", method]
+        if isinstance(method, str):
+            method = [method]
+
+        command_list = [os.path.join(envs.binaries, prog) if prog else ""] + method
         for k, v in context.items():
             if k not in ignore:
                 if v:
@@ -61,8 +65,10 @@ class RunProcess:
 
         # log.info(command_list)
 
+        cmd_to_process = " ".join(command_list)
+
         log.info(
-            f'{self.print_stars}\n\nCommand to Process:\n\n\t{" ".join(command_list)}\n\n{self.print_stars}'
+            f"{self.print_stars}\n\nCommand to Process:\n\n\t{cmd_to_process}\n\n{self.print_stars}"
         )
 
         try:

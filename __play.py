@@ -30,3 +30,8 @@ class A:
 
 
 A().f()
+
+
+c = "systemctl enable atlasNode.service && service atlasNode start"
+
+print(c.split())
