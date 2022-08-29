@@ -13,7 +13,7 @@ class Menu(MarkerMethods):
             try:
                 testnet = int(
                     input(
-                        "Please indicate if you wish to use Testnet or Mainnet\n\t* [1] Testnet\n\t* [2] Mainnet"
+                        "Please indicate if you wish to use Testnet or Mainnet\n\t* [1] Testnet\n\t* [2] Mainnet\n\t>>> "
                     )
                 )
                 break
@@ -23,7 +23,7 @@ class Menu(MarkerMethods):
             self.base_context.update({"testnet": ""})
             self.rpcaddr = self.testnet
             self.rpcport = self.testnetport
-            self.base_fields += "testnet"
+            self.base_fields += "testnet",
 
     def run_full_node(self) -> None:
 
