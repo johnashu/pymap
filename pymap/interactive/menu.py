@@ -20,15 +20,15 @@ class Menu(MarkerMethods):
             except ValueError:
                 pass
         if testnet == 1:
-            self.base_context.update({"testnet": ""})
+            self.base_context.update(
+                {
+                    "rpcaddr": self.testnet,
+                }
+            )
             self.rpcaddr = self.testnet
-            self.rpcport = self.testnetport
-            self.base_fields += ("testnet",)
 
     def run_full_node(self) -> None:
-
         self.is_testnet()
-
         while True:
             os.system("clear")
             self.create_menu()
