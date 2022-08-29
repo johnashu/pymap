@@ -21,18 +21,21 @@ Some of this information will be gathered during setup and will need to be updat
 
 ```bash
 binaries=/home/atlas/build/bin
+testnet=http://18.142.54.137
+testnetport=7445
 rpcaddr=https://poc3-rpc.maplabs.io
 rpcport=False
-keystore=
 password=password
 passwordFile=/home/password
+keystore=/home/pymap/admin/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
 namePrefix=validator
-lockedNum=1000000
-signerPriv=0x
+lockedNum=10
+signerPriv=
 validator=0x
-voteNum=10000
+target=0x
+voteNum=5
 commission=40000
-datadir=werwerrrrrrrrrrrrrrrrrr
+datadir=admin
 miner.validator=0x
 unlock=0x
 syncmode=full

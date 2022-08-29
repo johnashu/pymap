@@ -8,7 +8,27 @@ class Menu(MarkerMethods):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
+    def is_testnet(self) -> None:
+        while 1:
+            try:
+                testnet = int(
+                    input(
+                        "Please indicate if you wish to use Testnet or Mainnet\n\t* [1] Testnet\n\t* [2] Mainnet"
+                    )
+                )
+                break
+            except ValueError:
+                pass
+        if testnet == 1:
+            self.base_context.update({"testnet": ""})
+            self.rpcaddr = self.testnet
+            self.rpcport = self.testnetport
+            self.base_fields += "testnet"
+
     def run_full_node(self) -> None:
+
+        self.is_testnet()
+
         while True:
             os.system("clear")
             self.create_menu()
