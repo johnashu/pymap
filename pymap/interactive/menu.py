@@ -16,7 +16,8 @@ class Menu(MarkerMethods):
                         "Please indicate if you wish to use Testnet or Mainnet\n\t* [1] Testnet\n\t* [2] Mainnet\n\t>>> "
                     )
                 )
-                break
+                if testnet in (1, 2):
+                    break
             except ValueError:
                 pass
         if testnet == 1:
