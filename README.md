@@ -60,7 +60,7 @@ a password file is required for the service to run correctly!
  service atlasNode stop
 
  systemctl daemon-reload 
-
+ 
  systemctl enable atlasNode.service
 
  service atlasNode start
