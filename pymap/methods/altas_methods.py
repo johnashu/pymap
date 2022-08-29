@@ -73,15 +73,17 @@ class AtlasMethods:
             prog="",
         )
 
-        self.run_method(
-            [
-                "bash",
-                os.path.join(
-                    input(os.path.dirname(os.path.abspath(__file__))),
+        script = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)),
                     "..",
                     "scripts",
                     "startNode.sh",
-                ),
+                )
+
+        self.run_method(
+            [
+                "bash",
+                script,
             ],
             {},
             prog="",
