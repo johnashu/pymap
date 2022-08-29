@@ -59,7 +59,7 @@ class AtlasMethods:
         context: dict = dict(
             working_dir=str(),
             binaries=str(),
-            password=str(),
+            passwordFile=str(),
             datadir=str(),
             validator=str(),
             unlock=str(),
@@ -73,18 +73,26 @@ class AtlasMethods:
             prog="",
         )
 
-        script = os.path.join(
-                    os.path.dirname(os.path.abspath(__file__)),
-                    "..",
-                    "scripts",
-                    "startNode.sh",
-                )
+        commands = (
+            'service atlasNode stop',
+            'systemctl daemon-reload ',
+            'chmod 644 /etc/systemd/system/atlasNode.service',
+            'systemctl enable atlasNode.service',
+            'service atlasNode start'
+        )
 
-        self.run_method(
-            [
-                "bash",
-                script,
-            ],
+        for cmd in commands:
+            self.run_method(
+            cmd.split(),
             {},
             prog="",
         )
+
+    def show_tail(self) -> None:
+        cmd = 'tail -f /var/log/syslog'
+        self.run_method(
+            cmd.split(),
+            {},
+            prog="",
+        )
+

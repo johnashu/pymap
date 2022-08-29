@@ -24,4 +24,5 @@ menu_items = {
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",
     "Setup atlasNode Service": "setup_atlas_node_service",
+    'Show Node Logs': 'show_tail'
 }
