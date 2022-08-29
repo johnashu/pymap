@@ -23,4 +23,5 @@ menu_items = {
     "Get Balance": "get_balance",
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",
+    "Setup atlasNode Service": "setup_atlas_node_service",
 }

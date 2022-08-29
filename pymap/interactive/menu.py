@@ -34,15 +34,14 @@ class Menu(MarkerMethods):
             self.create_menu()
             try:
                 option = int(input("Enter your option: "))
+                try:
+                    self.menu[option]()
+                except KeyError:
+                    print("Option not found, Please enter a choice from the menu")
+                input("Press Enter to show menu or CTRL+C to exit..")
             except ValueError:
                 os.system("clear")
                 self.error_input()
-                self.run_full_node()
-            try:
-                self.menu[option]()
-            except KeyError:
-                print("Option not found, Please enter a choice from the menu")
-            input("Press Enter to show menu or CTRL+C to exit..")
 
     def finish_node(self):
         self.stars()

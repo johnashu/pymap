@@ -47,15 +47,12 @@ class RunProcess:
         shell: bool = False,
         save_keystore: bool = False,
     ) -> Tuple[bool, str]:
-        if not context:
-            return False, "No context provided"
+
         command_list = [os.path.join(envs.binaries, prog), method]
         for k, v in context.items():
             if k not in ignore:
                 if v:
                     command_list += [f"--{k}", f"{v}"]
-                # elif k == "password":
-                #     command_list += shlex.split(f'--{k} "{v}"')
 
         if args:
             command_list += args

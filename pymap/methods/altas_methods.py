@@ -1,6 +1,7 @@
 import os
 from getpass import getpass
 from pymap.tools.file_op import save_file
+from pymap.tools.create_service import create_systemd
 
 
 class AtlasMethods:
@@ -52,3 +53,20 @@ class AtlasMethods:
         context.update(self.handle_input(context))
         context.update({"mine": ""})
         self.run_method("", context, prog="atlas")
+
+    def setup_atlas_node_service(
+        self,
+        context: dict = dict(
+            working_dir=str(),
+            binaries=str(),
+            password=str(),
+            datadir=str(),
+            validator=str(),
+            unlock=str(),
+        ),
+    ) -> None:
+        context.update(self.handle_input(context))
+        cmd = create_systemd(context)
+        self.run_method(cmd, {}, prog="atlas")
+        self.run_method("systemctl enable atlasNode.service", {}, prog="")
+        self.run_method("service atlasNode start", {}, prog="")
