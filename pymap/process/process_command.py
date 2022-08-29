@@ -48,7 +48,7 @@ class RunProcess:
         save_keystore: bool = False,
     ) -> Tuple[bool, str]:
 
-        command_list = [os.path.join(envs.binaries, prog), method]
+        command_list = [os.path.join(envs.binaries, prog) if prog else "", method]
         for k, v in context.items():
             if k not in ignore:
                 if v:
