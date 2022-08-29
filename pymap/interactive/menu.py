@@ -23,7 +23,7 @@ class Menu(MarkerMethods):
             self.base_context.update({"testnet": ""})
             self.rpcaddr = self.testnet
             self.rpcport = self.testnetport
-            self.base_fields += "testnet",
+            self.base_fields += ("testnet",)
 
     def run_full_node(self) -> None:
 

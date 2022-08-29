@@ -21,8 +21,7 @@ Some of this information will be gathered during setup and will need to be updat
 
 ```bash
 binaries=/home/atlas/build/bin
-testnet=http://18.142.54.137
-testnetport=7445
+testnet=http://18.142.54.137:7445
 rpcaddr=https://poc3-rpc.maplabs.io
 rpcport=False
 password=password
