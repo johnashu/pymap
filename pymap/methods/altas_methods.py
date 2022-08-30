@@ -74,25 +74,24 @@ class AtlasMethods:
         )
 
         commands = (
-            'service atlasNode stop',
-            'systemctl daemon-reload ',
-            'chmod 644 /etc/systemd/system/atlasNode.service',
-            'systemctl enable atlasNode.service',
-            'service atlasNode start'
+            "service atlasNode stop",
+            "systemctl daemon-reload ",
+            "chmod 644 /etc/systemd/system/atlasNode.service",
+            "systemctl enable atlasNode.service",
+            "service atlasNode start",
         )
 
         for cmd in commands:
             self.run_method(
-            cmd.split(),
-            {},
-            prog="",
-        )
+                cmd.split(),
+                {},
+                prog="",
+            )
 
     def show_tail(self) -> None:
-        cmd = 'tail -f /var/log/syslog'
+        cmd = "tail -f /var/log/syslog"
         self.run_method(
             cmd.split(),
             {},
             prog="",
         )
-

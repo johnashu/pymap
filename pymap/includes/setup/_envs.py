@@ -6,6 +6,7 @@ class Envs:
         self.load_envs()
 
     def load_envs(self):
+
         config = dotenv_values(find_dotenv())
 
         for k, v in config.items():

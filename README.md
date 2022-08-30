@@ -20,13 +20,13 @@ Some of this information will be gathered during setup and will need to be updat
 
 
 ```bash
-binaries=/home/atlas/build/bin
+binaries=/home/maffaz/atlas/build/bin
 testnet=http://18.142.54.137:7445
 rpcaddr=https://poc3-rpc.maplabs.io
 rpcport=False
 password=password
-passwordFile=/home/password
-keystore=/home/pymap/admin/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
+passwordFile=/home/maffaz/password
+keystore=/home/maffaz/pymap/admin/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
 namePrefix=validator
 lockedNum=10
 signerPriv=
