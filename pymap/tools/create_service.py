@@ -1,7 +1,6 @@
 from pymap.tools.file_op import save_file
 import logging as log
 
-
 def create_systemd(
     context: dict = dict(
         working_dir="",
@@ -33,6 +32,5 @@ WantedBy=multi-user.target
 """
 
     sysd = template.format(*[x for x in context.values()])
-    log.info(sysd)
     save_file("atlasNode.service", sysd)
     return sysd
