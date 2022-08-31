@@ -13,4 +13,5 @@ name_map = {
     "unlock": "Address to unlock to",
     "syncmode": "Syncing mode required",
     "port": "Port to run Node on",
+    "default_address": "Enter address to check",
 }

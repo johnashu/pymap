@@ -97,16 +97,21 @@ class RpcMethods(RpcRequest):
 
     def get_balance(self, address: str = "") -> int:
         if not address:
-            address = take_input(str, "Enter address to check balance: ")
+            address = self.handle_input({"default_address": self.default_address})[
+                "default_address"
+            ]
+            # take_input(str, "Enter address to check: ")
         balance = self._get_balance(address)
         log.info(f"Balance of Address  {address}  ::  {balance}  MAP")
         return balance
 
     def check_if_selected(self, validator: str = "") -> bool:
         if not validator:
-            validator = take_input(
-                str, "Enter validator address to check election status: "
-            )
+            validator = self.handle_input({"validator": self.validator})["validator"]
+
+            # validator = take_input(
+            #     str, "Enter validator address to check election status: "
+            # )
         elected = self._get_validators()
         if validator in elected:
             log.info(f"Validator {validator} is Elected!!")
