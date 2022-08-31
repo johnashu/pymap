@@ -85,13 +85,19 @@ class RunProcess:
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
-            asyncio.run(
-                self.run(
+            asyncio.new_event_loop().run_until_complete(self.run(
                     command_list,
                     bytes(std_in, "utf-8"),
                     save_keystore=save_keystore,
                     scrolling=scrolling,
-                )
-            )
+                ))
+            # asyncio.run(
+            #     self.run(
+            #         command_list,
+            #         bytes(std_in, "utf-8"),
+            #         save_keystore=save_keystore,
+            #         scrolling=scrolling,
+            #     )
+            # )
         except KeyboardInterrupt:
             pass
