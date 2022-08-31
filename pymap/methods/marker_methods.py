@@ -15,7 +15,6 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         self.base_context = {
             k: v for k, v in kw.items() if k in self.base_fields if v != False
         }
-        print(self.base_context)
         super(MarkerMethods, self).__init__(**kw)
 
     def set_fields(self, **base_fields) -> None:

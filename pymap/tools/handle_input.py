@@ -39,6 +39,5 @@ class HandleInput:
             else:
                 self.__dict__[k] = i
             context[k] = i
-        print(self.base_field_keys)
         self.update_env(self.base_field_keys)
         return context

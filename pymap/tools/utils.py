@@ -96,8 +96,3 @@ def list_subclass_methods(cls, is_narrow):
         return set(cls for cls in methods if not (cls in parentMethods))
     else:
         return methods
-
-
-# p = '5024518800000000000000'
-# r = readable_price(p)
-# print(r)
