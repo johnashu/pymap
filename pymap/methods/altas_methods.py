@@ -69,7 +69,7 @@ class AtlasMethods:
         create_systemd(context)
 
         commands = (
-            "sudo mv atlasNode.service /etc/systemd/system/atlasNode.service"
+            "sudo mv atlasNode.service /etc/systemd/system/atlasNode.service",
             "sudo service atlasNode stop",
             "sudo systemctl daemon-reload ",
             "sudo chmod 644 /etc/systemd/system/atlasNode.service",
