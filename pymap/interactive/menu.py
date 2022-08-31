@@ -60,6 +60,7 @@ class Menu(MarkerMethods):
             + "Are you sure you would like to proceed with rebooting your server?\n\nType 'Yes' or 'No' to continue"
         )
         if question:
+            os.system("sudo service atlasNode stop")
             os.system("sudo reboot")
         else:
             print("Invalid option.")
