@@ -47,25 +47,41 @@ run `example.py` to get started..
 
 # Service control.
 
+```bash
+cat<<-EOF > /etc/systemd/system/atlasNode.service
+[Unit]
+Description=atlasNode daemon
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+WorkingDirectory=/home
+ExecStart=bash /home/maffaz/atlas/build/bin/atlas  --datadir /home/maffaz/account --syncmode full --port 30321 --mine --miner.validator 0x53d923e76645f7D91e1F27D08339937f5AEFcB62  --unlock 0xe3163d13b123d359e0fbf04f6c8b1812d04524b8 --password /home/maffaz/pymap/password
+SyslogIdentifier=atlasNode
+StartLimitInterval=0
+LimitNOFILE=65536
+LimitNPROC=65536
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+```
 
 a password file is required for the service to run correctly!
 
 
 ```bash
 
- chmod +x startNode.sh
 
- chmod 644 /etc/systemd/system/atlasNode.service
-
- service atlasNode stop
-
- systemctl daemon-reload 
- 
- systemctl enable atlasNode.service
-
- service atlasNode start
-
- service atlasNode status
+sudo mv atlasNode.service /etc/systemd/system/atlasNode.service
+sudo service atlasNode stop
+sudo systemctl daemon-reload 
+sudo chmod 644 /etc/systemd/system/atlasNode.service
+sudo systemctl enable atlasNode.service
+sudo service atlasNode start
 
 ```
  
