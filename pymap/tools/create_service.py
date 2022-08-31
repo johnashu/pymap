@@ -10,7 +10,9 @@ def create_systemd(
         "datadir": str(),
         "miner.validator": str(),
         "unlock": str(),
+        'testnet': str()
     },
+    
 ) -> None:
     template = """
 [Unit]
@@ -22,7 +24,7 @@ Type=simple
 Restart=always
 RestartSec=1
 WorkingDirectory={}
-ExecStart={}atlas --password {} --datadir {} --syncmode full --port 30321 --mine --miner.validator {}  --unlock {}
+ExecStart={}atlas --password {} --datadir {} --syncmode full --port 30321 --mine --miner.validator {}  --unlock {} {}
 SyslogIdentifier=atlasNode
 StartLimitInterval=0
 LimitNOFILE=65536
