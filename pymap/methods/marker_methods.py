@@ -143,3 +143,10 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         if self.rpcport:
             context.update({"rpcport": self.rpcport})
         self.run_method("getValidatorRewardInfo", context)
+
+    
+    # TX and things
+    def transfer(self, context: dict = dict(target=int(), amount=str())
+    ) -> None:
+        context.update(self.handle_input({**self.base_context, **context}))
+        self.run_method("transfer", context)
