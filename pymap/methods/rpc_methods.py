@@ -133,7 +133,7 @@ class RpcMethods(RpcRequest):
             raise InvalidRPCReplyError(method, self.rpcaddr) from e
 
     def get_block_number(self) -> int:
-        block = self._get_block_number()
+        block = int(self._get_block_number(), 16)
         log.info(f'Current Block Number:  {block}')
         return block
         
