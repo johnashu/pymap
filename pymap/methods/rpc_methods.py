@@ -9,7 +9,7 @@ class RpcMethods(RpcRequest):
     def __init__(self, **kw) -> None:
         super(RpcMethods, self).__init__(**kw)
     
-    def get_block_number(
+    def _get_block_number(
         self,
         # endpoint=_default_endpoint,
         timeout=_default_timeout,
@@ -132,12 +132,17 @@ class RpcMethods(RpcRequest):
         except KeyError as e:
             raise InvalidRPCReplyError(method, self.rpcaddr) from e
 
+    def get_block_number(self) -> int:
+        block = self._get_block_number()
+        log.info(f'Current Block Number:  {block}')
+        return block
+        
+
     def get_balance(self, address: str = "") -> int:
         if not address:
             address = self.handle_input({"default_address": self.default_address})[
                 "default_address"
             ]
-            # take_input(str, "Enter address to check: ")
         balance = self._get_balance(address)
         log.info(f"Balance of Address  {address}  ::  {balance}  MAP")
         return balance
@@ -146,9 +151,6 @@ class RpcMethods(RpcRequest):
         if not validator:
             validator = self.handle_input({"validator": self.validator})["validator"]
 
-            # validator = take_input(
-            #     str, "Enter validator address to check election status: "
-            # )
         elected = self._get_validators()
         if validator in elected:
             log.info(f"Validator {validator} is Elected!!")
