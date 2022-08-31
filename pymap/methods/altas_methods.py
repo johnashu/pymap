@@ -56,14 +56,14 @@ class AtlasMethods:
 
     def setup_atlas_node_service(
         self,
-        context: dict = dict(
-            working_dir=str(),
-            binaries=str(),
-            passwordFile=str(),
-            datadir=str(),
-            validator=str(),
-            unlock=str(),
-        ),
+         context: dict = {
+        "working_dir": str(),
+        "binaries": str(),
+        "passwordFile": str(),
+        "datadir": str(),
+        "miner.validator": str(),
+        "unlock": str(),
+    },
     ) -> None:
         context.update(self.handle_input(context))
         create_systemd(context)
