@@ -26,7 +26,7 @@ rpcaddr=https://poc3-rpc.maplabs.io
 rpcport=False
 password=password
 passwordFile=/home/maffaz/password
-keystore=/home/maffaz/pymap/admin/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
+keystore=/home/maffaz/node/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
 namePrefix=validator
 lockedNum=10
 signerPriv=
@@ -39,6 +39,7 @@ miner.validator=0x
 unlock=0x
 syncmode=full
 port=30321
+default_address=0x
 
 ```
 

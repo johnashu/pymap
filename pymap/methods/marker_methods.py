@@ -97,6 +97,8 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         self, context: dict = dict(commission=int(), signerPriv=str())
     ) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
+        c = context["commission"]
+        context["commission"] = c * 10000
         self.run_method("register", context)
 
     def deregister(self):

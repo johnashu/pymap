@@ -3,12 +3,13 @@ from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
-from pymap.tools.utils import take_input, log
+from pymap.tools.utils import log
+
 
 class RpcMethods(RpcRequest):
     def __init__(self, **kw) -> None:
         super(RpcMethods, self).__init__(**kw)
-    
+
     def _get_block_number(
         self,
         # endpoint=_default_endpoint,
@@ -134,9 +135,8 @@ class RpcMethods(RpcRequest):
 
     def get_block_number(self) -> int:
         block = int(self._get_block_number(), 16)
-        log.info(f'Current Block Number:  {block}')
+        log.info(f"Current Block Number:  {block}")
         return block
-        
 
     def get_balance(self, address: str = "") -> int:
         if not address:

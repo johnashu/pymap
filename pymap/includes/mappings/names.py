@@ -6,7 +6,7 @@ name_map = {
     "withdrawIndex": "withdraw index from pending withdrawals",
     "signerPriv": "Signer Private Key",
     "validator": "Validator Address",
-    "commission": "Commission of validator",
+    "commission": "Commission of validator in %",
     "voteNum": "amount of MAP to vote with",
     "datadir": "Data Directory",
     "miner.validator": "Validator Address to mine",
