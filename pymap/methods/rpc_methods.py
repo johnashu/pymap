@@ -12,7 +12,7 @@ class RpcMethods(RpcRequest):
 
     def _get_validators(
         self,
-        endpoint=_default_endpoint,
+        # endpoint=_default_endpoint,
         timeout=_default_timeout,
     ) -> list:
         """
@@ -44,16 +44,16 @@ class RpcMethods(RpcRequest):
         params = []
         try:
             return self.rpc_request(
-                method, params=params, endpoint=endpoint, timeout=timeout
+                method, params=params, endpoint=self.rpcaddr, timeout=timeout
             )["result"]
         except KeyError as e:
-            raise InvalidRPCReplyError(method, endpoint) from e
+            raise InvalidRPCReplyError(method, self.rpcaddr) from e
 
     def _get_balance(
         self,
         address: str,
         block: str = "latest",
-        endpoint=_default_endpoint,
+        # endpoint=_default_endpoint,
         timeout=_default_timeout,
     ) -> list:
         """
@@ -88,12 +88,12 @@ class RpcMethods(RpcRequest):
         try:
             return int(
                 self.rpc_request(
-                    method, params=params, endpoint=endpoint, timeout=timeout
+                    method, params=params, endpoint=self.rpcaddr, timeout=timeout
                 )["result"],
                 16,
             )
         except KeyError as e:
-            raise InvalidRPCReplyError(method, endpoint) from e
+            raise InvalidRPCReplyError(method, self.rpcaddr) from e
 
     def get_balance(self, address: str = "") -> int:
         if not address:
