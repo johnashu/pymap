@@ -50,14 +50,15 @@ class RpcRequest:
         try:
             payload = {"id": "1", "jsonrpc": "2.0", "method": method, "params": params}
             headers = {"Content-Type": "application/json"}
+            data = json.dumps(payload, indent=4)
 
-            log.info(f"Json Request to  [ {endpoint} ] \n{payload}\n")
+            log.info(f"Json Request to  [ {endpoint} ] \n{data}\n")
 
             resp = requests.request(
                 "POST",
                 endpoint,
                 headers=headers,
-                data=json.dumps(payload),
+                data=data,
                 timeout=timeout,
                 allow_redirects=True,
             )
