@@ -51,6 +51,8 @@ class RpcRequest:
             payload = {"id": "1", "jsonrpc": "2.0", "method": method, "params": params}
             headers = {"Content-Type": "application/json"}
 
+            log.info(f"Json Request to  [ {endpoint} ] \n{payload}\n")
+
             resp = requests.request(
                 "POST",
                 endpoint,

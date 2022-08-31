@@ -137,3 +137,6 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         if self.rpcport:
             context.update({"rpcport": self.rpcport})
         self.run_method("getTotalVotesForEligibleValidators", context)
+
+    def get_validator_reward_info(self) -> None:
+        self.run_method("getValidatorRewardInfo", {})
