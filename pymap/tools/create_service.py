@@ -10,9 +10,8 @@ def create_systemd(
         "datadir": str(),
         "miner.validator": str(),
         "unlock": str(),
-        'testnet': str()
+        "testnet": str(),
     },
-    
 ) -> None:
     template = """
 [Unit]

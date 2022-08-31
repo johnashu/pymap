@@ -56,18 +56,18 @@ class AtlasMethods:
 
     def setup_atlas_node_service(
         self,
-         context: dict = {
-        "working_dir": str(),
-        "binaries": str(),
-        "passwordFile": str(),
-        "datadir": str(),
-        "miner.validator": str(),
-        "unlock": str(),
-    },
+        context: dict = {
+            "working_dir": str(),
+            "binaries": str(),
+            "passwordFile": str(),
+            "datadir": str(),
+            "miner.validator": str(),
+            "unlock": str(),
+        },
     ) -> None:
         context.update(self.handle_input(context))
         if self.testnet == self.rpcaddr:
-            context['testnet'] = '--testnet'
+            context["testnet"] = "--testnet"
         create_systemd(context)
 
         commands = (
