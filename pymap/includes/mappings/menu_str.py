@@ -21,6 +21,7 @@ menu_items = {
     "Make ECDSA Signature From Signer": "make_ECDSA_signature_from_signer",
     "Make BLS Proof Of Possession From Signer": "make_BLS_proof_of_possession_from_signer",
     "Get Balance": "get_balance",
+    "Get Current Block Number": 'get_block_number',
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",
     "Setup atlasNode Service": "setup_atlas_node_service",

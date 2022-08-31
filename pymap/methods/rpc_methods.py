@@ -5,10 +5,47 @@ from pymap.rpc.exceptions import (
 )
 from pymap.tools.utils import take_input, log
 
-
 class RpcMethods(RpcRequest):
     def __init__(self, **kw) -> None:
         super(RpcMethods, self).__init__(**kw)
+    
+    def get_block_number(
+        self,
+        # endpoint=_default_endpoint,
+        timeout=_default_timeout,
+    ) -> list:
+        """
+        Get the current block number.
+
+        Parameters
+        ----------
+        endpoint: :obj:`str`, optional
+            Endpoint to send request to
+        timeout: :obj:`int`, optional
+            Timeout in seconds
+
+        Returns
+        -------
+        Json Response
+
+        Raises
+        ------
+        InvalidRPCReplyError
+            If received unknown result from endpoint
+
+        API Reference
+        -------------
+
+        """
+
+        method = "eth_blockNumber"
+        params = []
+        try:
+            return self.rpc_request(
+                method, params=params, endpoint=self.rpcaddr, timeout=timeout
+            )["result"]
+        except KeyError as e:
+            raise InvalidRPCReplyError(method, self.rpcaddr) from e
 
     def _get_validators(
         self,
