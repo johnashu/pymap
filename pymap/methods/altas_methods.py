@@ -52,7 +52,7 @@ class AtlasMethods:
     ) -> None:
         context.update(self.handle_input(context))
         context.update({"mine": ""})
-        self.run_method("", context, prog="atlas")
+        self.run_method("", context, prog="atlas", scrolling=True)
 
     def setup_atlas_node_service(
         self,
@@ -86,8 +86,4 @@ class AtlasMethods:
 
     def show_tail(self) -> None:
         cmd = "tail -f /var/log/syslog"
-        self.run_method(
-            cmd.split(),
-            {},
-            prog="",
-        )
+        self.run_method(cmd.split(), {}, prog="", scrolling=True)

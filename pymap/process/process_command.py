@@ -7,7 +7,9 @@ import shlex
 
 
 class RunProcess:
-    async def watch(self, stream, prefix="", save_keystore: bool = False):
+    async def watch(
+        self, stream, prefix="", save_keystore: bool = False, scrolling: bool = False
+    ):
         async for line in stream:
             l = line.decode().strip()
             if save_keystore:
@@ -15,7 +17,10 @@ class RunProcess:
                 if ks[0].endswith("secret key file"):
                     self.keystore = ks[-1].strip()
                     self.update_env(self.base_field_keys)
-            log.info(f"{prefix}  {l}")
+            if not scrolling:
+                log.info(f"{prefix}  {l}")
+            else:
+                print(f"{prefix}  {l}")
 
     async def create_process(self, cmd):
 
@@ -28,13 +33,19 @@ class RunProcess:
 
         return p
 
-    async def run(self, cmd, std_in: str = "", save_keystore: bool = False):
+    async def run(
+        self,
+        cmd,
+        std_in: str = "",
+        save_keystore: bool = False,
+        scrolling: bool = False,
+    ):
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
-            self.watch(p.stdout, ">", save_keystore=save_keystore),
-            self.watch(p.stderr, ">", save_keystore=save_keystore),
+            self.watch(p.stdout, ">", save_keystore=save_keystore, scrolling=scrolling),
+            self.watch(p.stderr, ">", save_keystore=save_keystore, scrolling=scrolling),
         )
 
     def run_method(
@@ -47,6 +58,7 @@ class RunProcess:
         shell: bool = False,
         save_keystore: bool = False,
         return_command: bool = False,
+        scrolling: bool = False,
     ) -> Tuple[bool, str]:
 
         if isinstance(method, str):
@@ -75,7 +87,10 @@ class RunProcess:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
             asyncio.run(
                 self.run(
-                    command_list, bytes(std_in, "utf-8"), save_keystore=save_keystore
+                    command_list,
+                    bytes(std_in, "utf-8"),
+                    save_keystore=save_keystore,
+                    scrolling=scrolling,
                 )
             )
         except KeyboardInterrupt:
