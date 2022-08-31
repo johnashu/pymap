@@ -67,18 +67,14 @@ class AtlasMethods:
     ) -> None:
         context.update(self.handle_input(context))
         create_systemd(context)
-        self.run_method(
-            ["mv", "atlasNode.service", "/etc/systemd/system/atlasNode.service"],
-            {},
-            prog="",
-        )
 
         commands = (
-            "service atlasNode stop",
-            "systemctl daemon-reload ",
-            "chmod 644 /etc/systemd/system/atlasNode.service",
-            "systemctl enable atlasNode.service",
-            "service atlasNode start",
+            "sudo mv atlasNode.service /etc/systemd/system/atlasNode.service"
+            "sudo service atlasNode stop",
+            "sudo systemctl daemon-reload ",
+            "sudo chmod 644 /etc/systemd/system/atlasNode.service",
+            "sudo systemctl enable atlasNode.service",
+            "sudo service atlasNode start",
         )
 
         for cmd in commands:
