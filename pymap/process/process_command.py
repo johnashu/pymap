@@ -33,8 +33,8 @@ class RunProcess:
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
-            self.watch(p.stdout, "INFO:", save_keystore=save_keystore),
-            self.watch(p.stderr, "ERROR:", save_keystore=save_keystore),
+            self.watch(p.stdout, ">", save_keystore=save_keystore),
+            self.watch(p.stderr, ">", save_keystore=save_keystore),
         )
 
     def run_method(

@@ -57,8 +57,8 @@ After=network-online.target
 Type=simple
 Restart=always
 RestartSec=1
-WorkingDirectory=/home
-ExecStart=bash /home/maffaz/atlas/build/bin/atlas  --datadir /home/maffaz/account --syncmode full --port 30321 --mine --miner.validator 0x53d923e76645f7D91e1F27D08339937f5AEFcB62  --unlock 0xe3163d13b123d359e0fbf04f6c8b1812d04524b8 --password /home/maffaz/pymap/password
+WorkingDirectory=/home/maffaz
+ExecStart=/home/maffaz/atlas/build/bin/atlas --password password --datadir /home/maffaz/node --syncmode full --port 30321 --mine --miner.validator 0x53d923e76645f7d91e1f27d08339937f5aefcb62  --unlock 0x53d923e76645f7d91e1f27d08339937f5aefcb62
 SyslogIdentifier=atlasNode
 StartLimitInterval=0
 LimitNOFILE=65536
@@ -66,6 +66,7 @@ LimitNPROC=65536
 
 [Install]
 WantedBy=multi-user.target
+
 EOF
 
 ```
