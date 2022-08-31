@@ -146,7 +146,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
 
     
     # TX and things
-    def transfer(self, context: dict = dict(target=int(), amount=str())
+    def transfer(self, context: dict = dict(target=str(), amount=int())
     ) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("transfer", context)
