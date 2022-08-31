@@ -98,7 +98,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
     ) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
         c = context["commission"]
-        context["commission"] = c * 10000
+        context["commission"] = str(int(c) * 10000)
         self.run_method("register", context)
 
     def deregister(self):
