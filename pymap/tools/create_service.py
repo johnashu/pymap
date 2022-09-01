@@ -35,7 +35,5 @@ WantedBy=multi-user.target
 
     sysd = template.format(*[x for x in context.values()])
     print(sysd)
-    print(context)
     save_file("/etc/systemd/system/atlasNode.service", sysd)
-
     return sysd
