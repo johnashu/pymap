@@ -1,7 +1,7 @@
 import logging as log
 import os
 from colorama import Style, Fore, Back
-from pymap.pymap.tools.utils import askYesNo
+from pymap.tools.utils import askYesNo
 from pymap.tools.utils import take_input, is_signer
 from pymap.tools.file_op import save_file
 from pymap.includes.mappings.names import name_map
