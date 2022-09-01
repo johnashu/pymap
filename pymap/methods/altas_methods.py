@@ -38,13 +38,8 @@ class AtlasMethods:
             isSigner=isSigner,
         )
 
-        passwordFile = self.passwordFile
-        default_pw_fn = "password"
-
-        if isSigner:
-            passwordFile = self.signer_passwordFile
-            self.signer_password = pw1
-            default_pw_fn = "signer_password"
+        passwordFile = self.signer_passwordFile if isSigner else self.passwordFile
+        default_pw_fn = "signer_password" if isSigner else 'password'
 
         save_file(
             passwordFile if passwordFile else os.path.join(os.getcwd(), default_pw_fn),
@@ -52,6 +47,7 @@ class AtlasMethods:
         )
 
         if isSigner:
+            self.signer_password = pw1
             self.signer_address, self.signerPriv = pk_from_store(
                 self.signer_keystore, self.signer_password
             )
