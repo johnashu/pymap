@@ -1,5 +1,5 @@
 menu_items = {
-    "List / Update Input Data": 'display_and_update_env',
+    "List / Update Input Data": "display_and_update_env",
     "Check Vote Statistics": "get_total_votes_for_eligible_validator",
     "Create New Keystore Address": "new_account",
     "Create New Account": "create_account",
@@ -27,6 +27,6 @@ menu_items = {
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",
     "Setup atlasNode Service": "setup_atlas_node_service",
-    'Transfer Map using Keystore': 'transfer', 
+    "Transfer Map using Keystore": "transfer",
     "Show Node Logs": "show_tail",
 }

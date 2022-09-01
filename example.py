@@ -21,7 +21,11 @@ if __name__ == "__main__":
     i = InteractiveSetup(**from_env)
     i.get_balance(address)
     v = i._get_validators()
-    tx = i.rpc_request('eth_getTransactionByHash', ['0x55e46782f48bbd36def69f5624d073ed5ff4c15e7da4300bc0effc297c59820c'], endpoint='http://18.142.54.137:7445')
+    tx = i.rpc_request(
+        "eth_getTransactionByHash",
+        ["0x55e46782f48bbd36def69f5624d073ed5ff4c15e7da4300bc0effc297c59820c"],
+        endpoint="http://18.142.54.137:7445",
+    )
     print(tx)
     print(v)
     # i.start()

@@ -1,6 +1,7 @@
 from colorama import Style, Fore, Back
 from pymap.tools.file_op import open_file
 from pymap.includes.mappings.menu_str import menu_items
+from pymap.includes.config import envs
 
 
 class PrintStuff:
@@ -96,10 +97,10 @@ class PrintStuff:
             + "WARNING: You may miss blocks during a reboot!"
             + Style.RESET_ALL
         )
-        print("*  Map Validator Menu Options:")
+        print("*  Menu Options:")
         print("*")
         for i, k in enumerate(menu_items.keys()):
-            print(f"*  [{i+1}] {k}")
+            print(f"*  [{i+1:>2}] {k}")
             self.menu[i + 1] = eval(f"self.{menu_items[k]}")
         print(
             f"""
@@ -110,6 +111,17 @@ print("*  [0] Exit Application            - Goodbye!")
 *********************************************************************************************
         """
         )
+
+    def list_envs(self) -> None:
+        c = 1
+        cur_list = {}
+        print("* " + Fore.GREEN + "[ 0] - Back To Main Menu" + Style.RESET_ALL)
+        for k, v in self.__dict__.items():
+            if k in envs.__dict__.keys():
+                cur_list[c] = k
+                print(f"* [{c:>2}] - {k:<15}  ::  {v}")
+                c += 1
+        return cur_list
 
 
 # whitespace = PrintStuff.whitespace
