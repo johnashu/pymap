@@ -1,6 +1,12 @@
 import json, csv
 import logging as log
+import os
 
+os.umask(0)  # Without this, the created file will have 0o777 - 0o022 (default umask) = 0o755 permissions
+
+def opener(path, flags):
+    """ Custom opener to handle permissions in linux"""
+    return os.open(path, flags, 0o777)
 
 def open_file(fn: str) -> list:
     with open(fn, "r") as f:
@@ -8,7 +14,7 @@ def open_file(fn: str) -> list:
 
 
 def save_file(fn: str, data: list) -> list:
-    with open(fn, "w") as f:
+    with open(fn, "w", opener=opener) as f:
         return f.write(data)
 
 
