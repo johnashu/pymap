@@ -8,7 +8,7 @@ class AtlasMethods:
     def __init__(self, **kw) -> None:
         super(AtlasMethods, self).__init__(**kw)
 
-    def new_validator(self, context: dict = dict(datadir=str())) -> None:
+    def new_account(self, context: dict = dict(datadir=str())) -> None:
         context.update(self.handle_input(context))
         pw1, pw2 = "1", "2"
         while 1:
@@ -71,7 +71,6 @@ class AtlasMethods:
         create_systemd(context)
 
         commands = (
-            "sudo mv atlasNode.service /etc/systemd/system/atlasNode.service",
             "sudo service atlasNode stop",
             "sudo systemctl daemon-reload ",
             "sudo chmod 644 /etc/systemd/system/atlasNode.service",

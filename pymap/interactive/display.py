@@ -83,11 +83,11 @@ class PrintStuff:
             + Fore.RED
             + "WARNING"
             + Style.RESET_ALL
-            + ": Only numbers are possible, please try your selection on the main menu once again."
+            + ": Only numbers are possible, please try your selection again."
         )
         self.stars(reset=1)
         self.whitespace()
-        input("* Press ENTER to return to the main menu")
+        input("* Press ENTER to return to the menu")
 
     def create_menu(self):
         msg = (

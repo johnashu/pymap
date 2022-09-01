@@ -1,7 +1,8 @@
 menu_items = {
+    "List / Update Input Data": 'display_and_update_env',
     "Check Vote Statistics": "get_total_votes_for_eligible_validator",
-    "Create New Wallet": "new_validator",
-    "Çreate New Account": "create_account",
+    "Create New Keystore Address": "new_account",
+    "Create New Account": "create_account",
     "Lock Map": "locked_map",
     "Unlock Map": "unlock_map",
     "Get Account Non Voting Locked Maps": "get_account_nonvoting_locked_gold",
