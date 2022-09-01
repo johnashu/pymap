@@ -38,9 +38,16 @@ class AtlasMethods:
             isSigner=isSigner,
         )
 
-        default_pw_fn = os.path.join(
-            os.getcwd(), "signer_password" if isSigner else "password"
+        keystore_path = (
+            self.keystore_signer.split("/")[0]
+            if isSigner
+            else self.keystore.split("/")[0]
         )
+
+        default_pw_fn = os.path.join(
+            keystore_path, "signer_password" if isSigner else "password"
+        )
+
         passwordFile = (
             self.signer_passwordFile
             if isSigner and self.signer_passwordFile
