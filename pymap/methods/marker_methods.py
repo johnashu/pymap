@@ -31,8 +31,8 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
                 ask_is_signer=True,
                 signer_fields=(
                     "namePrefix", 
-                    # "password", 
-                    # "passwordFile"
+                    "password", 
+                    "passwordFile"
                     ),
             )
         )
