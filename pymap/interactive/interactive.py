@@ -30,7 +30,7 @@ class InteractiveSetup(Menu):
                 )
                 if choice == 0:
                     break
-                self.handle_input({cur_list[choice]: str()})
+                self.handle_input({cur_list[choice]: str()}, allow_empty=True)
             except ValueError:
                 self.error_input()
 

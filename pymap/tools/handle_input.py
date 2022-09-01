@@ -1,5 +1,7 @@
 import logging as log
 import os
+from colorama import Style, Fore, Back
+from pymap.pymap.tools.utils import askYesNo
 from pymap.tools.utils import take_input, is_signer
 from pymap.tools.file_op import save_file
 from pymap.includes.mappings.names import name_map
@@ -23,6 +25,7 @@ class HandleInput:
         signer_fields: tuple = (),
         ask_is_signer: bool = False,
         isSigner: bool = False,
+        allow_empty: bool = False,
     ) -> None:
         isSigner = None
         if ask_is_signer:
@@ -45,10 +48,25 @@ class HandleInput:
                 if not name_map.get(k)
                 else name_map.get(k)
             )
-            i = take_input(type(v), f"Please Enter {display} ({arg}) ({key}): ")
+            i = take_input(type(v), f"Please Enter {display} ({arg}): ")
             if not i:
                 try:
-                    i = self.__dict__[key]
+                    allow = False
+                    if allow_empty:
+                        allow = askYesNo(
+                            "* "
+                            + Fore.RED
+                            + "WARNING"
+                            + Style.RESET_ALL
+                            + "Are you sure you want to"
+                            + Fore.RED
+                            + "DELETE"
+                            + Style.RESET_ALL
+                            + "this Field?: "
+                        )
+
+                    if not allow:
+                        i = self.__dict__[key]
                 except KeyError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
