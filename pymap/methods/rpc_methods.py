@@ -149,7 +149,7 @@ class RpcMethods(RpcRequest):
 
     def check_if_selected(self, validator: str = "") -> bool:
         if not validator:
-            validator = self.handle_input({"validator": self.validator})["validator"]
+            validator = self.handle_input({"validator": self.signer_address})["validator"]
 
         elected = self._get_validators()
         if validator in elected:

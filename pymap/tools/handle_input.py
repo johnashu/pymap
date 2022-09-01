@@ -22,6 +22,7 @@ class HandleInput:
         remove: tuple = (),
         signer_fields: tuple = (),
         ask_is_signer: bool = False,
+        isSigner: bool = False,
     ) -> None:
         isSigner = None
         if ask_is_signer:

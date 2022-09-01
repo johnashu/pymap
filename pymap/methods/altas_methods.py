@@ -55,6 +55,8 @@ class AtlasMethods:
             self.signer_address, self.signerPriv = pk_from_store(
                 self.signer_keystore, self.signer_password
             )
+            self.unlock = self.signer_address
+            self.__dict__['miner.validator'] = self.signer_address
             self.update_env(self.base_field_keys)
 
     def join_network(
@@ -82,7 +84,9 @@ class AtlasMethods:
             "unlock": str(),
         },
     ) -> None:
-        context.update(self.handle_input(context))
+        context.update(
+            self.handle_input(context), isSigner=True, signer_fields=("passwordFile")
+        )
         if self.testnet == self.rpcaddr:
             context["testnet"] = "--testnet"
         create_systemd(context)
