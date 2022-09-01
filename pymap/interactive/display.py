@@ -119,7 +119,7 @@ print("*  [0] Exit Application            - Goodbye!")
         for k, v in self.__dict__.items():
             if k in envs.__dict__.keys():
                 cur_list[c] = k
-                print(f"* [{c:>2}] - {k:<15}  ::  {v}")
+                print(f"* [{c:>2}] - {k:<20}  ::  {v}")
                 c += 1
         return cur_list
 
