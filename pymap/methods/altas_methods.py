@@ -39,7 +39,7 @@ class AtlasMethods:
         )
 
         keystore_path = (
-            self.keystore_signer.split("/")[0]
+            self.signer_keystore.split("/")[0]
             if isSigner
             else self.keystore.split("/")[0]
         )
