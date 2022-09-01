@@ -2,6 +2,8 @@ import os
 from getpass import getpass
 from pymap.tools.file_op import save_file
 from pymap.tools.create_service import create_systemd
+from pymap.tools.utils import is_signer
+from pymap.tools.key_from_keystore import pk_from_store
 
 
 class AtlasMethods:
@@ -11,6 +13,8 @@ class AtlasMethods:
     def new_account(self, context: dict = dict(datadir=str())) -> None:
         context.update(self.handle_input(context))
         pw1, pw2 = "1", "2"
+        isSigner = is_signer()
+
         while 1:
             pw1 = getpass(prompt="Enter Keystore password: ")
             if not pw1:
@@ -31,14 +35,27 @@ class AtlasMethods:
             prog="atlas",
             std_in=f"{pw1}\n{pw2}\n",
             save_keystore=True,
+            isSigner=isSigner,
         )
+
         to_write = pw1
+        passwordFile = self.passwordFile
+        default_pw_fn = "password"
+
+        if isSigner:
+            passwordFile = self.signer_passwordFile
+            default_pw_fn = "signer_password"
+
         save_file(
-            self.passwordFile
-            if self.passwordFile
-            else os.path.join(os.getcwd(), "password"),
+            passwordFile if passwordFile else os.path.join(os.getcwd(), default_pw_fn),
             to_write,
         )
+
+        if isSigner:
+            self.signer_address, self.signerPriv = pk_from_store(
+                self.signer_keystore, self.signer_password
+            )
+            self.update_env(self.base_field_keys)
 
     def join_network(
         self,

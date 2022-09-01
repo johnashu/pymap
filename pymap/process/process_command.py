@@ -8,15 +8,24 @@ import shlex
 
 class RunProcess:
     async def watch(
-        self, stream, prefix="", save_keystore: bool = False, scrolling: bool = False
+        self,
+        stream,
+        prefix="",
+        save_keystore: bool = False,
+        scrolling: bool = False,
+        isSigner: bool = False,
     ):
         async for line in stream:
             l = line.decode().strip()
             if save_keystore:
                 ks = l.split(":")
                 if ks[0].endswith("secret key file"):
-                    self.keystore = ks[-1].strip()
-                    self.update_env(self.base_field_keys)
+                    if isSigner:
+                        self.signer_keystore = ks[-1].strip()
+                    else:
+                        self.keystore = ks[-1].strip()
+                self.update_env(self.base_field_keys)
+
             if not scrolling:
                 log.info(f"{prefix}  {l}")
             else:
@@ -37,15 +46,31 @@ class RunProcess:
         self,
         cmd,
         std_in: str = "",
-        save_keystore: bool = False,
-        scrolling: bool = False,
+        **kw
+        # save_keystore: bool = False,
+        # scrolling: bool = False,
+        # isSigner: bool = False,
     ):
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
         await asyncio.gather(
-            self.watch(p.stdout, ">", save_keystore=save_keystore, scrolling=scrolling),
-            self.watch(p.stderr, ">", save_keystore=save_keystore, scrolling=scrolling),
+            self.watch(
+                p.stdout,
+                ">",
+                # save_keystore=save_keystore,
+                # scrolling=scrolling,
+                # isSigner=isSigner,
+                **kw,
+            ),
+            self.watch(
+                p.stderr,
+                ">",
+                # save_keystore=save_keystore,
+                # scrolling=scrolling,
+                # isSigner=isSigner,
+                **kw,
+            ),
         )
 
     def run_method(
@@ -55,10 +80,10 @@ class RunProcess:
         args: list = [],
         prog: str = marker,
         std_in: str = "",
-        shell: bool = False,
-        save_keystore: bool = False,
-        return_command: bool = False,
-        scrolling: bool = False,
+        # save_keystore: bool = False,
+        # scrolling: bool = False,
+        # isSigner: bool = False,
+        **kw,
     ) -> Tuple[bool, str]:
 
         if isinstance(method, str):
@@ -89,8 +114,10 @@ class RunProcess:
                 self.run(
                     command_list,
                     bytes(std_in, "utf-8"),
-                    save_keystore=save_keystore,
-                    scrolling=scrolling,
+                    **kw
+                    # save_keystore=save_keystore,
+                    # scrolling=scrolling,
+                    # isSigner=isSigner,
                 )
             )
         except KeyboardInterrupt:

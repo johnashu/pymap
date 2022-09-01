@@ -1,3 +1,4 @@
+from turtle import update
 from pymap.interactive.menu import Menu
 from pymap.tools.key_from_keystore import pk_from_store
 import os
@@ -7,10 +8,16 @@ class InteractiveSetup(Menu):
     def __init__(self, **base_fields: dict) -> None:
         super(InteractiveSetup, self).__init__(**base_fields)
 
-    def find_pk(self) -> None:
+    def backup_env(self) -> None:
+        fn = input(
+            "Please Enter Backup Location and Filename, i.e. /home/backup.env : "
+        )
+        self.update_env(self.base_field_keys, fn)
+
+    def find_pk(self, isSigner: bool = False) -> None:
         context = {"keystore": self.keystore, "password": self.password}
         context.update(self.handle_input(context))
-        address, pk = pk_from_store(self.keystore, self.password)
+        pk_from_store(self.keystore, self.password)
 
     def display_and_update_env(self) -> None:
         while 1:

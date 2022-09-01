@@ -57,6 +57,10 @@ def askYesNo(question: str) -> bool:
     return False
 
 
+def is_signer() -> bool:
+    return askYesNo("Is Signer Account? ")
+
+
 def take_input(_type: object, msg: str) -> None:
     while True:
         p = True

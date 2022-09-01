@@ -7,6 +7,7 @@ Python interface for validators for interacting with the MAP protocol
 ```bash
 sudo apt update && sudo apt upgrade -y
 
+apt install python3
 apt install python3-pip
 
 pip3 install -r requirements.txt

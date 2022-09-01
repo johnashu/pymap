@@ -17,7 +17,7 @@ if __name__ == "__main__":
     # balance = rpc.get_balance(address)
     # print(balance)
 
-    create_systemd()
+    # create_systemd()
     i = InteractiveSetup(**from_env)
     i.get_balance(address)
     v = i._get_validators()

@@ -25,7 +25,13 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         """
         https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
 
-        context.update(self.handle_input({**self.base_context, **context}))
+        context.update(
+            self.handle_input(
+                {**self.base_context, **context},
+                ask_is_signer=True,
+                signer_fields=("namePrefix", "password", "passwordFile", "keystore"),
+            )
+        )
         self.run_method("createAccount", context)
 
     # Locking, Unlocking & Withdrawal
