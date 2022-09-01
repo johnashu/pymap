@@ -19,7 +19,7 @@ class InteractiveSetup(Menu):
             try:
                 choice = int(
                     input(
-                        "\nTo update an item, please select a number or press 0 to go back:  >  "
+                        "\nTo update an item, please select a number or press 0 to go back:  "
                     )
                 )
                 if choice == 0:
