@@ -67,6 +67,8 @@ class HandleInput:
 
                     if not allow:
                         i = self.__dict__[key]
+                    else:
+                        self.__dict__[key] = i
                 except KeyError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:

@@ -19,32 +19,10 @@ Data to be included in the `.env` file.
 
 Some of this information will be gathered during setup and will need to be updated as required.
 
+see `example.env` for an explanation and starting point
 
-```bash
-binaries=/home/maffaz/atlas/build/bin
-testnet=http://18.142.54.137:7445
-rpcaddr=https://poc3-rpc.maplabs.io
-rpcport=False
-password=password
-passwordFile=/home/maffaz/password
-keystore=/home/maffaz/node/keystore/UTC--2022-08-26T23-45-19.943014769Z--1234567890abcdef123456
-namePrefix=validator
-lockedNum=10
-signerPriv=
-validator=0x
-target=0x
-voteNum=5
-commission=4
-datadir=admin
-miner.validator=0x
-unlock=0x
-syncmode=full
-port=30321
-default_address=0x
 
-```
-
-run `example.py` to get started..
+run `start_tool.py` to get started..
 
 
 # Service control.
@@ -60,7 +38,7 @@ Type=simple
 Restart=always
 RestartSec=1
 WorkingDirectory=/home/maffaz
-ExecStart=/home/maffaz/atlas/build/bin/atlas --password password --datadir /home/maffaz/node --syncmode full --port 30321 --mine --miner.validator 0x53d923e76645f7d91e1f27d08339937f5aefcb62  --unlock 0x53d923e76645f7d91e1f27d08339937f5aefcb62
+ExecStart=/home/maffaz/atlas/build/bin/atlas --password password --datadir /home/maffaz/node --syncmode full --port 30321 --mine --miner.validator <Signer Address>  --unlock <Signer Address>
 SyslogIdentifier=atlasNode
 StartLimitInterval=0
 LimitNOFILE=65536
@@ -92,3 +70,6 @@ sudo service atlasNode start
 tail -f /var/log/syslog
 
 
+
+
+> Donations welcome: 0x4F35285F1c387394197A0cdeA16D3a0eAA2c58F5
