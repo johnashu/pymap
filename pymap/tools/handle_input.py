@@ -27,7 +27,6 @@ class HandleInput:
         isSigner: bool = False,
         allow_empty: bool = False,
     ) -> None:
-        isSigner = None
         if ask_is_signer:
             isSigner = is_signer()
 

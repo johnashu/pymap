@@ -99,6 +99,8 @@ class AtlasMethods:
         context.update(
             self.handle_input(context, isSigner=True, signer_fields=("passwordFile"))
         )
+        print(context)
+
         if self.testnet == self.rpcaddr:
             context["testnet"] = "--testnet"
 
