@@ -56,13 +56,13 @@ class HandleInput:
                         allow = askYesNo(
                             "* "
                             + Fore.RED
-                            + "WARNING"
+                            + " WARNING "
                             + Style.RESET_ALL
                             + "Are you sure you want to"
                             + Fore.RED
-                            + "DELETE"
+                            + " DELETE "
                             + Style.RESET_ALL
-                            + "this Field?: "
+                            + "this Field?"
                         )
 
                     if not allow:
