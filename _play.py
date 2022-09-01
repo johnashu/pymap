@@ -102,3 +102,11 @@ class InteractiveSetup(Menu):
 # m = MarkerMethods(**base_fields)
 # # h = HandleInput()
 # m.f(some_other_stuff=100, signer_pkey='hello', validator='', voteNum=0)
+
+isSigner = False
+sp = '/signer/pass'
+p = ''
+d = '/default/pass'
+
+passwordFile = sp if isSigner and sp else p if p and not isSigner else d
+print(passwordFile)
