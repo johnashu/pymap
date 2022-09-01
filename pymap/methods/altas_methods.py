@@ -38,17 +38,17 @@ class AtlasMethods:
             isSigner=isSigner,
         )
 
-        to_write = pw1
         passwordFile = self.passwordFile
         default_pw_fn = "password"
 
         if isSigner:
             passwordFile = self.signer_passwordFile
+            self.signer_password = pw1
             default_pw_fn = "signer_password"
 
         save_file(
             passwordFile if passwordFile else os.path.join(os.getcwd(), default_pw_fn),
-            to_write,
+            pw1,
         )
 
         if isSigner:
@@ -56,7 +56,7 @@ class AtlasMethods:
                 self.signer_keystore, self.signer_password
             )
             self.unlock = self.signer_address
-            self.__dict__['miner.validator'] = self.signer_address
+            self.__dict__["miner.validator"] = self.signer_address
             self.update_env(self.base_field_keys)
 
     def join_network(
