@@ -97,10 +97,11 @@ class AtlasMethods:
         },
     ) -> None:
         context.update(
-            self.handle_input(context), isSigner=True, signer_fields=("passwordFile")
+            self.handle_input(context, isSigner=True, signer_fields=("passwordFile"))
         )
         if self.testnet == self.rpcaddr:
             context["testnet"] = "--testnet"
+
         create_systemd(context)
 
         commands = (
