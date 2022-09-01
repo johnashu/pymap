@@ -1,4 +1,3 @@
-from turtle import update
 from pymap.interactive.menu import Menu
 from pymap.tools.key_from_keystore import pk_from_store
 import os
