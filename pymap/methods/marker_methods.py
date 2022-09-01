@@ -29,7 +29,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
             self.handle_input(
                 {**self.base_context, **context},
                 ask_is_signer=True,
-                signer_fields=("namePrefix", "password", "passwordFile", "keystore"),
+                signer_fields=("namePrefix", "password", "passwordFile"),
             )
         )
         self.run_method("createAccount", context)
