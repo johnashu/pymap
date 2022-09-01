@@ -14,7 +14,7 @@ class InteractiveSetup(Menu):
         )
         self.update_env(self.base_field_keys, fn)
 
-    def find_pk(self, isSigner: bool = False) -> None:
+    def find_pk(self) -> None:
         context = {"keystore": self.keystore, "password": self.password}
         context.update(self.handle_input(context))
         pk_from_store(self.keystore, self.password)
