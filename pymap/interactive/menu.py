@@ -57,7 +57,7 @@ class Menu(MarkerMethods):
             + "WARNING: YOU WILL MISS BLOCKS WHILE YOU REBOOT YOUR ENTIRE SERVER.\n\n"
             + "Reconnect after a few moments & Run the Validator Toolbox Menu again\n"
             + Fore.WHITE
-            + "Are you sure you would like to proceed with rebooting your server?\n\nType 'Yes' or 'No' to continue"
+            + "Are you sure you would like to proceed with rebooting your server?\n\n"
         )
         if question:
             os.system("sudo service atlasNode stop")

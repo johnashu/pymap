@@ -51,7 +51,7 @@ def readable_price(num, d: int = 18, show_decimals=True, print_res=True) -> str:
 def askYesNo(question: str) -> bool:
     YesNoAnswer = ""
     while not YesNoAnswer.startswith(("Y", "N")):
-        YesNoAnswer = input(f"{question}: ").upper()
+        YesNoAnswer = input(f"{question} - yes / no): ").upper()
     if YesNoAnswer.startswith("Y"):
         return True
     return False
