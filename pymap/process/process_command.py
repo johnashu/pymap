@@ -1,8 +1,5 @@
-import subprocess
-from pymap.includes.config import *
-from typing import Tuple
 import asyncio
-import logging
+import logging as log
 
 
 class RunProcess:
@@ -30,14 +27,12 @@ class RunProcess:
                 self.update_env(self.base_field_keys)
 
             if isAttach:
-                print(l)
-                print(l_split)
                 if self.attach_prompt_found:
-                    log.info(f"{prefix}:  {l}")
+                    log.info(f"{prefix}: {l}")
                     self.attach_prompt_found = False
                 if l == '>':
                     self.attach_prompt_found = True
-                    
+
                 # if l_split[0].endswith('block'):
                 #     log.info(f"Block Number of Node:  {l_split[1].split()[0]}")
             else:
