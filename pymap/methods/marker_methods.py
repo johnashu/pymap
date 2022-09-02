@@ -1,11 +1,14 @@
 from pymap.process.process_command import RunProcess
 from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
+from pymap.methods.atlas_attach_methods import AtlasAttachMethods
 from pymap.methods.rpc_methods import RpcMethods
 from pymap.tools.handle_input import HandleInput
 
 
-class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInput):
+class MarkerMethods(
+    RunProcess, PrintStuff, AtlasMethods, AtlasAttachMethods, RpcMethods, HandleInput
+):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password", "mine", "v5disc")
 
@@ -28,8 +31,9 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         context.update(
             self.handle_input(
                 {**self.base_context, **context},
-                ask_is_signer=True,
-                signer_fields=("name", "password", "passwordFile"),
+                # Signer does not require an account, only keystore..
+                # ask_is_signer=True,
+                # signer_fields=("name", "password", "passwordFile"),
             )
         )
         self.run_method("createAccount", context)

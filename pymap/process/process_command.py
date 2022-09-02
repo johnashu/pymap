@@ -3,7 +3,6 @@ from pymap.includes.config import *
 from typing import Tuple
 import asyncio
 import logging
-import shlex
 
 
 class RunProcess:
@@ -42,15 +41,7 @@ class RunProcess:
 
         return p
 
-    async def run(
-        self,
-        cmd,
-        std_in: str = "",
-        **kw
-        # save_keystore: bool = False,
-        # scrolling: bool = False,
-        # isSigner: bool = False,
-    ):
+    async def run(self, cmd, std_in: str = "", **kw):
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
@@ -58,17 +49,11 @@ class RunProcess:
             self.watch(
                 p.stdout,
                 ">",
-                # save_keystore=save_keystore,
-                # scrolling=scrolling,
-                # isSigner=isSigner,
                 **kw,
             ),
             self.watch(
                 p.stderr,
                 ">",
-                # save_keystore=save_keystore,
-                # scrolling=scrolling,
-                # isSigner=isSigner,
                 **kw,
             ),
         )
@@ -80,9 +65,6 @@ class RunProcess:
         args: list = [],
         prog: str = marker,
         std_in: str = "",
-        # save_keystore: bool = False,
-        # scrolling: bool = False,
-        # isSigner: bool = False,
         **kw,
     ) -> Tuple[bool, str]:
 
@@ -110,15 +92,6 @@ class RunProcess:
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)
-            asyncio.run(
-                self.run(
-                    command_list,
-                    bytes(std_in, "utf-8"),
-                    **kw
-                    # save_keystore=save_keystore,
-                    # scrolling=scrolling,
-                    # isSigner=isSigner,
-                )
-            )
+            asyncio.run(self.run(command_list, bytes(std_in, "utf-8"), **kw))
         except KeyboardInterrupt:
             pass
