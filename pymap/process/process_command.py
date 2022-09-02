@@ -29,7 +29,7 @@ class RunProcess:
             if isAttach:
                 print(l)
                 print(l_split)
-                if l.startswith('at block'):
+                if l_split[0].endswith('block'):
                     log.info(f"{prefix}  {l_split[2]}")
             else:
                 if not scrolling:
