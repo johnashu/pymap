@@ -85,6 +85,8 @@ class AtlasMethods:
         },
     ) -> None:
         context.update(self.handle_input(context))
+        if self.testnet == self.rpcaddr:
+            context["testnet"] = ""
         context.update({"v5disc": "", "mine": ""})
         self.run_method("", context, prog="atlas", scrolling=True)
 
