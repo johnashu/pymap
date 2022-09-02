@@ -7,6 +7,9 @@ from pymap.tools.key_from_keystore import pk_from_store
 
 
 class AtlasMethods:
+
+    miner_flags = ("mine", "v5disc")
+
     def __init__(self, **kw) -> None:
         super(AtlasMethods, self).__init__(**kw)
 

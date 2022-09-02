@@ -10,7 +10,7 @@ class MarkerMethods(
     RunProcess, PrintStuff, AtlasMethods, AtlasAttachMethods, RpcMethods, HandleInput
 ):
 
-    base_fields = ("rpcaddr", "rpcport", "keystore", "password", "mine", "v5disc")
+    base_fields = ("rpcaddr", "rpcport", "keystore", "password")
 
     def __init__(self, **kw: dict) -> None:
         self.base_field_keys = kw.keys()

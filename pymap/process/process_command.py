@@ -84,16 +84,16 @@ class RunProcess:
     ) -> Tuple[bool, str]:
 
         if isinstance(method, str):
-            method = [method]
+            method = [method] 
 
         command_list = [os.path.join(envs.binaries, prog) if prog else ""] + method
         for k, v in context.items():
             if k not in ignore:
-                if v:
+                if v or k in self.miner_flags:
                     command_list += [f"--{k}", f"{v}"]
 
         if args:
-            command_list += args
+            command_list += args 
 
         command_list = [x for x in command_list if x]
 
