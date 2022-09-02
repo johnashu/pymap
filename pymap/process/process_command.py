@@ -27,6 +27,8 @@ class RunProcess:
                 self.update_env(self.base_field_keys)
 
             if isAttach:
+                print(l)
+                print(l_split)
                 if l_split[0].endswith('block'):
                     log.info(f"{prefix}  {l_split[0].split()[0]}")
             else:
