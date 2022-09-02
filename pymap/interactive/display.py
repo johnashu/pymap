@@ -124,7 +124,7 @@ print("*  [0] Exit Application            - Goodbye!")
         return cur_list
 
     def star_surround(self, msg) -> None:
-        f"{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
+        return f"{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
 
 
 # whitespace = PrintStuff.whitespace
