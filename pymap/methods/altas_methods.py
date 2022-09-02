@@ -82,7 +82,7 @@ class AtlasMethods:
         },
     ) -> None:
         context.update(self.handle_input(context))
-        context.update({"mine": "", "v5disc": ""})
+        context.update({"v5disc": "", "mine": ""})
         self.run_method("", context, prog="atlas", scrolling=True)
 
     def setup_atlas_node_service(
