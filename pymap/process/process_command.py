@@ -9,10 +9,11 @@ class RunProcess:
     async def watch(
         self,
         stream,
-        prefix="",
+        prefix: str = ">",
         save_keystore: bool = False,
         scrolling: bool = False,
         isSigner: bool = False,
+        isAttach: bool = False,
     ):
         async for line in stream:
             l = line.decode().strip()
@@ -25,10 +26,15 @@ class RunProcess:
                         self.keystore = ks[-1].strip()
                 self.update_env(self.base_field_keys)
 
-            if not scrolling:
-                log.info(f"{prefix}  {l}")
+            if isAttach:
+                res = l.split(">")
+                log.info(f"{prefix}  {res}")
+
             else:
-                print(f"{prefix}  {l}")
+                if not scrolling:
+                    log.info(f"{prefix}  {l}")
+                else:
+                    print(f"{prefix}  {l}")
 
     async def create_process(self, cmd):
 
@@ -48,12 +54,10 @@ class RunProcess:
         await asyncio.gather(
             self.watch(
                 p.stdout,
-                ">",
                 **kw,
             ),
             self.watch(
                 p.stderr,
-                ">",
                 **kw,
             ),
         )

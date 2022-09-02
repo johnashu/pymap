@@ -14,11 +14,20 @@ class AtlasAttachMethods:
     def get_eth_block_number_from_node(
         self, context: dict = dict(keystore=str())
     ) -> None:
-        isSigner = is_signer()
-        context.update(self.handle_input(context), isSigner=isSigner)
+        context.update(self.handle_input(context))
         args = self.prepare_attach(context["keystore"])
         method = "eth.blockNumber"
 
+        msg = f"Block Number for {args[-1]}:  "
+
         log.info(args)
 
-        self.run_method("", context, args=args, prog="atlas", std_in=f"{method}\n")
+        self.run_method(
+            "",
+            context,
+            args=args,
+            prog="atlas",
+            std_in=f"{method}\n",
+            isAttach=True,
+            prefix=msg,
+        )
