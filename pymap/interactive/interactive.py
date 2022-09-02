@@ -39,7 +39,7 @@ class InteractiveSetup(Menu):
         self.get_eth_block_number_from_node()
         rpc_block = int(self.get_block_number())      
         local_block = int(self.local_block)
-        msg = f'Local Block Number: {local_block}\nRPC Block Number:{rpc_block}\nRPC Block == Local Block Number?:  {local_block == rpc_block}'
+        msg = f'Local Block Number: {local_block:<20}\nRPC Block Number:{rpc_block:<20}\nRPC Block == Local Block Number?:  {local_block == rpc_block}'
         log.info(self.star_surround(msg))
 
     def start(self) -> None:
