@@ -3,6 +3,9 @@ import logging as log
 
 
 class AtlasAttachMethods:
+
+    local_block = 0
+
     def __init__(self, **kw) -> None:
         super(AtlasAttachMethods, self).__init__(**kw)
 
@@ -31,3 +34,5 @@ class AtlasAttachMethods:
             isAttach=True,
             prefix=msg,
         )
+
+    

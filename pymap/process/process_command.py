@@ -30,6 +30,7 @@ class RunProcess:
             if isAttach:
                 if self.attach_prompt_found:
                     log.info(f"{prefix}: {l}")
+                    self.local_block = l
                     self.attach_prompt_found = False
                 if l == '>':
                     self.attach_prompt_found = True

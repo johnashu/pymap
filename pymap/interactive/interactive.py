@@ -1,6 +1,7 @@
 from pymap.interactive.menu import Menu
 from pymap.tools.key_from_keystore import pk_from_store
 import os
+import logging as log
 
 
 class InteractiveSetup(Menu):
@@ -35,8 +36,12 @@ class InteractiveSetup(Menu):
                 self.error_input()
 
     def compare_block_numbers(self) -> None:
+        rpc_block = self.get_block_number()
         self.get_eth_block_number_from_node()
-        self.get_block_number()
+        
+        local_block = self.local_block
+
+        log.info(f'\nLocal Block Number: {local_block}\nRPC Block Number:{rpc_block}\nRPC Block == Local Block Number?')
 
     def start(self) -> None:
         self.intro_message()
