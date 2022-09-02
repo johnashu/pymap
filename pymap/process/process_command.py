@@ -17,20 +17,20 @@ class RunProcess:
     ):
         async for line in stream:
             l = line.decode().strip()
-            if save_keystore:
-                ks = l.split(":")
-                if ks[0].endswith("secret key file"):
+            l_split = l.split(":")
+            if save_keystore:                
+                if l_split[0].endswith("secret key file"):
                     if isSigner:
-                        self.signer_keystore = ks[-1].strip()
+                        self.signer_keystore = l_split[-1].strip()
                     else:
-                        self.keystore = ks[-1].strip()
+                        self.keystore = l_split[-1].strip()
                 self.update_env(self.base_field_keys)
 
             if isAttach:
                 print(l)
-                print(l.split())
-                if l.startswith('>'):
-                    log.info(f"{prefix}  {l}")
+                print(l_split)
+                if l.startswith('at block'):
+                    log.info(f"{prefix}  {l_split[2]}")
             else:
                 if not scrolling:
                     log.info(f"{prefix}  {l}")
