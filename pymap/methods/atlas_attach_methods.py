@@ -34,5 +34,3 @@ class AtlasAttachMethods:
             isAttach=True,
             prefix=msg,
         )
-
-    

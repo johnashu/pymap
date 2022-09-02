@@ -3,8 +3,9 @@ from typing import Tuple
 import asyncio
 import logging
 
+
 class RunProcess:
-    
+
     attach_prompt_found = False
 
     async def watch(
@@ -19,7 +20,7 @@ class RunProcess:
         async for line in stream:
             l = line.decode().strip()
             l_split = l.split(":")
-            if save_keystore:                
+            if save_keystore:
                 if l_split[0].endswith("secret key file"):
                     if isSigner:
                         self.signer_keystore = l_split[-1].strip()
@@ -33,7 +34,7 @@ class RunProcess:
                     self.local_block = l
                     self.attach_prompt_found = False
                     return
-                if l == '>':
+                if l == ">":
                     self.attach_prompt_found = True
 
                 # if l_split[0].endswith('block'):
@@ -59,7 +60,7 @@ class RunProcess:
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
-        if kw.get('isAttach'):
+        if kw.get("isAttach"):
             p.stdin.close()
         await asyncio.gather(
             self.watch(

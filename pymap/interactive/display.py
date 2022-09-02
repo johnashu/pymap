@@ -128,7 +128,7 @@ print("*  [0] Exit Application            - Goodbye!")
 
     def red_or_green(self, check) -> str:
         if check:
-            return  "" + Fore.GREEN + str(check) + Style.RESET_ALL
+            return "" + Fore.GREEN + str(check) + Style.RESET_ALL
         return "" + Fore.RED + str(check) + Style.RESET_ALL
 
 

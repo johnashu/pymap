@@ -37,15 +37,14 @@ class InteractiveSetup(Menu):
 
     def compare_block_numbers(self) -> None:
         self.get_eth_block_number_from_node()
-        rpc_block = int(self.get_block_number())      
+        rpc_block = int(self.get_block_number())
         local_block = int(self.local_block)
         match = local_block == rpc_block
-        msg = f'''
+        msg = f"""
         Local Block Number: {local_block}
         RPC Block Number:   {rpc_block}
         Blocks Synced:      {self.red_or_green(match)}        
-        '''
-
+        """
         log.info(self.star_surround(msg))
 
     def start(self) -> None:
