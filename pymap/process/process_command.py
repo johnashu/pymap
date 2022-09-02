@@ -28,8 +28,6 @@ class RunProcess:
                 self.update_env(self.base_field_keys)
 
             if isAttach:
-                print(l)
-                print(l_split)
                 if self.attach_prompt_found:
                     log.info(f"{prefix}: {l}")
                     self.attach_prompt_found = False
