@@ -22,7 +22,7 @@ base_fields = {
     "rpcport": 0,
     "keystore": "",
     "password": "",
-    "namePrefix": "",
+    "name": "",
     "lockedNum": 0,
     "signerPriv": "",
     "validator": "",

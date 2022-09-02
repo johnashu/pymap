@@ -21,7 +21,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
         for k, v in base_fields.items():
             setattr(self, k, str(v) if not isinstance(v, bool) else v)
 
-    def create_account(self, context: dict = dict(namePrefix=str())) -> None:
+    def create_account(self, context: dict = dict(name=str())) -> None:
         """
         https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
 
@@ -29,7 +29,7 @@ class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInpu
             self.handle_input(
                 {**self.base_context, **context},
                 ask_is_signer=True,
-                signer_fields=("namePrefix", "password", "passwordFile"),
+                signer_fields=("name", "password", "passwordFile"),
             )
         )
         self.run_method("createAccount", context)

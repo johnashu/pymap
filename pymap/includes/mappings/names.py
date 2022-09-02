@@ -1,5 +1,5 @@
 name_map = {
-    "namePrefix": "type of address, i.e. `validator`",
+    "name": "type of address, i.e. `validator`",
     "target": "the target validator address to check",
     "lockedNum": "amount of MAP to lock",
     "mapValue": "the amount of Map",
