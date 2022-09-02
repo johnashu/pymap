@@ -40,7 +40,11 @@ class InteractiveSetup(Menu):
         rpc_block = int(self.get_block_number())      
         local_block = int(self.local_block)
         match = local_block == rpc_block
-        msg = f'Local Block Number: {local_block:>20}\nRPC Block Number:{rpc_block:>20}\nRPC Block == Local Block Number?:  {self.red_or_green(match)}'
+        msg = f'''
+        Local Block Number: {local_block}
+        RPC Block Number:   {rpc_block}
+        Blocks Synced:      {self.red_or_green(match)}        
+        '''
 
         log.info(self.star_surround(msg))
 

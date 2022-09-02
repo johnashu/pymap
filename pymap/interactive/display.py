@@ -124,7 +124,7 @@ print("*  [0] Exit Application            - Goodbye!")
         return cur_list
 
     def star_surround(self, msg) -> None:
-        return f"{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
+        return f"\n{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
 
     def red_or_green(self, check) -> str:
         if check:
