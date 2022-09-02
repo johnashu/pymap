@@ -126,6 +126,11 @@ print("*  [0] Exit Application            - Goodbye!")
     def star_surround(self, msg) -> None:
         return f"{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
 
+    def red_or_green(self, check) -> str:
+        if check:
+            return  "" + Fore.GREEN + check + Style.RESET_ALL
+        return "" + Fore.RED + check + Style.RESET_ALL
+
 
 # whitespace = PrintStuff.whitespace
 # stars = PrintStuff().stars
