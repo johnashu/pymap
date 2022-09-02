@@ -27,6 +27,8 @@ class RunProcess:
                 self.update_env(self.base_field_keys)
 
             if isAttach:
+                print(l)
+                print(l.split())
                 if l.startswith('>'):
                     log.info(f"{prefix}  {l}")
             else:
