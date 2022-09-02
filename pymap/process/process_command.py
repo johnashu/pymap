@@ -1,8 +1,7 @@
 from pymap.includes.config import *
 from typing import Tuple
 import asyncio
-import logging as log
-
+import logging
 
 class RunProcess:
     
