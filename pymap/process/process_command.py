@@ -27,9 +27,8 @@ class RunProcess:
                 self.update_env(self.base_field_keys)
 
             if isAttach:
-                res = l.split(">")
-                log.info(f"{prefix}  {res}")
-
+                if l.startswith('>'):
+                    log.info(f"{prefix}  {l}")
             else:
                 if not scrolling:
                     log.info(f"{prefix}  {l}")
