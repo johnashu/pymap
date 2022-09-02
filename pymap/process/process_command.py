@@ -30,7 +30,7 @@ class RunProcess:
                 print(l)
                 print(l_split)
                 if l_split[0].endswith('block'):
-                    log.info(f"{prefix}  {l_split[-1].split()[0]}")
+                    log.info(f"{prefix}  {l_split[1].split()[0]}")
             else:
                 if not scrolling:
                     log.info(f"{prefix}  {l}")
