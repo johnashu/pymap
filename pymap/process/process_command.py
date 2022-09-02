@@ -60,7 +60,7 @@ class RunProcess:
         if std_in:
             p.stdin.write(std_in)
         if kw['isAttach']:
-            p.stdin.write("ctrl+d\n")
+            p.stdin.close()
         await asyncio.gather(
             self.watch(
                 p.stdout,
