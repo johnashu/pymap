@@ -7,7 +7,7 @@ from pymap.tools.handle_input import HandleInput
 
 class MarkerMethods(RunProcess, PrintStuff, AtlasMethods, RpcMethods, HandleInput):
 
-    base_fields = ("rpcaddr", "rpcport", "keystore", "password", "mine")
+    base_fields = ("rpcaddr", "rpcport", "keystore", "password", "mine", "v5disc")
 
     def __init__(self, **kw: dict) -> None:
         self.base_field_keys = kw.keys()
