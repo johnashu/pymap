@@ -59,6 +59,8 @@ class RunProcess:
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
+        if isAttach:
+            p.stdin.write("ctrl+d\n")
         await asyncio.gather(
             self.watch(
                 p.stdout,
