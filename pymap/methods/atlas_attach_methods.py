@@ -19,6 +19,6 @@ class AtlasAttachMethods:
         args = self.prepare_attach(context["keystore"])
         method = "eth.blockNumber"
 
-        log.info()
+        log.info(args)
 
         self.run_method("", context, args=args, prog="atlas", std_in=f"{method}\n")
