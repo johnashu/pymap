@@ -59,7 +59,7 @@ class RunProcess:
         p = await self.create_process(cmd)
         if std_in:
             p.stdin.write(std_in)
-        if kw['isAttach']:
+        if kw.get('isAttach'):
             p.stdin.close()
         await asyncio.gather(
             self.watch(

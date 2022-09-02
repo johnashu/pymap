@@ -40,7 +40,6 @@ class InteractiveSetup(Menu):
         rpc_block = int(self.get_block_number())      
         local_block = int(self.local_block)
         msg = f'Local Block Number: {local_block}\nRPC Block Number:{rpc_block}\nRPC Block == Local Block Number?:  {local_block == rpc_block}'
-        
         log.info(self.star_surround(msg))
 
     def start(self) -> None:
