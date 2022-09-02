@@ -6,6 +6,9 @@ import logging
 
 
 class RunProcess:
+    
+    attach_prompt_found = False
+
     async def watch(
         self,
         stream,
@@ -29,8 +32,14 @@ class RunProcess:
             if isAttach:
                 print(l)
                 print(l_split)
-                if l_split[0].endswith('block'):
-                    log.info(f"{prefix}  {l_split[1].split()[0]}")
+                if self.attach_prompt_found:
+                    log.info(f"{prefix}:  {l}")
+                    self.attach_prompt_found = False
+                if l == '>':
+                    self.attach_prompt_found = True
+                    
+                # if l_split[0].endswith('block'):
+                #     log.info(f"Block Number of Node:  {l_split[1].split()[0]}")
             else:
                 if not scrolling:
                     log.info(f"{prefix}  {l}")
