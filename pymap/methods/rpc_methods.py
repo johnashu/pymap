@@ -135,7 +135,7 @@ class RpcMethods(RpcRequest):
 
     def get_block_number(self) -> int:
         block = int(self._get_block_number(), 16)
-        log.info(f"Current Block Number:  {block}")
+        log.info(f"Current Block Number of {self.rpcaddr}:  {block}")
         return block
 
     def get_balance(self, address: str = "") -> int:

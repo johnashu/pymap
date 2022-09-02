@@ -24,6 +24,7 @@ menu_items = {
     "Get Balance": "get_balance",
     "Block Number of Network from RPC": "get_block_number",
     "Block Number of Local Node": "get_eth_block_number_from_node",
+    "Compare Local / RPC Block Number": "compare_block_numbers",
     "Get Validator Reward Info": "get_validator_reward_info",
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",

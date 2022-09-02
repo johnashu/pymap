@@ -34,6 +34,10 @@ class InteractiveSetup(Menu):
             except ValueError:
                 self.error_input()
 
+    def compare_block_numbers(self) -> None:
+        self.get_eth_block_number_from_node()
+        self.get_block_number()
+
     def start(self) -> None:
         self.intro_message()
         self.run_full_node()
