@@ -1,6 +1,7 @@
 import json
 
 import requests
+import curlify
 
 from .exceptions import RequestsError, RequestsTimeoutError, RPCError
 
@@ -52,7 +53,7 @@ class RpcRequest:
             headers = {"Content-Type": "application/json"}
             data = json.dumps(payload, indent=4)
 
-            log.info(f"Json Request to  [ {endpoint} ] \n{data}\n")
+            # log.info(f"Json Request to  [ {endpoint} ] \n{data}\n")
 
             resp = requests.request(
                 "POST",
@@ -62,6 +63,8 @@ class RpcRequest:
                 timeout=timeout,
                 allow_redirects=True,
             )
+            msg = f"cURL Request:\n{curlify.to_curl(resp.request)}\n"
+            log.info(self.star_surround(msg))
             return resp.content
         except requests.exceptions.Timeout as err:
             raise RequestsTimeoutError(endpoint) from err
