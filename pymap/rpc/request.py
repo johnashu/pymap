@@ -63,8 +63,7 @@ class RpcRequest:
                 timeout=timeout,
                 allow_redirects=True,
             )
-            msg = f"cURL Request:\n{curlify.to_curl(resp.request)}\n"
-            log.info(self.star_surround(msg))
+            log.info(self.star_surround(curlify.to_curl(resp.request)))
             return resp.content
         except requests.exceptions.Timeout as err:
             raise RequestsTimeoutError(endpoint) from err
