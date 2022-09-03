@@ -2,3 +2,4 @@ python-dotenv
 colorama
 requests
 pycryptodome
+curlify
