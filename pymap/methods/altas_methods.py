@@ -48,7 +48,7 @@ class AtlasMethods:
         )
 
         default_pw_fn = os.path.join(
-            keystore_path, "signer_password" if isSigner else "password"
+            keystore_path if keystore_path else self.datadir, "signer_password" if isSigner else "password"
         )
 
         passwordFile = (
