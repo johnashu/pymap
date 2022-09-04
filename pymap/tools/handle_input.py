@@ -68,11 +68,13 @@ class HandleInput:
                     if not allow:
                         i = self.__dict__[key]
                     else:
-                        self.__dict__[key] = i
+                        if k not in self.miner_flags:
+                            self.__dict__[key] = i
                 except KeyError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
-                self.__dict__[key] = i
+                if k not in self.miner_flags:
+                    self.__dict__[key] = i
             context[k] = i
         self.update_env(self.base_field_keys)
         # toggle between name (mainnet) and namePrefix (testnet)
