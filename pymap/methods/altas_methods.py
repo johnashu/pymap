@@ -85,6 +85,7 @@ class AtlasMethods:
             "port": int(),
             "miner.validator": str(),
             "unlock": str(),
+            "signer_passwordFile": str()
         },
     ) -> None:
         context.update(self.handle_input(context))
