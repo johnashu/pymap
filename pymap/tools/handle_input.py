@@ -33,6 +33,8 @@ class HandleInput:
         if remove:
             context = {k: v for k, v in context.items() if k not in remove}
         for k, v in context.items():
+            if k in self.miner_flags:
+                continue
 
             key = k
             if isSigner:
@@ -68,13 +70,11 @@ class HandleInput:
                     if not allow:
                         i = self.__dict__[key]
                     else:
-                        if k not in self.miner_flags:
-                            self.__dict__[key] = i
+                        self.__dict__[key] = i
                 except KeyError as e:
                     log.error(f"Argument not found for {k}  ::  {e}")
             else:
-                if k not in self.miner_flags:
-                    self.__dict__[key] = i
+                self.__dict__[key] = i
             context[k] = i
         self.update_env(self.base_field_keys)
         # toggle between name (mainnet) and namePrefix (testnet)
