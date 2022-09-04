@@ -130,10 +130,3 @@ print("*  [0] Exit Application            - Goodbye!")
         if check:
             return "" + Fore.GREEN + str(check) + Style.RESET_ALL
         return "" + Fore.RED + str(check) + Style.RESET_ALL
-
-
-# whitespace = PrintStuff.whitespace
-# stars = PrintStuff().stars
-# string_stars = PrintStuff().string_stars
-# stars_reset = PrintStuff(reset=1).stars
-# string_stars_reset = PrintStuff(reset=1).string_stars

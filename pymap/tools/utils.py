@@ -2,12 +2,6 @@ from decimal import Decimal, ROUND_DOWN
 import logging as log
 import re
 
-import itertools
-from types import FunctionType
-import inspect
-
-myself = lambda: inspect.stack()[1][3]
-
 
 def camel_to_snake(string):
     return re.sub(r"(?<!^)(?=[A-Z])", "_", string).lower()
@@ -75,28 +69,3 @@ def take_input(_type: object, msg: str) -> None:
         if p:
             break
     return _in
-
-
-def listMethods(cls):
-    return set(
-        x
-        for x, y in cls.__dict__.items()
-        if isinstance(y, (FunctionType, classmethod, staticmethod))
-    )
-
-
-def listParentMethods(cls):
-    return set(
-        itertools.chain.from_iterable(
-            listMethods(c).union(listParentMethods(c)) for c in cls.__bases__
-        )
-    )
-
-
-def list_subclass_methods(cls, is_narrow):
-    methods = listMethods(cls)
-    if is_narrow:
-        parentMethods = listParentMethods(cls)
-        return set(cls for cls in methods if not (cls in parentMethods))
-    else:
-        return methods

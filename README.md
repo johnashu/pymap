@@ -65,7 +65,7 @@ sudo systemctl enable atlasNode.service
 sudo service atlasNode start
 
 ```
- 
+  
 # Check Logs
 tail -f /var/log/syslog
 

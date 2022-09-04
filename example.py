@@ -10,7 +10,7 @@ print(from_env)
 if __name__ == "__main__":
 
     address = "0x3E8dF1A18E97fAA3235EA731A5C7B7C2455D21E8"
-    rpc = RpcMethods()
+    rpc = RpcMethods(**{"rpcarddr": rpc_url})
     res = rpc._get_validators()
     print(res)
 
