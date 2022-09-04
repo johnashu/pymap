@@ -8,7 +8,7 @@ from Crypto.Hash import keccak
 def pk_from_store(fn: str, password: str) -> None:
 
     keystore = open_json(fn)
-    address = fn.split("--")[-1]
+    address = f'0x{fn.split("--")[-1]}'
 
     dec_key = hashlib.scrypt(
         bytes(password, "utf-8"),
@@ -35,6 +35,6 @@ def pk_from_store(fn: str, password: str) -> None:
     plain_key = dec_suite.decrypt(bytes.fromhex(keystore["crypto"]["ciphertext"]))
     pk = plain_key.hex()
 
-    print(f"\n\tAddress:      0x{address}\n\tPrivate Key:  {pk}\n")
+    print(f"\n\tAddress:      {address}\n\tPrivate Key:  {pk}\n")
 
     return address, pk
