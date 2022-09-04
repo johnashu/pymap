@@ -88,6 +88,7 @@ class AtlasMethods:
             "signer_passwordFile": str()
         },
     ) -> None:
+        context = {k:v for k, v in context.items() if k != 'password'}
         context.update(self.handle_input(context))
         if self.testnet == self.rpcaddr:
             context["testnet"] = ""
