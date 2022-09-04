@@ -78,10 +78,9 @@ class HandleInput:
         # toggle between name (mainnet) and namePrefix (testnet)
         # Will be removed when testnet is updated.
         # --namePrefix change to --name in v1.2.1
-        if self.testnet == self.rpcaddr:
+        if self.testnet == self.rpcaddr and context.get("name"):
             context["namePrefix"] = context.get("name")
             if context.get("name"):
-                print(context.get("name"))
                 del context["name"]
 
         return context
