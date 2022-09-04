@@ -92,7 +92,7 @@ class AtlasMethods:
         if self.testnet == self.rpcaddr:
             context["testnet"] = ""
         context.update({"v5disc": "", "mine": "", 'password': context['signer_passwordFile']})
-        del context['signer_passwordFile']        
+        context = {k:v for k, v in context.items() if k != 'signer_passwordFile'}
         self.run_method("", context, prog="atlas", scrolling=True)
 
     def setup_atlas_node_service(
