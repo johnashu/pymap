@@ -33,6 +33,7 @@ class HandleInput:
         if remove:
             context = {k: v for k, v in context.items() if k not in remove}
         for k, v in context.items():
+
             key = k
             if isSigner:
                 if k in signer_fields:
@@ -74,4 +75,13 @@ class HandleInput:
                 self.__dict__[key] = i
             context[k] = i
         self.update_env(self.base_field_keys)
+        # toggle between name (mainnet) and namePrefix (testnet)
+        # Will be removed when testnet is updated.
+        # --namePrefix change to --name in v1.2.1
+        if self.testnet == self.rpcaddr:
+            context["namePrefix"] = context.get("name")
+            if context.get("name"):
+                print(context.get("name"))
+                del context["name"]
+
         return context

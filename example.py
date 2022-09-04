@@ -10,12 +10,12 @@ print(from_env)
 if __name__ == "__main__":
 
     address = "0x3E8dF1A18E97fAA3235EA731A5C7B7C2455D21E8"
-    # rpc = RpcMethods()
-    # res = rpc._get_validators()
-    # print(res)
+    rpc = RpcMethods()
+    res = rpc._get_validators()
+    print(res)
 
-    # balance = rpc.get_balance(address)
-    # print(balance)
+    balance = rpc.get_balance(address)
+    print(balance)
 
     # create_systemd()
     i = InteractiveSetup(**from_env)
