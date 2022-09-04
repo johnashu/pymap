@@ -72,7 +72,10 @@ class AtlasMethods:
             )
             self.unlock = self.signer_address
             self.__dict__["miner.validator"] = self.signer_address
-            self.update_env(self.base_field_keys)
+        else:
+            self.passwordFile = passwordFile
+            self.password = pw1
+        self.update_env(self.base_field_keys)
 
     def join_network(
         self,
