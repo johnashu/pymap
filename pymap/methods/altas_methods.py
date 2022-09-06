@@ -117,6 +117,8 @@ class AtlasMethods:
 
         if self.testnet == self.rpcaddr:
             context["testnet"] = "--testnet"
+        else:
+            context["testnet"] = ''
 
         create_systemd(context)
 
