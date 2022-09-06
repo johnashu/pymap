@@ -29,7 +29,8 @@ class RunProcess:
                     else:
                         self.keystore = l_split[-1].strip()
             if isECDSA:
-                if l_split[0].endswith("secret key file"):
+                if l.split("=")[0].endswith("result"):
+                    self.signature = l.split("=")[0].strip()
                     print(line)
             self.update_env(self.base_field_keys)
 
