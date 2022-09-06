@@ -52,13 +52,13 @@ class InteractiveSetup(Menu):
         current_block = int(self.get_block_number())
         bpe = int(self.blocks_per_epoch)
         epoch = calc_current_block(current_block, bpe)
-        t = time_to_next_block(current_block, epoch, bpe)
+        t, next_epoch = time_to_next_block(current_block, epoch, bpe)
         msg = f"""
         Current Block: {current_block}
 
         Current Epoch: {epoch}
         
-        Next Epoch:    {epoch+1} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
+        Next Epoch:    {epoch+1} starts @ block {next_epoch} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
         """
         print(self.star_surround(msg))
 
