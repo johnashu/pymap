@@ -4,6 +4,8 @@ __play.py
 input_test.py
 data/
 logs/
+mainnet.env
+testnet.env
 
 
 # Byte-compiled / optimized / DLL files
