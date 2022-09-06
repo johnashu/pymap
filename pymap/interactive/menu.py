@@ -21,12 +21,16 @@ class Menu(MarkerMethods):
             except ValueError:
                 pass
         if testnet == 1:
-            self.base_context.update(
-                {
-                    "rpcaddr": self.testnet,
-                }
-            )
-            self.rpcaddr = self.testnet
+            rpcaddr = self.testnet
+        else:
+            rpcaddr = self.mainnet
+
+        self.base_context.update(
+            {
+                "rpcaddr": rpcaddr,
+            }
+        )
+        self.rpcaddr = rpcaddr
 
     def run_full_node(self) -> None:
         self.is_testnet()

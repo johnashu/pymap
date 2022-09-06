@@ -48,7 +48,8 @@ class AtlasMethods:
         )
 
         default_pw_fn = os.path.join(
-            keystore_path if keystore_path else self.datadir, "signer_password" if isSigner else "password"
+            keystore_path if keystore_path else self.datadir,
+            "signer_password" if isSigner else "password",
         )
 
         passwordFile = (
@@ -85,15 +86,17 @@ class AtlasMethods:
             "port": int(),
             "miner.validator": str(),
             "unlock": str(),
-            "signer_passwordFile": str()
+            "signer_passwordFile": str(),
         },
     ) -> None:
-        context = {k:v for k, v in context.items() if k != 'password'}
+        context = {k: v for k, v in context.items() if k != "password"}
         context.update(self.handle_input(context))
         if self.testnet == self.rpcaddr:
             context["testnet"] = ""
-        context.update({"v5disc": "", "mine": "", 'password': context['signer_passwordFile']})
-        context = {k:v for k, v in context.items() if k != 'signer_passwordFile'}
+        context.update(
+            {"v5disc": "", "mine": "", "password": context["signer_passwordFile"]}
+        )
+        context = {k: v for k, v in context.items() if k != "signer_passwordFile"}
         self.run_method("", context, prog="atlas", scrolling=True)
 
     def setup_atlas_node_service(
