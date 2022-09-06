@@ -1,7 +1,8 @@
-from pymap.interactive.menu import Menu
-from pymap.tools.key_from_keystore import pk_from_store
 import os
 import logging as log
+from pymap.interactive.menu import Menu
+from pymap.tools.key_from_keystore import pk_from_store
+from pymap.tools.block_epoch_utils import calc_current_block, time_to_next_block
 
 
 class InteractiveSetup(Menu):
@@ -45,7 +46,21 @@ class InteractiveSetup(Menu):
         RPC Block Number:   {rpc_block}
         Blocks Synced:      {self.red_or_green(match)}        
         """
-        log.info(self.star_surround(msg))
+        print(self.star_surround(msg))
+
+    def get_epoch_data(self) -> None:
+        current_block = int(self.get_block_number())
+        bpe = int(self.blocks_per_epoch)
+        epoch = calc_current_block(current_block, bpe)
+        t = time_to_next_block(current_block, epoch, bpe)
+        msg = f"""
+        Current Block: {current_block}
+
+        Current Epoch: {epoch}
+        
+        Next Epoch:    {epoch+1} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
+        """
+        print(self.star_surround(msg))
 
     def start(self) -> None:
         self.intro_message()

@@ -32,5 +32,6 @@ menu_items = {
     "Private Key From Keystore": "find_pk",
     "Setup atlasNode Service": "setup_atlas_node_service",
     "Transfer Map using Keystore": "transfer",
+    "Get Epoch Data": "get_epoch_data",
     "Show Node Logs": "show_tail",
 }

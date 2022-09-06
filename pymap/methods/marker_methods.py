@@ -70,8 +70,7 @@ class MarkerMethods(
     ) -> None:
         context.update(
             self.handle_input(
-                {**self.base_context, **context},
-                remove=("password", "keystore")
+                {**self.base_context, **context}, remove=("password", "keystore")
             )
         )
         self.run_method("getActiveVotesForValidatorByAccount", context)
@@ -79,8 +78,7 @@ class MarkerMethods(
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
         context.update(
             self.handle_input(
-                {**self.base_context, **context}, 
-                remove=("password", "keystore")
+                {**self.base_context, **context}, remove=("password", "keystore")
             )
         )
         self.run_method("getPendingWithdrawals", context)
@@ -95,8 +93,7 @@ class MarkerMethods(
     ) -> None:
         context.update(
             self.handle_input(
-                {**self.base_context, **context}, 
-                remove=("password", "keystore")
+                {**self.base_context, **context}, remove=("password", "keystore")
             )
         )
         self.run_method("makeECDSASignatureFromSigner", context, isECDSA=True)
@@ -107,7 +104,7 @@ class MarkerMethods(
     # ) -> None:
     #     context.update(
     #         self.handle_input(
-    #             {**self.base_context, **context}, 
+    #             {**self.base_context, **context},
     #             remove=("password", "keystore")
     #         )
     #     )
@@ -118,8 +115,7 @@ class MarkerMethods(
     ) -> None:
         context.update(
             self.handle_input(
-                {**self.base_context, **context}, 
-                remove=("password", "keystore")
+                {**self.base_context, **context}, remove=("password", "keystore")
             )
         )
         self.run_method("generateSignerProof ", context)

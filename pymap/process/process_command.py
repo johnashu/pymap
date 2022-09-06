@@ -16,7 +16,7 @@ class RunProcess:
         scrolling: bool = False,
         isSigner: bool = False,
         isAttach: bool = False,
-        isECDSA: bool = False
+        isECDSA: bool = False,
     ):
         async for line in stream:
             l = line.decode().strip()
