@@ -20,7 +20,7 @@ menu_items = {
     "Revoke Active Votes": "revoke_active_votes",
     "Join Network (Sync)": "join_network",
     "Make ECDSA Signature From Signer": "make_ECDSA_signature_from_signer",
-    "Make BLS Proof Of Possession From Signer": "make_BLS_proof_of_possession_from_signer",
+    # "Make BLS Proof Of Possession From Signer": "make_BLS_proof_of_possession_from_signer",
     "Generate Signer Proof": "generate_signer_proof",
     "Authorise Validator Signer By Signature": "authorise_validator_signer_by_signature",
     "Get Balance": "get_balance",

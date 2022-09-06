@@ -101,16 +101,17 @@ class MarkerMethods(
         )
         self.run_method("makeECDSASignatureFromSigner", context, isECDSA=True)
 
-    def make_BLS_proof_of_possession_from_signer(
-        self, context: dict = dict(validator=str(), signerPriv=str())
-    ) -> None:
-        context.update(
-            self.handle_input(
-                {**self.base_context, **context}, 
-                remove=("password", "keystore")
-            )
-        )
-        self.run_method("MakeBLSProofOfPossessionFromSigner", context)
+    # Deprecated for generateSignerProof
+    # def make_BLS_proof_of_possession_from_signer(
+    #     self, context: dict = dict(validator=str(), signerPriv=str())
+    # ) -> None:
+    #     context.update(
+    #         self.handle_input(
+    #             {**self.base_context, **context}, 
+    #             remove=("password", "keystore")
+    #         )
+    #     )
+    #     self.run_method("MakeBLSProofOfPossessionFromSigner", context)
 
     def generate_signer_proof(
         self, context: dict = dict(validator=str(), signerPriv=str())
