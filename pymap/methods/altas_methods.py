@@ -68,11 +68,11 @@ class AtlasMethods:
         if isSigner:
             self.signer_passwordFile = passwordFile
             self.signer_password = pw1
-            self.signer_address, self.signerPriv = pk_from_store(
+            self.signer, self.signerPriv = pk_from_store(
                 self.signer_keystore, self.signer_password
             )
-            self.unlock = self.signer_address
-            self.__dict__["miner.validator"] = self.signer_address
+            self.unlock = self.signer
+            self.__dict__["miner.validator"] = self.signer
         else:
             self.passwordFile = passwordFile
             self.password = pw1

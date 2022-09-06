@@ -77,7 +77,10 @@ class MarkerMethods(
         self.run_method("getActiveVotesForValidatorByAccount", context)
 
     def get_pending_withdrawals(self, context: dict = dict(target=str())) -> None:
-        context.update(self.handle_input({**self.base_context, **context}))
+        context.update(
+            self.handle_input({**self.base_context, **context}),
+            remove=("password", "keystore"),
+        )
         self.run_method("getPendingWithdrawals", context)
 
     def withdraw_map(self, context: dict = dict(withdrawIndex=int())) -> None:
@@ -88,14 +91,35 @@ class MarkerMethods(
     def make_ECDSA_signature_from_signer(
         self, context: dict = dict(validator=str(), signerPriv=str())
     ) -> None:
-        context.update(self.handle_input({**self.base_context, **context}))
+        context.update(
+            self.handle_input({**self.base_context, **context}),
+            remove=("password", "keystore"),
+        )
         self.run_method("makeECDSASignatureFromSigner", context)
 
     def make_BLS_proof_of_possession_from_signer(
         self, context: dict = dict(validator=str(), signerPriv=str())
     ) -> None:
-        context.update(self.handle_input({**self.base_context, **context}))
+        context.update(
+            self.handle_input({**self.base_context, **context}),
+            remove=("password", "keystore"),
+        )
         self.run_method("MakeBLSProofOfPossessionFromSigner", context)
+
+    def generate_signer_proof(
+        self, context: dict = dict(validator=str(), signerPriv=str())
+    ) -> None:
+        context.update(
+            self.handle_input({**self.base_context, **context}),
+            remove=("password", "keystore"),
+        )
+        self.run_method("generateSignerProof ", context)
+
+    def authorise_validator_signer_by_signature(
+        self, context: dict = dict(signer=str(), signature=str())
+    ) -> None:
+        context.update(self.handle_input({**self.base_context, **context}))
+        self.run_method("authorizeValidatorSignerBySignature  ", context)
 
     def authorise_validator_signer(
         self, context: dict = dict(signerPriv=str())
