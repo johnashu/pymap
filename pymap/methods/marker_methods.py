@@ -71,7 +71,7 @@ class MarkerMethods(
         context.update(
             self.handle_input(
                 {**self.base_context, **context},
-                # remove=("password", "keystore")
+                remove=("password", "keystore")
             )
         )
         self.run_method("getActiveVotesForValidatorByAccount", context)
