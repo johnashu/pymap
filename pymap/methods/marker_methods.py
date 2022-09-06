@@ -99,7 +99,7 @@ class MarkerMethods(
                 remove=("password", "keystore")
             )
         )
-        self.run_method("makeECDSASignatureFromSigner", context)
+        self.run_method("makeECDSASignatureFromSigner", context, isECDSA=True)
 
     def make_BLS_proof_of_possession_from_signer(
         self, context: dict = dict(validator=str(), signerPriv=str())

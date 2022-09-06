@@ -16,6 +16,7 @@ class RunProcess:
         scrolling: bool = False,
         isSigner: bool = False,
         isAttach: bool = False,
+        isECDSA: bool = False
     ):
         async for line in stream:
             l = line.decode().strip()
@@ -26,7 +27,10 @@ class RunProcess:
                         self.signer_keystore = l_split[-1].strip()
                     else:
                         self.keystore = l_split[-1].strip()
-                self.update_env(self.base_field_keys)
+            if isECDSA:
+                if l_split[0].endswith("secret key file"):
+                    print(line)
+            self.update_env(self.base_field_keys)
 
             if isAttach:
                 if self.attach_prompt_found:
