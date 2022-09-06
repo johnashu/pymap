@@ -19,6 +19,7 @@ class RunProcess:
         isECDSA: bool = False
     ):
         async for line in stream:
+            print(line)
             l = line.decode().strip()
             l_split = l.split(":")
             if save_keystore:
