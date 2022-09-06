@@ -32,6 +32,7 @@ class HandleInput:
 
         if remove:
             context = {k: v for k, v in context.items() if k not in remove}
+            
         for k, v in context.items():
             if k in self.miner_flags:
                 continue

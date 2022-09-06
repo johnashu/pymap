@@ -19,7 +19,6 @@ class RunProcess:
         isECDSA: bool = False
     ):
         async for line in stream:
-            print(line)
             l = line.decode().strip()
             l_split = l.split(":")
             if save_keystore:
@@ -31,7 +30,6 @@ class RunProcess:
             if isECDSA:
                 if l.split("=")[0].endswith("result"):
                     self.signature = l.split("=")[-1].strip()
-                    print(line)
             self.update_env(self.base_field_keys)
 
             if isAttach:
