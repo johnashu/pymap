@@ -187,3 +187,13 @@ class MarkerMethods(
     def transfer(self, context: dict = dict(target=str(), amount=int())) -> None:
         context.update(self.handle_input({**self.base_context, **context}))
         self.run_method("transfer", context)
+
+    # Validator info
+    def get_validator(self, context: dict = dict(validator=str())) -> None:
+        context.update(
+            self.handle_input(
+                {**self.base_context, **context}, 
+                remove=("password", "keystore")
+            )
+        )
+        self.run_method("getValidator", context)

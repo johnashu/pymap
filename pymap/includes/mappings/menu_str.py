@@ -28,6 +28,7 @@ menu_items = {
     "Block Number of Local Node": "get_eth_block_number_from_node",
     "Compare Local / RPC Block Number": "compare_block_numbers",
     "Get Validator Reward Info": "get_validator_reward_info",
+    "Get Validator Information": "get_validator",
     "Check if Elected": "check_if_selected",
     "Private Key From Keystore": "find_pk",
     "Setup atlasNode Service": "setup_atlas_node_service",
