@@ -192,8 +192,7 @@ class MarkerMethods(
     def get_validator(self, context: dict = dict(validator=str())) -> None:
         context.update(
             self.handle_input(
-                {**self.base_context, **context}, 
-                remove=("password", "keystore")
+                {**self.base_context, **context}, remove=("password", "keystore")
             )
         )
         self.run_method("getValidator", context)

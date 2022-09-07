@@ -2,7 +2,7 @@ import os
 import logging as log
 from pymap.interactive.menu import Menu
 from pymap.tools.key_from_keystore import pk_from_store
-from pymap.tools.block_epoch_utils import calc_current_block, time_to_next_block
+from pymap.tools.block_epoch_utils import get_current_epoch, time_to_next_block
 
 
 class InteractiveSetup(Menu):
@@ -51,8 +51,7 @@ class InteractiveSetup(Menu):
     def get_epoch_data(self) -> None:
         current_block = int(self.get_block_number())
         bpe = int(self.blocks_per_epoch)
-        epoch = calc_current_block(current_block, bpe)
-        t, next_epoch = time_to_next_block(current_block, epoch, bpe)
+        t, epoch, next_epoch = time_to_next_block(current_block, bpe)
         msg = f"""
         Current Block: {current_block}
 
