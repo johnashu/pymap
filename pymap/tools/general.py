@@ -62,3 +62,4 @@ class General:
         Next Epoch:    {epoch+1} starts @ block {next_epoch} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
         """
         print(self.star_surround(msg))
+        return epoch

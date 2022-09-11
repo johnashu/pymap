@@ -33,6 +33,10 @@ class Menu(MarkerMethods):
         self.rpcaddr = rpcaddr
 
     def run_full_node(self) -> None:
+        self.menu = {
+            0: self.finish_node,
+            999: self.reboot_server,
+        }
         self.is_testnet()
         while True:
             os.system("clear")

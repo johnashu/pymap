@@ -9,11 +9,11 @@ verbose = False
 
 envs = Envs()
 alert_envs = Envs(envFile="alerts.env")
-print(envs.__dict__)
-print(alert_envs.__dict__)
 log = start_logger(verbose=verbose)
 
 version = "1.0.0"
+
+server_hostname = ""
 
 api_data_fn = "api_data"
 

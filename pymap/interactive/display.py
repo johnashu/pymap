@@ -5,13 +5,9 @@ from pymap.includes.config import envs
 
 
 class PrintStuff:
-    def __init__(self, **kw):
+    def __init__(self, isMenu: bool = True, **kw):
         self.print_stars = "*" * 93
         self.reset_stars = self.print_stars + Style.RESET_ALL
-        self.menu = {
-            0: self.finish_node,
-            999: self.reboot_server,
-        }
         super(PrintStuff, self).__init__()
 
     def stars(self, reset=0) -> None:
@@ -108,12 +104,13 @@ class PrintStuff:
         print(self.star_surround(msg))
 
     def list_envs(self) -> None:
+        ignore = ("envFile",)
         c = 1
         cur_list = {}
         back = "*  " + Fore.GREEN + "[ 0] - Back To Main Menu" + Style.RESET_ALL
         backup = "*  " + Fore.GREEN + "[99] - Backup Env to file" + Style.RESET_ALL
         for k, v in self.__dict__.items():
-            if k in envs.__dict__.keys():
+            if k in envs.__dict__.keys() and k not in ignore:
                 cur_list[c] = k
                 print(f"* [{c:>2}] - {k:<20}  ::  {v}")
                 c += 1
