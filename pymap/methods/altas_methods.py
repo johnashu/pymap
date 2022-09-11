@@ -4,6 +4,7 @@ from pymap.tools.file_op import save_file
 from pymap.tools.create_service import create_systemd
 from pymap.tools.utils import is_signer
 from pymap.tools.key_from_keystore import pk_from_store
+from pymap.includes.templates.systemd import atlasNode
 
 
 class AtlasMethods:
@@ -120,7 +121,7 @@ class AtlasMethods:
         else:
             context["testnet"] = ""
 
-        create_systemd(context)
+        create_systemd(context, template=atlasNode)
 
         commands = (
             "sudo service atlasNode stop",

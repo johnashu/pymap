@@ -53,6 +53,6 @@ class Alerts(AlertsBase):
                 msg,
                 "info",
                 log.info,
-                f"Epoch: [ {epoch} ] Node is Synced -- {self.hostname}"
+                f"Epoch: [ {epoch} ] Node is Synced -- {self.hostname}",
             )
         return times_sent

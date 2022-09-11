@@ -37,6 +37,7 @@ class Monitor(MarkerMethods, General, Alerts):
         if self.time_calc >= (self.RUN_EVERY_X_SECONDS) or self.first_run:
             self.start_time = self.time_check
             return True
+        self.first_run = False
         return False
 
     def check_sync(self, rpc, local) -> bool:

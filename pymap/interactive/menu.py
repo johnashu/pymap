@@ -13,16 +13,20 @@ class Menu(MarkerMethods):
             try:
                 testnet = int(
                     input(
-                        "Please indicate if you wish to use Testnet or Mainnet\n\t* [1] Testnet\n\t* [2] Mainnet\n\t>>> "
+                        "Please indicate if you wish to use Testnet or Mainnet or setup monitoring\n\t* [1] Testnet\n\t* [2] Mainnet\n\t* [3] Create Monitoring Service\n\t>>> "
                     )
                 )
-                if testnet in (1, 2):
+                if testnet in (1, 2, 3):
                     break
             except ValueError:
                 pass
+
+        if testnet == 3:
+            return self.setup_monitor_service()
+
         if testnet == 1:
             rpcaddr = self.testnet
-        else:
+        elif testnet == 2:
             rpcaddr = self.mainnet
 
         self.base_context.update(

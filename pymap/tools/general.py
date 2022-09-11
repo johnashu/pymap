@@ -1,6 +1,8 @@
 import os
 from pymap.tools.key_from_keystore import pk_from_store
 from pymap.tools.block_epoch_utils import time_to_next_block
+from pymap.includes.templates.systemd import monitorService
+from pymap.tools.create_service import create_systemd
 
 
 class General:
@@ -46,7 +48,7 @@ class General:
         Local Block Number: {local_block}
         RPC Block Number:   {rpc_block}       
         """
-        synced = f'Blocks Synced:      {self.red_or_green(match)} '
+        synced = f"Blocks Synced:      {self.red_or_green(match)} "
         print(self.star_surround(msg + synced))
         return match, rpc_block, local_block, msg
 
@@ -63,3 +65,29 @@ class General:
         """
         print(self.star_surround(msg))
         return epoch
+
+    def setup_monitor_service(
+        self,
+        context: dict = {"working_dir": str()},
+    ) -> None:
+        context.update(self.handle_input(context))
+        print(context)
+
+        create_systemd(
+            context, template=monitorService, serviceName="atlasmonitorservice"
+        )
+
+        commands = (
+            "sudo service atlasMonitorService stop",
+            "sudo systemctl daemon-reload ",
+            "sudo chmod 644 /etc/systemd/system/atlasMonitorService.service",
+            "sudo systemctl enable atlasMonitorService.service",
+            "sudo service atlasMonitorService start",
+        )
+
+        for cmd in commands:
+            self.run_method(
+                cmd.split(),
+                {},
+                prog="",
+            )

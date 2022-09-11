@@ -7,6 +7,7 @@ from pymap.tools.utils import take_input, is_signer
 from pymap.tools.file_op import save_file
 from pymap.includes.mappings.names import name_map
 
+
 class HandleInput:
     def __init__(self, reset: int = 0, **kw):
         super(HandleInput, self).__init__()
@@ -25,7 +26,7 @@ class HandleInput:
         signer_fields: tuple = (),
         ask_is_signer: bool = False,
         isSigner: bool = False,
-        allow_empty: bool = False
+        allow_empty: bool = False,
     ) -> None:
         if ask_is_signer:
             isSigner = is_signer()
@@ -72,7 +73,7 @@ class HandleInput:
                         if not allow:
                             i = self.__dict__[key]
                         else:
-                            self.__dict__[key] = i                
+                            self.__dict__[key] = i
                     except KeyError as e:
                         log.error(f"Argument not found for {k}  ::  {e}")
                 else:
