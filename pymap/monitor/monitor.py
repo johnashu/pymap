@@ -36,8 +36,8 @@ class Monitor(MarkerMethods, General, Alerts):
 
         if self.time_calc >= (self.RUN_EVERY_X_SECONDS) or self.first_run:
             self.start_time = self.time_check
+            self.first_run = False
             return True
-        self.first_run = False
         return False
 
     def check_sync(self, rpc, local) -> bool:
@@ -58,7 +58,7 @@ class Monitor(MarkerMethods, General, Alerts):
                         self.times_sent = self.happy_alert(
                             self.times_sent,
                             epoch,
-                            f"Local Epoch: {epoch}\nDifference: {synced}\n\n{msg}",
+                            f"Epoch: {epoch}\nDifference: {synced}\n\n{msg}",
                             first_run=self.first_run,
                         )
 

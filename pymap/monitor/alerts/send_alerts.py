@@ -21,7 +21,7 @@ class Alerts(AlertsBase):
 
     def build_error_message(self, msg: str, blocks: int, epoch: int):
         try:
-            html = f"""<strong>Local Epoch:</strong> {epoch}\n<strong>Difference:</strong> {blocks}\n\n{msg}"""
+            html = f"""Epoch: {epoch}\nDifference: {blocks}\n\n{msg}"""
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
             log.error(msg)
