@@ -36,7 +36,6 @@ class Monitor(MarkerMethods, General, Alerts):
 
         if self.time_calc >= (self.RUN_EVERY_X_SECONDS) or self.first_run:
             self.start_time = self.time_check
-            self.first_run = False
             return True
         return False
 
@@ -65,6 +64,7 @@ class Monitor(MarkerMethods, General, Alerts):
                         self.build_send_error_message(
                             local_block, rpc_block, synced, epoch
                         )
+                    self.first_run = False
 
             except Exception as e:
                 log.error(e)
