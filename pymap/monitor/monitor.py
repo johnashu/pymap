@@ -6,7 +6,7 @@ from pymap.includes.config import alert_envs
 from pymap.methods.marker_methods import MarkerMethods
 from pymap.tools.general import General
 from pymap.monitor.alerts.send_alerts import Alerts
-from pymap.monitor.includes.monitor_setup import  times_sent
+from pymap.monitor.includes.monitor_setup import times_sent
 
 
 class Monitor(MarkerMethods, General, Alerts):
@@ -16,7 +16,7 @@ class Monitor(MarkerMethods, General, Alerts):
     first_run = True
     alert_sent = False
     times_sent = times_sent
-    
+
     def __init__(self, **base_fields: dict) -> None:
         self.RUN_EVERY_X_SECONDS = self.calc_seconds()
         super(Monitor, self).__init__(**base_fields)
@@ -30,11 +30,11 @@ class Monitor(MarkerMethods, General, Alerts):
 
     def is_time_to_check(self) -> bool:
         # is it time to check?
-        time_check = datetime.datetime.now()
-        time_calc = (time_check - self.start_time).seconds
+        self.time_check = datetime.datetime.now()
+        self.time_calc = (self.time_check - self.start_time).seconds
 
-        if time_calc >= (self.RUN_EVERY_X_SECONDS) or self.first_run:
-            self.start_time = time_check
+        if self.time_calc >= (self.RUN_EVERY_X_SECONDS) or self.first_run:
+            self.start_time = self.time_check
             return True
         return False
 
@@ -50,11 +50,11 @@ class Monitor(MarkerMethods, General, Alerts):
             try:
                 if self.is_time_to_check():
                     epoch = self.get_epoch_data()
-                    match, rpc_block, local_block, msg = self.compare_block_numbers()
+                    _, rpc_block, local_block, msg = self.compare_block_numbers()
                     res, synced = self.check_sync(rpc_block, local_block)
                     if res:
-                        times_sent = self.happy_alert(
-                            times_sent,
+                        self.times_sent = self.happy_alert(
+                            self.times_sent,
                             epoch,
                             msg,
                             first_run=self.first_run,
@@ -67,6 +67,7 @@ class Monitor(MarkerMethods, General, Alerts):
 
             except Exception as e:
                 log.error(e)
+                self.generic_error(e)
                 # error sleep....zzzzzzzzz
                 if alert_envs.DELAY_IN_MINS != int(0):
                     sleep(alert_envs.DELAY_IN_MINS * 60)
