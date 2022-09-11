@@ -42,11 +42,12 @@ class General:
         rpc_block = int(self.get_block_number())
         local_block = int(self.local_block)
         match = local_block == rpc_block
-        msg = f"""Local Block Number: {local_block}
-        RPC Block Number:   {rpc_block}
-        Blocks Synced:      {str(self.red_or_green(match))}        
+        msg = f"""
+        Local Block Number: {local_block}
+        RPC Block Number:   {rpc_block}       
         """
-        print(self.star_surround(msg))
+        synced = f'\nBlocks Synced:      {self.red_or_green(match)} '
+        print(self.star_surround(msg + synced))
         return match, rpc_block, local_block, msg
 
     def get_epoch_data(self) -> None:
