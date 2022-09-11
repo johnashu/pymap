@@ -71,7 +71,6 @@ class General:
         context: dict = {"working_dir": str()},
     ) -> None:
         context.update(self.handle_input(context))
-        print(context)
 
         create_systemd(
             context, template=monitorService, serviceName="atlasMonitorService"

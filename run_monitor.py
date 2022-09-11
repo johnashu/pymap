@@ -7,5 +7,5 @@ from_env = envs.__dict__
 
 if __name__ == "__main__":
     m = Monitor(**from_env)
-    # m.start_monitor()
-    m.setup_monitor_service()
+    m.start_monitor()
+    # m.setup_monitor_service()
