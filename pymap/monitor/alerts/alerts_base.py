@@ -37,11 +37,9 @@ class AlertsBase:
         _type: str = "Danger",
         log_level: log = log.info,
         log_msg: str = "[INFO]",
-        email: bool = False,
-        tg_api: bool = False,
     ) -> None:
         log_level(log_msg)
-        if tg_api:
+        if alert_envs.SEND_ALERT_TO_MAPSTATS:
             self.send_to_mapstats(subject, msg, _type)
-        if email:
+        if alert_envs.SEND_EMAIL:
             send_email(subject, msg)

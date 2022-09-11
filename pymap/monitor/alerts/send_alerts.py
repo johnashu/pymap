@@ -53,8 +53,6 @@ class Alerts(AlertsBase):
                 msg,
                 "info",
                 log.info,
-                f"Epoch: [ {epoch} ] Node is Synced -- {self.hostname}",
-                email= alert_envs.SEND_EMAIL,
-                tg_api = alert_envs.SEND_ALERT_TO_MAPSTATS,
+                f"Epoch: [ {epoch} ] Node is Synced -- {self.hostname}"
             )
         return times_sent
