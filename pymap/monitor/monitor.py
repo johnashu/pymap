@@ -19,6 +19,7 @@ class Monitor(MarkerMethods, General, Alerts):
 
     def __init__(self, **base_fields: dict) -> None:
         self.RUN_EVERY_X_SECONDS = self.calc_seconds()
+        self.automatic = True
         super(Monitor, self).__init__(**base_fields)
 
     def calc_seconds(self):

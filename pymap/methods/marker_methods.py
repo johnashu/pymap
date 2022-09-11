@@ -11,6 +11,7 @@ class MarkerMethods(
 ):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")
+    automatic = False
 
     def __init__(self, **kw: dict) -> None:
         self.base_field_keys = kw.keys()

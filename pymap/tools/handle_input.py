@@ -1,3 +1,4 @@
+from enum import auto
 import logging as log
 import os
 from colorama import Style, Fore, Back
@@ -5,7 +6,6 @@ from pymap.tools.utils import askYesNo
 from pymap.tools.utils import take_input, is_signer
 from pymap.tools.file_op import save_file
 from pymap.includes.mappings.names import name_map
-
 
 class HandleInput:
     def __init__(self, reset: int = 0, **kw):
@@ -25,7 +25,7 @@ class HandleInput:
         signer_fields: tuple = (),
         ask_is_signer: bool = False,
         isSigner: bool = False,
-        allow_empty: bool = False,
+        allow_empty: bool = False
     ) -> None:
         if ask_is_signer:
             isSigner = is_signer()
@@ -51,7 +51,8 @@ class HandleInput:
                 if not name_map.get(k)
                 else name_map.get(k)
             )
-            i = take_input(type(v), f"Please Enter {display} ({arg}): ")
+            if not self.automatic:
+                i = take_input(type(v), f"Please Enter {display} ({arg}): ")
             if not i:
                 try:
                     allow = False
