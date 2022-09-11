@@ -50,13 +50,13 @@ class Monitor(MarkerMethods, General, Alerts):
             try:
                 if self.is_time_to_check():
                     epoch = self.get_epoch_data()
-                    _, rpc_block, local_block, msg = self.compare_block_numbers()
+                    _, rpc_block, local_block, _ = self.compare_block_numbers()
                     res, synced = self.check_sync(rpc_block, local_block)
                     if res:
                         self.times_sent = self.happy_alert(
                             self.times_sent,
                             epoch,
-                            msg,
+                            f"<strong>Local Epoch:</strong> {epoch}\n<strong>Difference:</strong> {synced}\n\n{msg}",
                             first_run=self.first_run,
                         )
 
