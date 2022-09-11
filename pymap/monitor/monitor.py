@@ -57,7 +57,7 @@ class Monitor(MarkerMethods, General, Alerts):
                         self.times_sent = self.happy_alert(
                             self.times_sent,
                             epoch,
-                            f"<strong>Local Epoch:</strong> {epoch}\n<strong>Difference:</strong> {synced}\n\n{msg}",
+                            f"Local Epoch: {epoch}\nDifference: {synced}\n\n{msg}",
                             first_run=self.first_run,
                         )
 
