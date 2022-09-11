@@ -62,7 +62,7 @@ class Monitor(MarkerMethods, General, Alerts):
 
                     else:
                         self.build_send_error_message(
-                            local_block, rpc_block, synced, epoch
+                            msg, synced, epoch
                         )
                     self.first_run = False
 
