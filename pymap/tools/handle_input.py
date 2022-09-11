@@ -53,30 +53,32 @@ class HandleInput:
             )
             if not self.automatic:
                 i = take_input(type(v), f"Please Enter {display} ({arg}): ")
-            if not i:
-                try:
-                    allow = False
-                    if allow_empty:
-                        allow = askYesNo(
-                            "* "
-                            + Fore.RED
-                            + " WARNING "
-                            + Style.RESET_ALL
-                            + "Are you sure you want to"
-                            + Fore.RED
-                            + " DELETE "
-                            + Style.RESET_ALL
-                            + "this Field?"
-                        )
+                if not i:
+                    try:
+                        allow = False
+                        if allow_empty:
+                            allow = askYesNo(
+                                "* "
+                                + Fore.RED
+                                + " WARNING "
+                                + Style.RESET_ALL
+                                + "Are you sure you want to"
+                                + Fore.RED
+                                + " DELETE "
+                                + Style.RESET_ALL
+                                + "this Field?"
+                            )
 
-                    if not allow:
-                        i = self.__dict__[key]
-                    else:
-                        self.__dict__[key] = i
-                except KeyError as e:
-                    log.error(f"Argument not found for {k}  ::  {e}")
+                        if not allow:
+                            i = self.__dict__[key]
+                        else:
+                            self.__dict__[key] = i                
+                    except KeyError as e:
+                        log.error(f"Argument not found for {k}  ::  {e}")
+                else:
+                    self.__dict__[key] = i
             else:
-                self.__dict__[key] = i
+                i = self.__dict__[key]
             context[k] = i
         self.update_env(self.base_field_keys)
         # toggle between name (mainnet) and namePrefix (testnet)
