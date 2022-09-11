@@ -20,7 +20,7 @@ WantedBy=multi-user.target
 
 monitorService = """
 [Unit]
-Description=atlasmonitorservice daemon
+Description=atlasMonitorService daemon
 After=network-online.target
 
 [Service]
@@ -29,7 +29,7 @@ Restart=always
 RestartSec=1
 WorkingDirectory={}/pymap
 ExecStart=python3 run_monitor.py
-SyslogIdentifier=atlasmonitorservice
+SyslogIdentifier=atlasMonitorService
 StartLimitInterval=0
 LimitNOFILE=65536
 LimitNPROC=65536

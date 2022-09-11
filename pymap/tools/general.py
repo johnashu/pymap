@@ -74,7 +74,7 @@ class General:
         print(context)
 
         create_systemd(
-            context, template=monitorService, serviceName="atlasmonitorservice"
+            context, template=monitorService, serviceName="atlasMonitorService"
         )
 
         commands = (
