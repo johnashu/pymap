@@ -2,12 +2,12 @@ import logging as log
 import socket
 from pymap.monitor.alerts.alerts_base import AlertsBase
 from pymap.monitor.util.tools import check_hours_alert
-from pymap.includes.config import alert_envs
+from pymap.includes.config import alerts_envs
 
 
 class Alerts(AlertsBase):
 
-    server_hostname = socket.gethostname()
+    hostname = socket.gethostname()
 
     def build_send_error_message(self, *a, **kw) -> None:
         err_msg = self.build_error_message(*a, **kw)
