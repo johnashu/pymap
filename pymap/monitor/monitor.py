@@ -25,7 +25,7 @@ class Monitor(MarkerMethods, General, Alerts):
     def calc_seconds(self):
         try:
             hh, mm = alert_envs.HOURS, alert_envs.MINS
-            return int(hh) * 3600 + int(mm) * 60
+            return int(float(hh) * 3600 + float(mm) * 60)
         except ZeroDivisionError:
             return 0
 
