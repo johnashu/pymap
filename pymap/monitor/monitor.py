@@ -56,14 +56,12 @@ class Monitor(MarkerMethods, General, Alerts):
                         self.times_sent = self.happy_alert(
                             self.times_sent,
                             epoch,
-                            f"\t\tEpoch: {epoch}\n\t\tDifference: {synced}\n\n{msg}",
+                            f"        Epoch: {epoch}\n        Difference: {synced}\n{msg}",
                             first_run=self.first_run,
                         )
 
                     else:
-                        self.build_send_error_message(
-                            msg, synced, epoch
-                        )
+                        self.build_send_error_message(msg, synced, epoch)
                     self.first_run = False
 
             except Exception as e:
