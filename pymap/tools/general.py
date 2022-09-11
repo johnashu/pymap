@@ -46,7 +46,7 @@ class General:
         Local Block Number: {local_block}
         RPC Block Number:   {rpc_block}       
         """
-        synced = f'\n\t\tBlocks Synced:      {self.red_or_green(match)} '
+        synced = f'Blocks Synced:      {self.red_or_green(match)} '
         print(self.star_surround(msg + synced))
         return match, rpc_block, local_block, msg
 
