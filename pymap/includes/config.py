@@ -8,6 +8,9 @@ sys.dont_write_bytecode = True
 verbose = False
 
 envs = Envs()
+alert_envs = Envs(envFile="alerts.env")
+print(envs.__dict__)
+print(alert_envs.__dict__)
 log = start_logger(verbose=verbose)
 
 version = "1.0.0"
