@@ -21,7 +21,7 @@ def send_email(subject: str, message: str) -> None:
     ServerConnect = False
 
     try:
-        smtp_server = SMTP(alert_envs.EMAIL_SMTP, alert_envs)
+        smtp_server = SMTP(alert_envs.EMAIL_SMTP, alert_envs.PORT)
         smtp_server.login(alert_envs.EMAIL_FROM, alert_envs.EMAIL_PASS)
         ServerConnect = True
     except SMTPHeloError as e:
