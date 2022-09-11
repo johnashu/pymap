@@ -6,12 +6,7 @@ from pymap.includes.config import alert_envs
 from pymap.methods.marker_methods import MarkerMethods
 from pymap.tools.general import General
 from pymap.monitor.alerts.send_alerts import Alerts
-from pymap.monitor.includes.monitor_setup import (
-    times,
-    times_sent,
-    FULLY_SYNCED_NOTIFICATIONS,
-    server_hostname,
-)
+from pymap.monitor.includes.monitor_setup import  times_sent
 
 
 class Monitor(MarkerMethods, General, Alerts):
@@ -20,8 +15,9 @@ class Monitor(MarkerMethods, General, Alerts):
     current_block = 0
     first_run = True
     alert_sent = False
-
-    def __init__(self, isMenu: bool = False, **base_fields: dict) -> None:
+    times_sent = times_sent
+    
+    def __init__(self, **base_fields: dict) -> None:
         self.RUN_EVERY_X_SECONDS = self.calc_seconds()
         super(Monitor, self).__init__(**base_fields)
 

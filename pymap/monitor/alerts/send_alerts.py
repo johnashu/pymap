@@ -1,8 +1,8 @@
 import logging as log
 import socket
 from pymap.monitor.alerts.alerts_base import AlertsBase
-
 from pymap.monitor.util.tools import check_hours_alert
+from pymap.includes.config import alert_envs
 
 
 class Alerts(AlertsBase):
@@ -47,7 +47,7 @@ class Alerts(AlertsBase):
         first_run: bool = False,
     ) -> dict:
 
-        if self.FULLY_SYNCED_NOTIFICATIONS and _send_alert:
+        if alerts_envs.FULLY_SYNCED_NOTIFICATIONS and _send_alert:
             self.send_alert(
                 f"Epoch: [ {epoch} ] Node is Synced -- {self.hostname}",
                 msg,
