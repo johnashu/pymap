@@ -48,7 +48,6 @@ class Monitor(MarkerMethods, General, Alerts):
 
     def start_monitor(self) -> None:
         while 1:
-            log.info(f"Run sync check")
             try:
                 if self.is_time_to_check():
                     epoch = self.get_epoch_data()
