@@ -7,23 +7,23 @@ from includes.config import *
 
 class Email:
     def send_email(subject: str, message: str) -> None:
-        if not envs.SEND_EMAIL:
+        if not alert_envs.SEND_EMAIL:
             log.info("Email sending not turned on, no email sent!")
             return
 
         msg = MIMEMultipart()
 
-        msg["From"] = envs.EMAIL_FROM
+        msg["From"] = alert_envs.EMAIL_FROM
 
-        msg["To"] = envs.EMAIL_TO
+        msg["To"] = alert_envs.EMAIL_TO
         msg["Subject"] = subject
         msg.attach(MIMEText(message))
 
         ServerConnect = False
 
         try:
-            smtp_server = SMTP(envs.EMAIL_SMTP, "465")
-            smtp_server.login(envs.EMAIL_FROM, envs.EMAIL_PASS)
+            smtp_server = SMTP(alert_envs.EMAIL_SMTP, alert_envs)
+            smtp_server.login(alert_envs.EMAIL_FROM, alert_envs.EMAIL_PASS)
             ServerConnect = True
         except SMTPHeloError as e:
             log.error(f"Server did not reply  ::  {e}")
@@ -34,7 +34,9 @@ class Email:
 
         if ServerConnect:
             try:
-                smtp_server.sendmail(envs.EMAIL_FROM, envs.EMAIL_TO, msg.as_string())
+                smtp_server.sendmail(
+                    alert_envs.EMAIL_FROM, alert_envs.EMAIL_TO, msg.as_string()
+                )
                 log.info(msg.as_string())
                 log.info("Successfully sent email")
             except SMTPException as e:

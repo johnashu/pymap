@@ -102,25 +102,23 @@ class PrintStuff:
         for i, k in enumerate(menu_items.keys()):
             print(f"*  [{i+1:>2}] {k}")
             self.menu[i + 1] = eval(f"self.{menu_items[k]}")
-        print(
-            f"""
-        
-*********************************************************************************************
-print("*  [999] Reboot Server             - {msg}
-print("*  [0] Exit Application            - Goodbye!")
-*********************************************************************************************
-        """
-        )
+        msg = f"""*  [999] Reboot Server             - {msg}
+*  [0] Exit Application            - Goodbye!
+"""
+        print(self.star_surround(msg))
 
     def list_envs(self) -> None:
         c = 1
         cur_list = {}
-        print("* " + Fore.GREEN + "[ 0] - Back To Main Menu" + Style.RESET_ALL)
+        back = "*  " + Fore.GREEN + "[ 0] - Back To Main Menu" + Style.RESET_ALL
+        backup = "*  " + Fore.GREEN + "[99] - Backup Env to file" + Style.RESET_ALL
         for k, v in self.__dict__.items():
             if k in envs.__dict__.keys():
                 cur_list[c] = k
                 print(f"* [{c:>2}] - {k:<20}  ::  {v}")
                 c += 1
+        msg = f"{back}\n{backup}"
+        print(self.star_surround(msg))
         return cur_list
 
     def star_surround(self, msg) -> None:
