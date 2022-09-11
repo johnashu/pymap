@@ -15,19 +15,20 @@ class AlertsBase:
         # self.connect_to_api = connect_to_api
         self.__dict__.update(kwargs)
 
-    # def send_to_mapstats(
-    #     self, subject: str, msg: str, alert_type: str, hostname: str = server_hostname
-    # ) -> None:
-    #     j = {
-    #         "api_token": self.envs.MAPSTATS_TOKEN,
-    #         "alert-type": alert_type,
-    #         "subject": subject,
-    #         "message": msg,
-    #         "hostname": hostname,
-    #     }
-    #     full, _, _ = self.connect_to_api("", self.MAPSTATS_API, "", j=j)
-    #     log.info(full)
-    #     log.info(hostname)
+    def send_to_mapstats(
+        self, subject: str, msg: str, alert_type: str, hostname: str = server_hostname
+    ) -> None:
+        return
+        # j = {
+        #     "api_token": self.envs.MAPSTATS_TOKEN,
+        #     "alert-type": alert_type,
+        #     "subject": subject,
+        #     "message": msg,
+        #     "hostname": hostname,
+        # }
+        # full, _, _ = self.connect_to_api("", self.MAPSTATS_API, "", j=j)
+        # log.info(full)
+        # log.info(hostname)
 
     def send_alert(
         self,
