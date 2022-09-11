@@ -6,6 +6,7 @@ data/
 logs/
 mainnet.env
 testnet.env
+alerts.env
 
 
 # Byte-compiled / optimized / DLL files
