@@ -4,7 +4,7 @@ import datetime
 
 def check_hours_alert(function_to_decorate):
     def wrapper(
-        self, shard, times_sent, _send_alert: bool = False, first_run: bool = False
+        self, times_sent, epoch, msg, _send_alert: bool = False, first_run: bool = False
     ):
         now = datetime.datetime.now()
         h = str(now.hour)
@@ -19,7 +19,7 @@ def check_hours_alert(function_to_decorate):
             _send_alert = True
 
         return function_to_decorate(
-            self, shard, times_sent, _send_alert=_send_alert, first_run=first_run
+            self, times_sent, epoch, msg, _send_alert=_send_alert, first_run=first_run
         )
 
     return wrapper
