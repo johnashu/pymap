@@ -22,7 +22,8 @@ class Menu(MarkerMethods):
                 pass
 
         if testnet == 3:
-            return self.setup_monitor_service()
+            self.setup_monitor_service()
+            return input("Press Enter to show menu or CTRL+C to exit..")
 
         if testnet == 1:
             rpcaddr = self.testnet
