@@ -44,7 +44,7 @@ def readable_price(
         rtn_str = rtn_str[1:]
 
     if print_res:
-        log.info(rtn_str)
+        print(rtn_str)
 
     if d > 0:
         before_dec, after_dec = rtn_str.split(".")

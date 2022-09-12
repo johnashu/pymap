@@ -7,7 +7,7 @@ from pymap.includes.config import *
 
 def send_email(subject: str, message: str) -> None:
     if not alert_envs.SEND_EMAIL:
-        log.info("Email sending not turned on, no email sent!")
+        print("Email sending not turned on, no email sent!")
         return
 
     msg = MIMEMultipart()
@@ -36,13 +36,13 @@ def send_email(subject: str, message: str) -> None:
             smtp_server.sendmail(
                 alert_envs.EMAIL_FROM, alert_envs.EMAIL_TO, msg.as_string()
             )
-            log.info(msg.as_string())
-            log.info("Successfully sent email")
+            print(msg.as_string())
+            print("Successfully sent email")
         except SMTPException as e:
             log.error(f"Unable to send email  ::  {e}")
         finally:
             smtp_server.close()
-            log.info("Email server connection closed")
+            print("Email server connection closed")
 
 
 # send_email('VOLUME Resized', 'HELLO TEST')

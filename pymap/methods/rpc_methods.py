@@ -157,7 +157,7 @@ class RpcMethods(RpcRequest):
 
         elected = self._get_validators()
         if validator in elected:
-            log.info(f"Validator {validator} is Elected!!")
+            print(f"Validator {validator} is Elected!!")
             return True
-        log.info(f"Validator {validator} is NOT elected.")
+        print(f"Validator {validator} is NOT elected.")
         return False

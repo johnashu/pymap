@@ -53,8 +53,6 @@ class RpcRequest:
             headers = {"Content-Type": "application/json"}
             data = json.dumps(payload, indent=4)
 
-            # log.info(f"Json Request to  [ {endpoint} ] \n{data}\n")
-
             resp = requests.request(
                 "POST",
                 endpoint,
@@ -63,7 +61,7 @@ class RpcRequest:
                 timeout=timeout,
                 allow_redirects=True,
             )
-            log.info(self.star_surround(curlify.to_curl(resp.request)))
+            print(self.star_surround(curlify.to_curl(resp.request)))
             return resp.content
         except requests.exceptions.Timeout as err:
             raise RequestsTimeoutError(endpoint) from err

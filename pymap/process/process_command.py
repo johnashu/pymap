@@ -40,7 +40,7 @@ class RunProcess:
                     if localBlock:
                         self.local_block = l
                         l = readable_price(l, d=0, show_decimals=False)
-                    log.info(f"{prefix}: {l}")
+                    print(f"{prefix}: {l}")
                     self.attach_prompt_found = False
                     return
                 if l == ">":
@@ -106,11 +106,11 @@ class RunProcess:
 
         command_list = [x for x in command_list if x]
 
-        # log.info(command_list)
+        # print(command_list)
 
         cmd_to_process = " ".join(command_list)
         msg = f"Command to Process:\n\n\t{cmd_to_process}"
-        log.info(self.star_surround(msg))
+        print(self.star_surround(msg))
 
         try:
             logging.getLogger("asyncio").setLevel(logging.CRITICAL)

@@ -30,7 +30,7 @@ def open_json(fn: str) -> json:
 def save_json(fn: str, d: dict) -> json:
     with open(f"{fn}", "w", encoding="utf-8") as j:
         json.dump(d, j, indent=4, ensure_ascii=False)
-        log.info(f"File - {fn} Created")
+        print(f"File - {fn} Created")
 
 
 def open_csv(fn: str) -> dict:
@@ -49,4 +49,4 @@ def save_csv(fn: str, data: list, header: list, inc: int = 1) -> None:
     except PermissionError:  # file is open, rename and try again.
         save_csv(f"{fn}-{inc}", data, header, inc=inc + 1)
 
-    log.info(f"File - {fn} Created")
+    print(f"File - {fn} Created")
