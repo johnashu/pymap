@@ -1,3 +1,4 @@
+from os import read
 from pymap.rpc.request import RpcRequest, _default_endpoint, _default_timeout
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
@@ -135,7 +136,9 @@ class RpcMethods(RpcRequest):
 
     def get_block_number(self) -> int:
         block = int(self._get_block_number(), 16)
-        log.info(f"Current Block Number of {self.rpcaddr}  ::  [ {block} ]")
+        print(
+            f"Current Block Number of {self.rpcaddr}  ::  [ {readable_price(block, d=0, show_decimals=False)} ]"
+        )
         return block
 
     def get_balance(self, address: str = "") -> int:
@@ -145,7 +148,7 @@ class RpcMethods(RpcRequest):
             ]
         balance = self._get_balance(address)
         # log readable but return int.
-        log.info(f"Balance of Address  {address}  ::  {readable_price(balance)}  MAP")
+        print(f"Balance of Address  {address}  ::  {readable_price(balance)}  MAP")
         return balance
 
     def check_if_selected(self, validator: str = "") -> bool:

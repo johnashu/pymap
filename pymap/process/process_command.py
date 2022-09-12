@@ -3,6 +3,8 @@ from typing import Tuple
 import asyncio
 import logging
 
+from pymap.tools.utils import readable_price
+
 
 class RunProcess:
 
@@ -17,6 +19,7 @@ class RunProcess:
         isSigner: bool = False,
         isAttach: bool = False,
         isECDSA: bool = False,
+        localBlock: bool = False,
     ):
         async for line in stream:
             l = line.decode().strip()
@@ -34,8 +37,10 @@ class RunProcess:
 
             if isAttach:
                 if self.attach_prompt_found:
+                    if localBlock:
+                        self.local_block = l
+                        l = readable_price(l, d=0, show_decimals=False)
                     log.info(f"{prefix}: {l}")
-                    self.local_block = l
                     self.attach_prompt_found = False
                     return
                 if l == ">":

@@ -1,5 +1,4 @@
-from pymap.tools.utils import is_signer
-import logging as log
+from pymap.tools.utils import log, readable_price
 
 
 class AtlasAttachMethods:
@@ -23,8 +22,6 @@ class AtlasAttachMethods:
 
         msg = f"Block Number for {args[-1]}:  "
 
-        log.info(args)
-
         self.run_method(
             "",
             context,
@@ -33,4 +30,5 @@ class AtlasAttachMethods:
             std_in=f"{method}\n",
             isAttach=True,
             prefix=msg,
+            localBlock=True,
         )
