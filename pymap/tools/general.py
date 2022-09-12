@@ -3,6 +3,7 @@ from pymap.tools.key_from_keystore import pk_from_store
 from pymap.tools.block_epoch_utils import time_to_next_block
 from pymap.includes.templates.systemd import monitorService
 from pymap.tools.create_service import create_systemd
+from pymap.tools.utils import log, readable_price
 
 
 class General:
@@ -45,8 +46,8 @@ class General:
         local_block = int(self.local_block)
         match = local_block == rpc_block
         msg = f"""
-        Local Block Number: {local_block}
-        RPC Block Number:   {rpc_block}       
+        Local Block Number: {readable_price(local_block, d=0, show_decimals=False)}
+        RPC Block Number:   {readable_price(rpc_block, d=0, show_decimals=False)}       
         """
         synced = f"Blocks Synced:      {self.red_or_green(match)} "
         print(self.star_surround(msg + synced))
@@ -57,11 +58,11 @@ class General:
         bpe = int(self.blocks_per_epoch)
         t, epoch, next_epoch = time_to_next_block(current_block, bpe)
         msg = f"""
-        Current Block: {current_block}
+        Current Block: {readable_price(current_block, d=0, show_decimals=False)}
 
         Current Epoch: {epoch}
         
-        Next Epoch:    {epoch+1} starts @ block {next_epoch} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
+        Next Epoch:    {epoch+1} starts @ block {readable_price(next_epoch, d=0, show_decimals=False)} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
         """
         print(self.star_surround(msg))
         return epoch

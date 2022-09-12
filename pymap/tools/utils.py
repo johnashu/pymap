@@ -13,16 +13,22 @@ def round_down(amount: str, decimals: int) -> float:
     return float(rounded)
 
 
-def readable_price(num, d: int = 18, show_decimals=True, print_res=True) -> str:
+def readable_price(
+    num, d: int = 18, dp: int = 4, show_decimals=True, print_res=True
+) -> str:
     temp = []
     c = 1
     try:
-        main, decimals = f"{int(num) / 10 ** d:.{d}f}".split(".")
-    except ValueError:
+        if d > 0:
+            main, decimals = f"{int(num) / 10 ** d:.{d}f}".split(".")
+        else:
+            main, decimals = str(num), ""
+    except ValueError as e:
+        print(e)
         return float(num)
 
-    for d in reversed(main):
-        temp.insert(0, d)
+    for r in reversed(main):
+        temp.insert(0, r)
         if c == 3:
             temp.insert(0, ",")
             c = 1
@@ -39,6 +45,12 @@ def readable_price(num, d: int = 18, show_decimals=True, print_res=True) -> str:
 
     if print_res:
         log.info(rtn_str)
+
+    if d > 0:
+        before_dec, after_dec = rtn_str.split(".")
+        if float(after_dec) != 0.0:
+            return f"{before_dec}.{after_dec[:dp]}"
+        return before_dec
     return rtn_str
 
 

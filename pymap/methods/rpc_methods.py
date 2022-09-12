@@ -3,7 +3,7 @@ from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
-from pymap.tools.utils import log
+from pymap.tools.utils import log, readable_price
 
 
 class RpcMethods(RpcRequest):
@@ -144,7 +144,8 @@ class RpcMethods(RpcRequest):
                 "default_address"
             ]
         balance = self._get_balance(address)
-        log.info(f"Balance of Address  {address}  ::  {balance}  MAP")
+        # log readable but return int.
+        log.info(f"Balance of Address  {address}  ::  {readable_price(balance)}  MAP")
         return balance
 
     def check_if_selected(self, validator: str = "") -> bool:
