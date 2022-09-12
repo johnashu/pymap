@@ -27,6 +27,8 @@ run `start_tool.py` to get started..
 
 # Service control.
 
+Create a service from the menu or manually using the sample below.
+
 ```bash
 cat<<-EOF > /etc/systemd/system/atlasNode.service
 [Unit]
