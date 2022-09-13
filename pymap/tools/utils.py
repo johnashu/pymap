@@ -14,7 +14,7 @@ def round_down(amount: str, decimals: int) -> float:
 
 
 def readable_price(
-    num, d: int = 18, dp: int = 4, show_decimals=True, print_res=True
+    num, d: int = 18, dp: int = 4, show_decimals=True, print_res=False
 ) -> str:
     temp = []
     c = 1
