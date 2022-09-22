@@ -27,6 +27,7 @@ menu_items = {
     "Block Number of Network from RPC": "get_block_number",
     "Block Number of Local Node": "get_eth_block_number_from_node",
     "Compare Local / RPC Block Number": "compare_block_numbers",
+    "Get Local Peer Count": "get_peer_count",
     "Get Validator Reward Info": "get_validator_reward_info",
     "Get Validator Information": "get_validator",
     "Check if Elected": "check_if_selected",

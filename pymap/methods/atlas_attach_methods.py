@@ -13,6 +13,25 @@ class AtlasAttachMethods:
         ipc = f"{keystore.split('keystore')[0]}atlas.ipc"
         return [attach, ipc]
 
+    # TODO: Below methods are not DRY.. 
+    def get_peer_count(self, context: dict = dict(keystore=str())) -> None:
+        context.update(self.handle_input(context))
+        args = self.prepare_attach(context["keystore"])
+        method = 'admin.peers.length'
+
+        msg = f"Number of connected Peers:  "
+
+        self.run_method(
+            "",
+            context,
+            args=args,
+            prog="atlas",
+            std_in=f"{method}\n",
+            isAttach=True,
+            prefix=msg,
+            localBlock=False,
+        )
+
     def get_eth_block_number_from_node(
         self, context: dict = dict(keystore=str())
     ) -> None:
