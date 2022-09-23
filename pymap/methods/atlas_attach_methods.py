@@ -28,7 +28,7 @@ class AtlasAttachMethods:
             prog="atlas",
             std_in=f"{method}\n",
             isAttach=True,
-            prefix=msg + f"for {args[-1]}:  ",
+            prefix=msg + f"for {args[-1]}",
             localBlock=localBlock,
         )
 
