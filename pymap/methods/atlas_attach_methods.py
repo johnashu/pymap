@@ -1,26 +1,26 @@
 from pymap.tools.utils import log, readable_price
+import inspect
 
 
 class AtlasAttachMethods:
+    """Class method names are named using the attach method but swapping . for _
+    handle_attach will convert the class method name to the attach method name
+    """
 
     local_block = 0
 
     def __init__(self, **kw) -> None:
         super(AtlasAttachMethods, self).__init__(**kw)
 
-    def prepare_attach(self, keystore: str) -> list:
+    def handle_attach(self, context: dict, msg: str, localBlock: bool = False) -> None:
+        method = inspect.stack()[1][3].replace("_", ".")
         attach = "attach"
+        keystore = context.get("keystore")
+        if not keystore:
+            log.error(f"No Keystore Found!")
+            return
         ipc = f"{keystore.split('keystore')[0]}atlas.ipc"
-        return [attach, ipc]
-
-    # TODO: Below methods are not DRY.. 
-    def get_peer_count(self, context: dict = dict(keystore=str())) -> None:
-        context.update(self.handle_input(context))
-        args = self.prepare_attach(context["keystore"])
-        method = 'admin.peers.length'
-
-        msg = f"Number of connected Peers:  "
-
+        args = [attach, ipc]
         self.run_method(
             "",
             context,
@@ -28,26 +28,16 @@ class AtlasAttachMethods:
             prog="atlas",
             std_in=f"{method}\n",
             isAttach=True,
-            prefix=msg,
-            localBlock=False,
+            prefix=msg + f"for {args[-1]}:  ",
+            localBlock=localBlock,
         )
 
-    def get_eth_block_number_from_node(
-        self, context: dict = dict(keystore=str())
-    ) -> None:
+    def admin_peers_length(self, context: dict = dict(keystore=str())) -> None:
         context.update(self.handle_input(context))
-        args = self.prepare_attach(context["keystore"])
-        method = "eth.blockNumber"
+        msg = f"Number of connected Peers "
+        self.handle_attach(context, msg)
 
-        msg = f"Block Number for {args[-1]}:  "
-
-        self.run_method(
-            "",
-            context,
-            args=args,
-            prog="atlas",
-            std_in=f"{method}\n",
-            isAttach=True,
-            prefix=msg,
-            localBlock=True,
-        )
+    def eth_blockNumber(self, context: dict = dict(keystore=str())) -> None:
+        context.update(self.handle_input(context))
+        msg = f"Block Number "
+        self.handle_attach(context, msg, localBlock=True)

@@ -41,7 +41,7 @@ class General:
                 self.error_input()
 
     def compare_block_numbers(self) -> tuple:
-        self.get_eth_block_number_from_node()
+        self.eth_blockNumber()
         rpc_block = int(self.get_block_number())
         local_block = int(self.local_block)
         match = local_block == rpc_block
