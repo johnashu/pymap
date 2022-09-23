@@ -81,6 +81,6 @@ run monitor to check.  It will always send an email when starting
 
 Select option  3 from the title screen to create and run monitor service
 
-> Vote / Stake with Maffaz Node: https://staking.maplabs.io/#/login?redirect=%2FaddVote%2F0x1C45F8a4C8b34ecf5Ee2F6208896B782D04FE006
+- Vote / Stake with Maffaz Node: https://staking.maplabs.io/#/login?redirect=%2FaddVote%2F0x1C45F8a4C8b34ecf5Ee2F6208896B782D04FE006
 
-> Donations welcome: 0x4F35285F1c387394197A0cdeA16D3a0eAA2c58F5
+- Donations welcome: 0x4F35285F1c387394197A0cdeA16D3a0eAA2c58F5

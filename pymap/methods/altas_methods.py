@@ -14,6 +14,16 @@ class AtlasMethods:
     def __init__(self, **kw) -> None:
         super(AtlasMethods, self).__init__(**kw)
 
+    def get_atlas_version(self) -> None:
+        args = ["version"]
+        self.run_method(
+            "",
+            {},
+            args=args,
+            prog="atlas",
+        )
+
+
     def new_account(self, context: dict = dict(datadir=str())) -> None:
         context.update(self.handle_input(context))
         pw1, pw2 = "1", "2"

@@ -1,5 +1,6 @@
 menu_items = {
     "List / Update Input Data": "display_and_update_env",
+    "Atlas Version Info": "get_atlas_version",
     "Check Vote Statistics": "get_total_votes_for_eligible_validator",
     "Create New Keystore Address": "new_account",
     "Create New Account": "create_account",
