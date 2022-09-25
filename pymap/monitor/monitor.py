@@ -51,7 +51,8 @@ class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
         info_dict, info_str = self.get_commitee_info_by_address(address, show=False)
         uptime = info_dict.get("upTime")
         if uptime:
-            if float(uptime) < float(alert_envs.ACCEPTABLE_UPTIME):
+            uptime = round(float(uptime), 2)
+            if uptime < float(alert_envs.ACCEPTABLE_UPTIME):
                 return False, info_str, uptime
         return True, info_str, uptime
 
@@ -69,7 +70,7 @@ class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
                     alert_msg = f"Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n\n{msg}"
 
                     uptime_res, info_str, uptime = self.check_uptime()
-                    alert_msg += f"Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}\n\nFull Data: {info_str}"
+                    alert_msg += f"Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
 
                     if not uptime_res:
                         problem = True
