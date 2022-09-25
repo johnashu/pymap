@@ -67,10 +67,10 @@ class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
                     if not sync_res:
                         problem = True
 
-                    alert_msg = f"Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n\n{msg}"
+                    alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n"
 
                     uptime_res, info_str, uptime = self.check_uptime()
-                    alert_msg += f"Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
+                    alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
 
                     if not uptime_res:
                         problem = True
