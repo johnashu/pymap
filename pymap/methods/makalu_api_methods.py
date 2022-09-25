@@ -122,20 +122,23 @@ class MakaluApiMethods(RpcRequest):
 
         if validator_info:
             validator_info = validator_info.get("committeeBasicInfo")
+
+            meta = {
+                "voteReward": (None, "%", True),
+                "lockedAmount": (None, None, True),
+                "votePercent": (None, "%", False),
+                "version": (" Epoch", None, False),
+                "upTime": (None, "%", False),
+                "blockNumber": (None, "", True),
+                "votedAmount": (None, "", True),
+            }
+
+            ignore = "pk1, pk2"
+
+            res, msg = self.display_dict(
+                [validator_info], meta=meta, ignore=ignore, show=show
+            )
             if show:
-                meta = {
-                    "voteReward": (None, "%", True),
-                    "lockedAmount": (None, None, True),
-                    "votePercent": (None, "%", False),
-                    "version": (" Epoch", None, False),
-                    "upTime": (None, "%", False),
-                    "blockNumber": (None, "", True),
-                    "votedAmount": (None, "", True),
-                }
-
-                ignore = "pk1, pk2"
-
-                res, msg = self.display_dict([validator_info], meta=meta, ignore=ignore)
                 if not res:
                     print(f"Error with displaying:  {validator_info}")
                 print(f"Information for Validator [ {address} ]\n")

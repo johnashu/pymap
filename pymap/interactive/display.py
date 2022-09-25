@@ -140,7 +140,9 @@ class PrintStuff:
 
         return max_len
 
-    def display_dict(self, items: list, meta: dict = {}, ignore: tuple = ()) -> None:
+    def display_dict(
+        self, items: list, meta: dict = {}, ignore: tuple = (), show: bool = True
+    ) -> None:
         """
         Expects a list of dictionaries to display.
         meta should contain {name: (pre, post, readable price)} - i.e.
@@ -173,6 +175,7 @@ class PrintStuff:
                     v = round(float(v), 2)
                 v = f" {pre} {v}{post}"
                 msg += f"{k:<{c}} :: {v:<{c}}\n"
-            self.star_surround(msg)
+            if show:
+                self.star_surround(msg)
             rtn_str += msg
         return True, rtn_str
