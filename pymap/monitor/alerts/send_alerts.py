@@ -9,8 +9,8 @@ class Alerts(AlertsBase):
 
     hostname = socket.gethostname()
 
-    def build_send_error_message(self, *a, **kw) -> None:
-        err_msg = self.build_error_message(*a, **kw)
+    def build_send_error_message(self, err_msg, *a, **kw) -> None:
+        # err_msg = self.build_error_message(*a, **kw)
         self.send_alert(
             f"Problem With Node -- {self.hostname}",
             err_msg,
@@ -19,16 +19,16 @@ class Alerts(AlertsBase):
             f"Problem With Node -- {self.hostname}",
         )
 
-    def build_error_message(
-        self, msg: str, blocks: int, epoch: int, uptime: float = 0.0
-    ):
-        try:
-            html = f"""\t\tEpoch: {epoch}\n\t\tDifference: {blocks}\n\n{msg}"""
-        except KeyError as e:
-            msg = f"Problem Sending alert [ build_error_message ] {e}"
-            log.error(msg)
-            return msg
-        return html
+    # def build_error_message(
+    #     self, msg: str, blocks: int, epoch: int, uptime: float = 0.0
+    # ):
+    #     try:
+    #         html = f"""\t\tEpoch: {epoch}\n\t\tDifference: {blocks}\n\n{msg}"""
+    #     except KeyError as e:
+    #         msg = f"Problem Sending alert [ build_error_message ] {e}"
+    #         log.error(msg)
+    #         return msg
+    #     return html
 
     def generic_error(self, e: str):
         self.send_alert(

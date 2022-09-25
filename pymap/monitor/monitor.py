@@ -57,30 +57,36 @@ class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
 
     def start_monitor(self) -> None:
         while 1:
+            problem = False
             try:
                 if self.is_time_to_check():
                     epoch = self.get_epoch_data()
                     _, rpc_block, local_block, msg = self.compare_block_numbers()
-                    res, synced = self.check_sync(rpc_block, local_block)
-                    if res:
-                        alert_msg = f"Node Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n\n"
+                    sync_res, synced = self.check_sync(rpc_block, local_block)
+                    if not sync_res:
+                        problem = True
 
-                        res, info_str, uptime = self.check_uptime()
-                        if res:
-                            alert_msg += f"Node Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}\n{msg}\n\n{info_str}"
+                    alert_msg = f"Node Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n\n"
 
-                            self.times_sent = self.happy_alert(
-                                self.times_sent,
-                                epoch,
-                                alert_msg,
-                                first_run=self.first_run,
-                            )
-                        else:
-                            self.build_send_error_message(
-                                alert_msg, synced, epoch, uptime=uptime
-                            )
+                    uptime_res, info_str, uptime = self.check_uptime()
+                    alert_msg += f"Node Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}\n{msg}\n\n{info_str}"
+
+                    if not uptime_res:
+                        problem = True
+
                     else:
-                        self.build_send_error_message(msg, synced, epoch)
+                        self.build_send_error_message(alert_msg)
+
+                    if problem:
+                        self.build_send_error_message(alert_msg)
+                    else:
+                        self.times_sent = self.happy_alert(
+                            self.times_sent,
+                            epoch,
+                            alert_msg,
+                            first_run=self.first_run,
+                        )
+
                     self.first_run = False
 
             except Exception as e:

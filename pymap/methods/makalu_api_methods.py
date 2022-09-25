@@ -119,11 +119,9 @@ class MakaluApiMethods(RpcRequest):
             address = vals.get("default_address")
 
         validator_info = self._get_commitee_info_by_address(address)
-        
+
         if validator_info:
-            validator_info = validator_info.get(
-                "committeeBasicInfo"
-            )
+            validator_info = validator_info.get("committeeBasicInfo")
             if show:
                 meta = {
                     "voteReward": (None, "%", True),
