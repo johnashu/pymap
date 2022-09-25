@@ -114,7 +114,7 @@ class RpcMethods(RpcRequest):
     def get_block_number(self) -> int:
         block = int(self._get_block_number(), 16)
         print(
-            f"Current Block Number of {self._rpc_endpoint}  ::  [ {readable_price(block, d=0, show_decimals=False)} ]"
+            f"Current Block Number of {self._rpc_endpoint}  ::  [ {readable_price(num=block, d=0, show_decimals=False)} ]"
         )
         return block
 
@@ -125,7 +125,7 @@ class RpcMethods(RpcRequest):
             ]
         balance = self._get_balance(address)
         # log readable but return int.
-        print(f"Balance of Address  {address}  ::  {readable_price(balance)}  MAP")
+        print(f"Balance of Address  {address}  ::  {readable_price(num=balance)}  MAP")
         return balance
 
     def check_if_selected(self, validator: str = "") -> bool:

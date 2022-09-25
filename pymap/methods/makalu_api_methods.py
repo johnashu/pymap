@@ -62,7 +62,7 @@ class MakaluApiMethods(RpcRequest):
         pages_msg, m = self.calc_num_pages(page, size, rewards_list)
 
         if show:
-            meta = {"voterReward": ("Block: ", "", True)}
+            meta = {"voterReward": ("Block: ", "", True, {})}
 
             ignore = "rewardStr, voterRewardStr"
 
@@ -124,13 +124,13 @@ class MakaluApiMethods(RpcRequest):
             validator_info = validator_info.get("committeeBasicInfo")
 
             meta = {
-                "voteReward": (None, "%", True),
-                "lockedAmount": (None, None, True),
-                "votePercent": (None, "%", False),
-                "version": (" Epoch", None, False),
-                "upTime": (None, "%", False),
-                "blockNumber": (None, "", True),
-                "votedAmount": (None, "", True),
+                "voteReward": (None, "%", True, {}),
+                "lockedAmount": (None, None, True, dict(show_decimals=False)),
+                "votePercent": (None, "%", False, {}),
+                "version": (" Epoch", None, False, {}),
+                "upTime": (None, "%", False, {}),
+                "blockNumber": (None, "", True, dict(d=0, show_decimals=False)),
+                "votedAmount": (None, "", True, dict(show_decimals=False)),
             }
 
             ignore = "pk1, pk2"

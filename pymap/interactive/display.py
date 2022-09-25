@@ -167,14 +167,22 @@ class PrintStuff:
                 if k in mulitply:
                     v = int(v) * 100
 
-                pre, post, readable = meta.get(k) if meta.get(k) else ("", "", False)
+                pre, post, readable, kw = (
+                    meta.get(k) if meta.get(k) else ("", "", False, {})
+                )
                 pre = pre if pre else ""
                 post = post if post else ""
-                v = readable_price(v) if readable else v
+
+                if readable:
+                    kwargs = {**{"num": v}, **kw} if kw else {"num": v}
+                    v = readable_price(**kwargs) if readable else v
+
                 if post == "%":
                     v = round(float(v), 2)
                 v = f" {pre} {v}{post}"
+
                 msg += f"{k:<{c}} :: {v:<{c}}\n"
+
             if show:
                 self.star_surround(msg)
             rtn_str += msg

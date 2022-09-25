@@ -1,0 +1,26 @@
+{
+    "code": 200,
+    "message": "success",
+    "data": {
+        "committeeBasicInfo": {
+            "voteReward": 150000000000000000,
+            "signAddress": "0xe4f125a24c0591795cc880852a8abc8395275939",
+            "lockedAmount": "1076255768800993855682627",
+            "accountAddress": "0x1c45f8a4c8b34ecf5ee2f6208896b782d04fe006",
+            "votePercent": 2.484700,
+            "version": 32,
+            "url": "",
+            "createdAt": "2022-09-25T08:30:40.156+0000",
+            "upTime": "72.5285947712418300",
+            "rewardAddress": null,
+            "pk2": "0x2c7ce19fdd20713e61f31a9b7c890aa4b41b7c7344b2108f98dfd2adf9ce11f91359456888a8f6c7a76fe09896e51052acd2cf569f85497e1f06f7c499f42c0a",
+            "blockNumber": 1554896,
+            "pk1": "0x2e4c42e5a4532700a5e47cf15d820b8373244620cd390b8045b2beffcf02c8e41fdc64b8a00592507c90a7c457fd89c54921de66b66a7114600b4e14bbc6f12d1c4d1417093e978003ae8f7f0c963b97806ad6fef4e63e827b4302c3c8a0475a1a011768daeb0c06c354a61a3fae74effc09765b571204c75410d73fcfa36d7d",
+            "name": "Maffaz",
+            "id": "633011b0941ad5c32c594c8a",
+            "votedAmount": "6159360106318287510981095",
+            "isValidator": 1,
+            "updatedAt": "2022-09-25T15:20:30.190+0000"
+        }
+    }
+}

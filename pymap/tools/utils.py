@@ -14,7 +14,7 @@ def round_down(amount: str, decimals: int) -> float:
 
 
 def readable_price(
-    num, d: int = 18, dp: int = 4, show_decimals=True, print_res=False
+    num: int = 0, d: int = 18, dp: int = 4, show_decimals=True, print_res=False
 ) -> str:
     temp = []
     c = 1
@@ -47,10 +47,11 @@ def readable_price(
         print(rtn_str)
 
     if d > 0:
-        before_dec, after_dec = rtn_str.split(".")
-        if float(after_dec) != 0.0:
-            return f"{before_dec}.{after_dec[:dp]}"
-        return before_dec
+        if "." in rtn_str:
+            before_dec, after_dec = rtn_str.split(".")
+            if float(after_dec) != 0.0:
+                return f"{before_dec}.{after_dec[:dp]}"
+            return before_dec
     return rtn_str
 
 
@@ -83,5 +84,10 @@ def take_input(_type: object, msg: str) -> None:
     return _in
 
 
-r = readable_price(6159360106318287510981095)
-print(r)
+# kw = dict(show_decimals=False)
+# n = 6159360106318287510981095
+# kw = {**{'num': 15123400000000000000}, **kw} if kw else {'num': n}
+# print(kw)
+
+# r = readable_price(**kw)
+# print(r)

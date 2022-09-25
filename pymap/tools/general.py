@@ -46,8 +46,8 @@ class General:
         local_block = int(self.local_block)
         match = local_block == rpc_block
         msg = f"""
-        Local Block Number: {readable_price(local_block, d=0, show_decimals=False)}
-        RPC Block Number:   {readable_price(rpc_block, d=0, show_decimals=False)}       
+        Local Block Number: {readable_price(num=local_block, d=0, show_decimals=False)}
+        RPC Block Number:   {readable_price(num=rpc_block, d=0, show_decimals=False)}       
         """
         synced = f"Blocks Synced:      {self.red_or_green(match)} "
         self.star_surround(msg + synced)
@@ -58,11 +58,11 @@ class General:
         bpe = int(self.blocks_per_epoch)
         t, epoch, next_epoch = time_to_next_block(current_block, bpe)
         msg = f"""
-        Current Block: {readable_price(current_block, d=0, show_decimals=False)}
+        Current Block: {readable_price(num=current_block, d=0, show_decimals=False)}
 
         Current Epoch: {epoch}
         
-        Next Epoch:    {epoch+1} starts @ block {readable_price(next_epoch, d=0, show_decimals=False)} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
+        Next Epoch:    {epoch+1} starts @ block {readable_price(num=next_epoch, d=0, show_decimals=False)} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
         """
         self.star_surround(msg)
         return epoch
