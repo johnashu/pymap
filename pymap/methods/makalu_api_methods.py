@@ -113,30 +113,34 @@ class MakaluApiMethods(RpcRequest):
     def get_commitee_info_by_address(
         self, address: str = "", show: bool = True
     ) -> dict:
+        msg = None
         if not address:
             vals = self.handle_input({"default_address": self.default_address})
             address = vals.get("default_address")
 
-        validator_info = self._get_commitee_info_by_address(address).get(
-            "committeeBasicInfo"
-        )
-        if show:
-            meta = {
-                "voteReward": (None, "%", True),
-                "lockedAmount": (None, None, True),
-                "votePercent": (None, "%", False),
-                "version": (" Epoch", None, False),
-                "upTime": (None, "%", False),
-                "blockNumber": (None, "", True),
-                "votedAmount": (None, "", True),
-            }
+        validator_info = self._get_commitee_info_by_address(address)
+        
+        if validator_info:
+            validator_info = validator_info.get(
+                "committeeBasicInfo"
+            )
+            if show:
+                meta = {
+                    "voteReward": (None, "%", True),
+                    "lockedAmount": (None, None, True),
+                    "votePercent": (None, "%", False),
+                    "version": (" Epoch", None, False),
+                    "upTime": (None, "%", False),
+                    "blockNumber": (None, "", True),
+                    "votedAmount": (None, "", True),
+                }
 
-            ignore = "pk1, pk2"
+                ignore = "pk1, pk2"
 
-            res, msg = self.display_dict([validator_info], meta=meta, ignore=ignore)
-            if not res:
-                print(f"Error with displaying:  {validator_info}")
-            print(f"Information for Validator [ {address} ]\n")
+                res, msg = self.display_dict([validator_info], meta=meta, ignore=ignore)
+                if not res:
+                    print(f"Error with displaying:  {validator_info}")
+                print(f"Information for Validator [ {address} ]\n")
         return validator_info, msg
 
     def calc_num_pages(self, page: int, size: int, d: dict) -> tuple:
