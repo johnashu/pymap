@@ -171,7 +171,7 @@ class PrintStuff:
                 v = readable_price(v) if readable else v
                 if post == "%":
                     v = round(float(v), 2)
-                v = f" {pre} {v} {post}"
+                v = f" {pre} {v}{post}"
                 msg += f"{k:<{c}} :: {v:<{c}}\n"
             self.star_surround(msg)
             rtn_str += msg
