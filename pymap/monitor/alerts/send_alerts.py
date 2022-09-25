@@ -12,16 +12,18 @@ class Alerts(AlertsBase):
     def build_send_error_message(self, *a, **kw) -> None:
         err_msg = self.build_error_message(*a, **kw)
         self.send_alert(
-            f"Node is Behind -- {self.hostname}",
+            f"Problem With Node -- {self.hostname}",
             err_msg,
             "danger",
             log.error,
-            f" Node is Behind -- {self.hostname}",
+            f"Problem With Node -- {self.hostname}",
         )
 
-    def build_error_message(self, msg: str, blocks: int, epoch: int):
+    def build_error_message(
+        self, msg: str, blocks: int, epoch: int, uptime: float = 0.0
+    ):
         try:
-            html = f"""\t\tEpoch: {epoch}\n\t\tSync Difference: {blocks}\n\n{msg}"""
+            html = f"""\t\tEpoch: {epoch}\n\t\tDifference: {blocks}\n\n{msg}"""
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
             log.error(msg)

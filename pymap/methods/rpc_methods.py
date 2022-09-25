@@ -1,5 +1,5 @@
 from os import read
-from pymap.rpc.request import RpcRequest, _default_endpoint, _default_timeout
+from pymap.rpc.request import RpcRequest
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
@@ -13,18 +13,9 @@ class RpcMethods(RpcRequest):
 
     def _get_block_number(
         self,
-        # endpoint=_default_endpoint,
-        timeout=_default_timeout,
     ) -> list:
         """
         Get the current block number.
-
-        Parameters
-        ----------
-        endpoint: :obj:`str`, optional
-            Endpoint to send request to
-        timeout: :obj:`int`, optional
-            Timeout in seconds
 
         Returns
         -------
@@ -41,28 +32,18 @@ class RpcMethods(RpcRequest):
         """
 
         method = "eth_blockNumber"
-        params = []
         try:
             return self.rpc_request(
-                method, params=params, endpoint=self.rpcaddr, timeout=timeout
+                method, endpoint=self._rpc_endpoint, timeout=self._timeout
             )["result"]
         except KeyError as e:
-            raise InvalidRPCReplyError(method, self.rpcaddr) from e
+            raise InvalidRPCReplyError(method, self._rpc_endpoint) from e
 
     def _get_validators(
         self,
-        # endpoint=_default_endpoint,
-        timeout=_default_timeout,
     ) -> list:
         """
         Determine whether we are selected as validators who can participate in block generation
-
-        Parameters
-        ----------
-        endpoint: :obj:`str`, optional
-            Endpoint to send request to
-        timeout: :obj:`int`, optional
-            Timeout in seconds
 
         Returns
         -------
@@ -80,20 +61,17 @@ class RpcMethods(RpcRequest):
         """
 
         method = "istanbul_getValidators"
-        params = []
         try:
             return self.rpc_request(
-                method, params=params, endpoint=self.rpcaddr, timeout=timeout
+                method, endpoint=self._rpc_endpoint, timeout=self._timeout
             )["result"]
         except KeyError as e:
-            raise InvalidRPCReplyError(method, self.rpcaddr) from e
+            raise InvalidRPCReplyError(method, self._rpc_endpoint) from e
 
     def _get_balance(
         self,
         address: str,
         block: str = "latest",
-        # endpoint=_default_endpoint,
-        timeout=_default_timeout,
     ) -> list:
         """
         Check Balance of address
@@ -102,10 +80,6 @@ class RpcMethods(RpcRequest):
         ----------
         address: :obj: str
             Address to check
-        endpoint: :obj:`str`, optional
-            Endpoint to send request to
-        timeout: :obj:`int`, optional
-            Timeout in seconds
 
         Returns
         -------
@@ -127,17 +101,20 @@ class RpcMethods(RpcRequest):
         try:
             return int(
                 self.rpc_request(
-                    method, params=params, endpoint=self.rpcaddr, timeout=timeout
+                    method,
+                    params=params,
+                    endpoint=self._rpc_endpoint,
+                    timeout=self._timeout,
                 )["result"],
                 16,
             )
         except KeyError as e:
-            raise InvalidRPCReplyError(method, self.rpcaddr) from e
+            raise InvalidRPCReplyError(method, self._rpc_endpoint) from e
 
     def get_block_number(self) -> int:
         block = int(self._get_block_number(), 16)
         print(
-            f"Current Block Number of {self.rpcaddr}  ::  [ {readable_price(block, d=0, show_decimals=False)} ]"
+            f"Current Block Number of {self._rpc_endpoint}  ::  [ {readable_price(block, d=0, show_decimals=False)} ]"
         )
         return block
 

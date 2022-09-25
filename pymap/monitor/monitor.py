@@ -4,12 +4,13 @@ import datetime
 
 from pymap.includes.config import alert_envs
 from pymap.methods.marker_methods import MarkerMethods
+from pymap.methods.makalu_api_methods import MakaluApiMethods
 from pymap.tools.general import General
 from pymap.monitor.alerts.send_alerts import Alerts
 from pymap.monitor.includes.monitor_setup import times_sent
 
 
-class Monitor(MarkerMethods, General, Alerts):
+class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
 
     start_time = datetime.datetime.now()
     current_block = 0
@@ -45,6 +46,14 @@ class Monitor(MarkerMethods, General, Alerts):
             return True, synced
         return False, synced
 
+    def check_uptime(self) -> tuple:
+        address = alert_envs.VALIDATOR_ADDRESS
+        info_dict, info_str = self.get_commitee_info_by_address(address, show=False)
+        uptime = info_dict.get("uptime")
+        if uptime < alert_envs.ACCEPTABLE_UPTIME:
+            return False, info_str, uptime
+        return False, info_str, uptime
+
     def start_monitor(self) -> None:
         while 1:
             try:
@@ -53,13 +62,22 @@ class Monitor(MarkerMethods, General, Alerts):
                     _, rpc_block, local_block, msg = self.compare_block_numbers()
                     res, synced = self.check_sync(rpc_block, local_block)
                     if res:
-                        self.times_sent = self.happy_alert(
-                            self.times_sent,
-                            epoch,
-                            f"Node Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}",
-                            first_run=self.first_run,
-                        )
+                        alert_msg = f"Node Sync Statistics\n\n        Epoch: {epoch}\n        Difference: {synced}\n\n"
 
+                        res, info_str, uptime = self.check_uptime()
+                        if res:
+                            alert_msg += f"Node Uptime Statistics\n\n        Epoch: {epoch}\n        Uptime: {uptime}\n{msg}\n\n{info_str}"
+
+                            self.times_sent = self.happy_alert(
+                                self.times_sent,
+                                epoch,
+                                alert_msg,
+                                first_run=self.first_run,
+                            )
+                        else:
+                            self.build_send_error_message(
+                                alert_msg, synced, epoch, uptime=uptime
+                            )
                     else:
                         self.build_send_error_message(msg, synced, epoch)
                     self.first_run = False

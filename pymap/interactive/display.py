@@ -1,7 +1,9 @@
+from typing import Type
 from colorama import Style, Fore, Back
 from pymap.tools.file_op import open_file
 from pymap.includes.mappings.menu_str import menu_items
 from pymap.includes.config import envs
+from pymap.tools.utils import readable_price
 
 
 class PrintStuff:
@@ -101,7 +103,7 @@ class PrintStuff:
         msg = f"""*  [999] Reboot Server             - {msg}
 *  [0] Exit Application            - Goodbye!
 """
-        print(self.star_surround(msg))
+        self.star_surround(msg)
 
     def list_envs(self) -> None:
         ignore = ("envFile",)
@@ -115,13 +117,62 @@ class PrintStuff:
                 print(f"* [{c:>2}] - {k:<20}  ::  {v}")
                 c += 1
         msg = f"{back}\n{backup}"
-        print(self.star_surround(msg))
+        self.star_surround(msg)
         return cur_list
 
     def star_surround(self, msg) -> None:
-        return f"\n{self.print_stars}\n\n{msg}\n\n{self.print_stars}"
+        print(f"\n{self.print_stars}\n\n{msg}\n\n{self.print_stars}")
 
     def red_or_green(self, check) -> str:
         if check:
             return "" + Fore.GREEN + str(check) + Style.RESET_ALL
         return "" + Fore.RED + str(check) + Style.RESET_ALL
+
+    def get_max_length_of_text(self, d: dict) -> int:
+        max_len = 0
+        for k, v in d.items():
+            try:
+                x = len(k)
+                if x > max_len:
+                    max_len = x
+            except TypeError:
+                continue
+
+        return max_len
+
+    def display_dict(self, items: list, meta: dict = {}, ignore: tuple = ()) -> None:
+        """
+        Expects a list of dictionaries to display.
+        meta should contain {name: (pre, post, readable price)} - i.e.
+        {"voteReward": (None, '%', True)}
+        """
+        # Items to multiply by 100 to create a proper % of 100%
+        mulitply = ("voteReward",)
+        rtn_str = ""
+        if not items:
+            return False, rtn_str
+
+        for d in items:
+            c = self.get_max_length_of_text(d)
+            msg = ""
+            for k, v in d.items():
+                if k in ignore:
+                    continue
+
+                if not v:
+                    v = "None"
+
+                if k in mulitply:
+                    v = int(v) * 100
+
+                pre, post, readable = meta.get(k) if meta.get(k) else ("", "", False)
+                pre = pre if pre else ""
+                post = post if post else ""
+                v = readable_price(v) if readable else v
+                if post == "%":
+                    v = round(float(v), 2)
+                v = f" {pre} {v} {post}"
+                msg += f"{k:<{c}} :: {v:<{c}}\n"
+            self.star_surround(msg)
+            rtn_str += msg
+        return True, rtn_str

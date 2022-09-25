@@ -23,7 +23,6 @@ class AtlasMethods:
             prog="atlas",
         )
 
-
     def new_account(self, context: dict = dict(datadir=str())) -> None:
         context.update(self.handle_input(context))
         pw1, pw2 = "1", "2"

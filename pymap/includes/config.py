@@ -38,6 +38,7 @@ ignore = ("binaries",)
 # )
 
 rpc_url = "https://poc3-rpc.maplabs.io"
+makalu_api_url = "https://makalu-api.mapscan.io/scan/"
 
-_default_endpoint = rpc_url
-_default_timeout = 30
+_rpc_endpoint = rpc_url
+_timeout = 30

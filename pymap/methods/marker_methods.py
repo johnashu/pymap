@@ -3,11 +3,18 @@ from pymap.interactive.display import PrintStuff
 from pymap.methods.altas_methods import AtlasMethods
 from pymap.methods.atlas_attach_methods import AtlasAttachMethods
 from pymap.methods.rpc_methods import RpcMethods
+from pymap.methods.makalu_api_methods import MakaluApiMethods
 from pymap.tools.handle_input import HandleInput
 
 
 class MarkerMethods(
-    RunProcess, PrintStuff, AtlasMethods, AtlasAttachMethods, RpcMethods, HandleInput
+    RunProcess,
+    PrintStuff,
+    AtlasMethods,
+    AtlasAttachMethods,
+    RpcMethods,
+    MakaluApiMethods,
+    HandleInput,
 ):
 
     base_fields = ("rpcaddr", "rpcport", "keystore", "password")

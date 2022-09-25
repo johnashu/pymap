@@ -1,19 +1,22 @@
 import json
+from textwrap import indent
 
 import requests
 import curlify
 
 from .exceptions import RequestsError, RequestsTimeoutError, RPCError
 
-from pymap.includes.config import *
-
-_default_endpoint = rpc_url
-_default_timeout = 30
+from pymap.includes.config import rpc_url, makalu_api_url
 
 
 class RpcRequest:
+
+    _rpc_endpoint = rpc_url
+    _makalu_api_url = makalu_api_url
+    _timeout = 30
+
     def base_request(
-        self, method, params=None, endpoint=_default_endpoint, timeout=_default_timeout
+        self, method, params=None, endpoint=None, timeout=None, call_type="POST"
     ) -> str:
         """
         Basic RPC request
@@ -43,25 +46,30 @@ class RpcRequest:
         RequestsError
             If other request error occured
         """
-        if params is None:
-            params = []
-        elif not isinstance(params, list):
-            raise TypeError(f"invalid type {params.__class__}")
-
+        headers = {"Content-Type": "application/json"}
+        kw = dict(
+            headers=headers,
+            timeout=timeout,
+            allow_redirects=True,
+        )
+        params = self.handle_request_type(list if call_type == "POST" else dict, params)
         try:
-            payload = {"id": "1", "jsonrpc": "2.0", "method": method, "params": params}
-            headers = {"Content-Type": "application/json"}
-            data = json.dumps(payload, indent=4)
 
-            resp = requests.request(
-                "POST",
-                endpoint,
-                headers=headers,
-                data=data,
-                timeout=timeout,
-                allow_redirects=True,
-            )
-            print(self.star_surround(curlify.to_curl(resp.request)))
+            if call_type == "POST":
+                payload = {
+                    "id": "1",
+                    "jsonrpc": "2.0",
+                    "method": method,
+                    "params": params,
+                }
+                kw["data"] = json.dumps(payload, indent=4)
+
+            elif call_type == "GET":
+                kw["params"] = params
+                endpoint = f"{endpoint}{method}"
+
+            resp = requests.request(call_type, endpoint, **kw)
+            self.star_surround(curlify.to_curl(resp.request))
             return resp.content
         except requests.exceptions.Timeout as err:
             raise RequestsTimeoutError(endpoint) from err
@@ -69,7 +77,7 @@ class RpcRequest:
             raise RequestsError(endpoint) from err
 
     def rpc_request(
-        self, method, params=None, endpoint=_default_endpoint, timeout=_default_timeout
+        self, method, params=None, endpoint=None, timeout=None, call_type: str = "POST"
     ) -> dict:
         """
         RPC request
@@ -105,7 +113,7 @@ class RpcRequest:
         --------
         base_request
         """
-        raw_resp = self.base_request(method, params, endpoint, timeout)
+        raw_resp = self.base_request(method, params, endpoint, timeout, call_type)
 
         try:
             resp = json.loads(raw_resp)
@@ -114,3 +122,10 @@ class RpcRequest:
             return resp
         except json.decoder.JSONDecodeError as err:
             raise RPCError(method, endpoint, raw_resp) from err
+
+    def handle_request_type(self, obj: object, params: list) -> object:
+        if not params:
+            params = obj()
+        elif not isinstance(params, obj):
+            raise TypeError(f"invalid type {params.__class__}")
+        return params

@@ -50,7 +50,7 @@ class General:
         RPC Block Number:   {readable_price(rpc_block, d=0, show_decimals=False)}       
         """
         synced = f"Blocks Synced:      {self.red_or_green(match)} "
-        print(self.star_surround(msg + synced))
+        self.star_surround(msg + synced)
         return match, rpc_block, local_block, msg
 
     def get_epoch_data(self) -> None:
@@ -64,7 +64,7 @@ class General:
         
         Next Epoch:    {epoch+1} starts @ block {readable_price(next_epoch, d=0, show_decimals=False)} in {t.days} day(s) | {t.hours} hour(s) | {t.minutes} min(s) | {t.seconds} sec(s)
         """
-        print(self.star_surround(msg))
+        self.star_surround(msg)
         return epoch
 
     def setup_monitor_service(

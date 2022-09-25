@@ -81,3 +81,7 @@ def take_input(_type: object, msg: str) -> None:
         if p:
             break
     return _in
+
+
+r = readable_price(6159360106318287510981095)
+print(r)
