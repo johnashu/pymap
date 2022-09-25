@@ -122,9 +122,12 @@ class MakaluApiMethods(RpcRequest):
 
         if validator_info:
             validator_info = validator_info.get("committeeBasicInfo")
+            apy = self.get_apy(address)
+            validator_info.update({"apy": apy})
 
             meta = {
                 "voteReward": (None, "%", True, {}),
+                "apy": (None, "%", False, {}),
                 "lockedAmount": (None, None, True, dict(show_decimals=False)),
                 "votePercent": (None, "%", False, {}),
                 "version": (" Epoch", None, False, {}),

@@ -39,6 +39,7 @@ ignore = ("binaries",)
 
 rpc_url = "https://poc3-rpc.maplabs.io"
 makalu_api_url = "https://makalu-api.mapscan.io/scan/"
+staking_graph_url = "https://staking.maplabs.io/graphql"
 
 _rpc_endpoint = rpc_url
 _timeout = 30

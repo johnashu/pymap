@@ -4,6 +4,7 @@ from pymap.methods.altas_methods import AtlasMethods
 from pymap.methods.atlas_attach_methods import AtlasAttachMethods
 from pymap.methods.rpc_methods import RpcMethods
 from pymap.methods.makalu_api_methods import MakaluApiMethods
+from pymap.methods.staking_methods import StakingGraph
 from pymap.tools.handle_input import HandleInput
 
 
@@ -14,6 +15,7 @@ class MarkerMethods(
     AtlasAttachMethods,
     RpcMethods,
     MakaluApiMethods,
+    StakingGraph,
     HandleInput,
 ):
 

@@ -6,17 +6,24 @@ import curlify
 
 from .exceptions import RequestsError, RequestsTimeoutError, RPCError
 
-from pymap.includes.config import rpc_url, makalu_api_url
+from pymap.includes.config import rpc_url, makalu_api_url, staking_graph_url
 
 
 class RpcRequest:
 
     _rpc_endpoint = rpc_url
     _makalu_api_url = makalu_api_url
+    _staking_graph_url = staking_graph_url
     _timeout = 30
 
     def base_request(
-        self, method, params=None, endpoint=None, timeout=None, call_type="POST"
+        self,
+        method,
+        params=None,
+        endpoint=None,
+        timeout=None,
+        call_type="POST",
+        graph: bool = False,
     ) -> str:
         """
         Basic RPC request
@@ -52,16 +59,21 @@ class RpcRequest:
             timeout=timeout,
             allow_redirects=True,
         )
-        params = self.handle_request_type(list if call_type == "POST" else dict, params)
+        params = self.handle_request_type(
+            list if call_type == "POST" and not graph else dict, params
+        )
         try:
 
             if call_type == "POST":
-                payload = {
-                    "id": "1",
-                    "jsonrpc": "2.0",
-                    "method": method,
-                    "params": params,
-                }
+                if not graph:
+                    payload = {
+                        "id": "1",
+                        "jsonrpc": "2.0",
+                        "method": method,
+                        "params": params,
+                    }
+                else:
+                    payload = params
                 kw["data"] = json.dumps(payload, indent=4)
 
             elif call_type == "GET":
@@ -77,7 +89,13 @@ class RpcRequest:
             raise RequestsError(endpoint) from err
 
     def rpc_request(
-        self, method, params=None, endpoint=None, timeout=None, call_type: str = "POST"
+        self,
+        method,
+        params=None,
+        endpoint=None,
+        timeout=None,
+        call_type: str = "POST",
+        graph: bool = False,
     ) -> dict:
         """
         RPC request
@@ -113,7 +131,9 @@ class RpcRequest:
         --------
         base_request
         """
-        raw_resp = self.base_request(method, params, endpoint, timeout, call_type)
+        raw_resp = self.base_request(
+            method, params, endpoint, timeout, call_type, graph
+        )
 
         try:
             resp = json.loads(raw_resp)
