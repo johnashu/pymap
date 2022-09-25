@@ -49,10 +49,11 @@ class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
     def check_uptime(self) -> tuple:
         address = alert_envs.VALIDATOR_ADDRESS
         info_dict, info_str = self.get_commitee_info_by_address(address, show=False)
-        uptime = info_dict.get("uptime")
-        if uptime < alert_envs.ACCEPTABLE_UPTIME:
-            return False, info_str, uptime
-        return False, info_str, uptime
+        uptime = info_dict.get("upTime")
+        if uptime:
+            if float(uptime) < float(alert_envs.ACCEPTABLE_UPTIME):
+                return False, info_str, uptime
+        return True, info_str, uptime
 
     def start_monitor(self) -> None:
         while 1:
