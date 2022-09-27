@@ -55,11 +55,11 @@ def readable_price(
     return rtn_str
 
 
-def askYesNo(question: str) -> bool:
-    YesNoAnswer = ""
-    while not YesNoAnswer.startswith(("Y", "N")):
-        YesNoAnswer = input(f"{question} - yes / no): ").upper()
-    if YesNoAnswer.startswith("Y"):
+def askYesNo(question: str, YesNoAnswer="") -> bool:
+    if not YesNoAnswer:
+        while not YesNoAnswer.startswith(("Y", "N")):
+            YesNoAnswer = input(f"{question} - yes / no): ").upper()
+    if YesNoAnswer.upper().startswith("Y"):
         return True
     return False
 
@@ -82,12 +82,3 @@ def take_input(_type: object, msg: str) -> None:
         if p:
             break
     return _in
-
-
-# kw = dict(show_decimals=False)
-# n = 6159360106318287510981095
-# kw = {**{'num': 15123400000000000000}, **kw} if kw else {'num': n}
-# print(kw)
-
-# r = readable_price(**kw)
-# print(r)

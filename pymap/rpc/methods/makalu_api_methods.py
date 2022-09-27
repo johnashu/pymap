@@ -4,7 +4,7 @@ from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
-from pymap.tools.utils import readable_price
+from pymap.tools.utils import readable_price, askYesNo
 import math
 
 
@@ -48,15 +48,16 @@ class MakaluApiMethods(RpcRequest):
         address: str = "",
         page: int = 1,
         size: int = 2,
-        paginate: bool = True,
+        paginate: str = "Yes",
         show: bool = True,
     ) -> int:
         if not address:
             vals = self.handle_input(
-                {"default_address": self.default_address, "pagniate": paginate}
+                {"default_address": self.default_address, "paginate": paginate}
             )
             address = vals.get("default_address")
             paginate = vals.get("paginate")
+            print("paginate", paginate)
 
         rewards_list = self._get_rewards_list(address, page=page, size=size)
         pages_msg, m = self.calc_num_pages(page, size, rewards_list)
@@ -69,14 +70,14 @@ class MakaluApiMethods(RpcRequest):
             self.display_dict(rewards_list["list"], meta=meta, ignore=ignore)
             print(f"Rewards for [ {address} ]\n{pages_msg}")
 
-        self.run_pagniate(
-            self.get_rewards_list,
-            m,
-            *(address,),
-            page=page,
-            size=size,
-            paginate=paginate,
-        )
+            self.run_pagniate(
+                self.get_rewards_list,
+                m,
+                *(address,),
+                page=page,
+                size=size,
+                paginate=paginate,
+            )
         return rewards_list
 
     def _get_commitee_info_by_address(self, address) -> list:
@@ -156,9 +157,10 @@ class MakaluApiMethods(RpcRequest):
         )
 
     def run_pagniate(
-        self, func, m, *args, page: int = 1, size: int = 2, paginate: bool = True, **kw
+        self, func, m, *args, page: int = 1, size: int = 2, paginate: str = "Yes", **kw
     ) -> None:
         next_page = page + 1
-        if paginate and next_page <= m:
+        do_paginate = askYesNo("", paginate)
+        if do_paginate and next_page <= m:
             input(f"Press any key to load page {next_page}")
             return func(*args, page=next_page, size=size, paginate=paginate, **kw)

@@ -1,6 +1,6 @@
 from pymap.includes.config import envs, rpc_url
 from pymap.interactive.interactive import InteractiveSetup
-from pymap.methods.rpc_methods import RpcMethods
+from pymap.rpc.methods.rpc_methods import RpcMethods
 
 from pymap.tools.create_service import create_systemd
 
