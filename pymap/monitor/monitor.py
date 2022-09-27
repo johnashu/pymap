@@ -42,9 +42,7 @@ class Monitor(BaseMixin, General, Alerts):
 
     def check_sync(self, rpc, local) -> bool:
         synced = int(rpc) - int(local)
-        if synced <= int(alert_envs.ACCEPTABLE_RANGE):
-            return True, synced
-        return False, synced
+        return synced <= int(alert_envs.ACCEPTABLE_RANGE), synced
 
     def check_uptime(self) -> tuple:
         address = alert_envs.VALIDATOR_ADDRESS
@@ -52,19 +50,15 @@ class Monitor(BaseMixin, General, Alerts):
             address, show=False
         )
         uptime = raw.get("upTime")
-        if uptime:
-            uptime = round(float(uptime), 2)
-            if uptime < float(alert_envs.ACCEPTABLE_UPTIME):
-                return False, info_str, info_dict, uptime
-        return True, info_str, info_dict, uptime
+        uptime = round(float(uptime), 2)
+        return uptime < float(alert_envs.ACCEPTABLE_UPTIME), info_str, info_dict, uptime
 
     def check_peers(self) -> tuple:
         self.admin_peers_length()
-        peers = self.num_peers
+        peers = int(self.num_peers)
         data = self.query_validator_data()
         total_validators = data.get("count")
-
-        return total_validators == peers, total_validators, peers
+        return peers >= int(alert_envs.ACCEPTABLE_PEERS), total_validators, peers
 
     def start_monitor(self) -> None:
         while 1:

@@ -23,7 +23,8 @@ class Alerts(AlertsBase):
     def dict_to_table(self, d: dict) -> str:
         table = []
         for k, v in d.items():
-            k = f'{k}:'
+            k = f"<p>{k}:</p>"
+            v = f"<p>{v}:</p>"
             if v == "title":
                 k = f"<p style='font-weight: bold;'>{k}</p>"
             if isinstance(v, (tuple, list, set)):
