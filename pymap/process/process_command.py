@@ -38,7 +38,7 @@ class RunProcess:
 
             if isAttach:
                 if self.attach_prompt_found:
-                    attachValue = l
+                    self.__dict__[attachValue] = l
                     if localBlock:
                         # self.local_block = l
                         l = readable_price(l, d=0, show_decimals=False)

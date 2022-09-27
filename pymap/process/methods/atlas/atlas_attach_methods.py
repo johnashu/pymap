@@ -39,11 +39,11 @@ class AtlasAttachMethods:
     def admin_peers_length(self, context: dict = dict(keystore=str())) -> None:
         context.update(self.handle_input(context))
         msg = f"Number of connected Peers "
-        self.handle_attach(context, msg, attachValue=self.num_peers)
+        self.handle_attach(context, msg, attachValue="num_peers")
 
     def eth_blockNumber(self, context: dict = dict(keystore=str())) -> None:
         context.update(self.handle_input(context))
 
         msg = f"Block Number "
 
-        self.handle_attach(context, msg, localBlock=True, attachValue=self.local_block)
+        self.handle_attach(context, msg, localBlock=True, attachValue="local_block")
