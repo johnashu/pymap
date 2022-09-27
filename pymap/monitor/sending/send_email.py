@@ -4,6 +4,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pymap.includes.config import *
 
+# <!--[if mso]>
+# <style type="text/css">
+# .tableClass {
+# margin: 0px 0px 0px 24px !important;
+
+# padding: 0px 0px 20px 0px !important;
+# }
+# </style>
+# <![endif]-->
+
 
 def send_email(subject: str, message: str) -> None:
     if not alert_envs.SEND_EMAIL:
