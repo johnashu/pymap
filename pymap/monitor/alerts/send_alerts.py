@@ -23,15 +23,15 @@ class Alerts(AlertsBase):
     def dict_to_table(self, d: dict) -> str:
         table = []
         for k, v in d.items():
+            k = f'{k}:'
             if v == "title":
                 k = f"<p style='font-weight: bold;'>{k}</p>"
-                v = f"<p style='font-weight: bold;'>{k}</p>"
             if isinstance(v, (tuple, list, set)):
                 v, res = v
                 if not res:
                     v = f"<p style='font-weight: bold;color:red'>{v}</p>"
                     k = f"<p style='font-weight: bold;color:red'>{k}</p>"
-            table.append([f'{k}:', v])
+            table.append([k, v])
         return tabulate(table, tablefmt="unsafehtml")
 
     def build_html_message(self, msg: str, d: dict = None):
