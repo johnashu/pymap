@@ -57,6 +57,7 @@ class Monitor(BaseMixin, General, Alerts):
         return True, info_str, uptime
 
     def check_peers(self) -> tuple:
+        self.admin_peers_length()
         peers = self.num_peers
         data = self.query_validator_data()
         total_validators = data.get("count")
@@ -73,8 +74,8 @@ class Monitor(BaseMixin, General, Alerts):
                     uptime_res, info_str, uptime = self.check_uptime()
                     peers_res, total_validators, num_peers = self.check_peers()
 
-                    alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n"
-                    alert_msg += f"\nNumber of Peers Connected:  {num_peers} / {total_validators} Peers\n"
+                    alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n\n"
+                    alert_msg += f"\n\nNumber of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
                     alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
 
                     problem = (
