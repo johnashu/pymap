@@ -26,9 +26,13 @@ class Alerts(AlertsBase):
             <tbody>                
                 """
         for k, v in d.items():
+            if isinstance(v, (tuple, list, set)):
+                v, res = v
             s = f"<td>{k}:</td><td>{v}</td>"
+            if not res:
+                s = f'<font color="red"><strong>{s}</strong></font>'
             if v == "":
-                s = space
+                s = space           
             table += f"<tr>{s}</tr>"
         table += """
             </tbody>

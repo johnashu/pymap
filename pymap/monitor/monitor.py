@@ -79,11 +79,11 @@ class Monitor(BaseMixin, General, Alerts):
                     msg_dict = {
                         "Node Statistics:": " ",
                         "Epoch": epoch,
-                        "Difference": synced,
+                        "Difference": (synced, sync_res),
                         "Local Block": local_block,
                         "RPC Block": rpc_block,
-                        "Connected Peers": f"{num_peers} / {total_validators}",
-                        "Uptime": f"{uptime}%",
+                        "Connected Peers": (f"{num_peers} / {total_validators}", peers_res),
+                        "Uptime": (f"{uptime}%", uptime_res),
                     }
                     ignore = (
                         "version",
