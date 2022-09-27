@@ -21,7 +21,6 @@ class Alerts(AlertsBase):
         )
 
     def dict_to_table(self, d: dict) -> str:
-
         table = []
         for k, v in d.items():
             if v == "title":
@@ -32,7 +31,7 @@ class Alerts(AlertsBase):
                 if not res:
                     v = f"<p style='font-weight: bold;color:red'>{v}</p>"
                     k = f"<p style='font-weight: bold;color:red'>{k}</p>"
-            table.append([k, v])
+            table.append([f'{k}:', v])
         return tabulate(table, tablefmt="unsafehtml")
 
     def build_html_message(self, msg: str, d: dict = None):

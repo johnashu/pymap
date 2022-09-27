@@ -82,8 +82,8 @@ class Monitor(BaseMixin, General, Alerts):
                         "Difference": (synced, sync_res),
                         "Local Block": local_block,
                         "RPC Block": rpc_block,
-                        "Connected Peers": (
-                            f"{num_peers} / {total_validators}",
+                        "Peers": (
+                            f"{num_peers} / {total_validators} Connected",
                             peers_res,
                         ),
                         "Uptime": (f"{uptime}%", uptime_res),
