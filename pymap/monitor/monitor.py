@@ -77,17 +77,13 @@ class Monitor(BaseMixin, General, Alerts):
                     peers_res, total_validators, num_peers = self.check_peers()
 
                     msg_dict = {
-                        "Sync Statistics:": " ",
+                        "Node Statistics:": " ",
                         "Epoch": epoch,
                         "Difference": synced,
-                        "sp1": "",
                         "Local Block": local_block,
                         "RPC Block": rpc_block,
-                        "sp2": "",
                         "Connected Peers": f"{num_peers} / {total_validators}",
-                        "upTime": f"{uptime}%",
-                        "sp3": "",
-                        "Full Data:": " ",
+                        "Uptime": f"{uptime}%",
                     }
                     ignore = (
                         "version",

@@ -26,8 +26,8 @@ class Alerts(AlertsBase):
             <tbody>                
                 """
         for k, v in d.items():
-            s = f"<td>{k}</td><td>{v}</td>"
-            if not v:
+            s = f"<td>{k}:</td><td>{v}</td>"
+            if v == "":
                 s = space
             table += f"<tr>{s}</tr>"
         table += """
