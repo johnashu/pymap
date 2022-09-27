@@ -33,15 +33,14 @@ class Alerts(AlertsBase):
                     v = f"<p style='font-weight: bold;color:red'>{v}</p>"
                     k = f"<p style='font-weight: bold;color:red'>{k}</p>"
             else:
-                v = f"<p>{v}:</p>"
+                v = f"<p>{v}</p>"
             table.append([k, v])
+        print(table)
         return tabulate(table, tablefmt="unsafehtml")
 
     def build_html_message(self, msg: str, d: dict = None):
         try:
             table = self.dict_to_table(d)
-            print(table)
-            print(d)
             return f"<html> <head></head><body>{table}</body></html>"
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
