@@ -10,15 +10,18 @@ def send_email(subject: str, message: str) -> None:
         print("Email sending not turned on, no email sent!")
         return
 
-    msg = MIMEMultipart()
+    msg = MIMEMultipart("related")
 
     msg["From"] = alert_envs.EMAIL_FROM
-
     msg["To"] = alert_envs.EMAIL_TO
     msg["Subject"] = subject
-    msg.attach(MIMEText(message))
 
+    # msg.attach(MIMEText(message))
     ServerConnect = False
+
+    html_output = f"<body>{message}</body>"
+
+    msg.attach(MIMEText(html_output, "html"))
 
     try:
         smtp_server = SMTP(alert_envs.EMAIL_SMTP, alert_envs.PORT)

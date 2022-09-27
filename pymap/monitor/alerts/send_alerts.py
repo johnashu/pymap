@@ -19,16 +19,37 @@ class Alerts(AlertsBase):
             f"Epoch: [ {epoch} ] Problem With Node -- {self.hostname}",
         )
 
-    # def build_error_message(
-    #     self, msg: str, blocks: int, epoch: int, uptime: float = 0.0
-    # ):
-    #     try:
-    #         html = f"""\t\tEpoch: {epoch}\n\t\tDifference: {blocks}\n\n{msg}"""
-    #     except KeyError as e:
-    #         msg = f"Problem Sending alert [ build_error_message ] {e}"
-    #         log.error(msg)
-    #         return msg
-    #     return html
+    def dict_to_table(self, d: dict) -> str:
+        table = """
+        <table border="1" class="dataframe">
+            <tbody>                
+                """
+        for k, v in d.items():
+            table += f"""
+            <tr>
+                <td>{k}</td>
+                <td>{v}</td>
+                </tr>
+                """
+        table += """
+            </tbody>
+            </table>
+        """
+        return table
+
+    def build_html_message(self, msg: str, d: dict = None):
+        table = ""
+        if d:
+            table = self.dict_to_table(d)
+
+        try:
+            message = msg.replace("\n", "<br>").replace('\t', '    ')
+            html = f"""{message}{table}"""
+        except KeyError as e:
+            msg = f"Problem Sending alert [ build_error_message ] {e}"
+            log.error(msg)
+            return msg
+        return html
 
     def generic_error(self, e: str):
         self.send_alert(

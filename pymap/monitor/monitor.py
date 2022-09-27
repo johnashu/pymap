@@ -53,7 +53,7 @@ class Monitor(BaseMixin, General, Alerts):
         if uptime:
             uptime = round(float(uptime), 2)
             if uptime < float(alert_envs.ACCEPTABLE_UPTIME):
-                return False, info_str, uptime
+                return False, info_str, info_dict, uptime
         return True, info_str, uptime
 
     def check_peers(self) -> tuple:
@@ -71,13 +71,14 @@ class Monitor(BaseMixin, General, Alerts):
                     epoch = self.get_epoch_data()
                     _, rpc_block, local_block, msg = self.compare_block_numbers()
                     sync_res, synced = self.check_sync(rpc_block, local_block)
-                    uptime_res, info_str, uptime = self.check_uptime()
+                    uptime_res, info_str, info_dict, uptime = self.check_uptime()
                     peers_res, total_validators, num_peers = self.check_peers()
 
                     alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n\n"
                     alert_msg += f"Number of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
-                    alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
-
+                    alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n"
+                    
+                    alert_msg = self.build_message(alert_msg, info_dict)
                     problem = (
                         True if False in (sync_res, uptime_res, peers_res) else False
                     )
