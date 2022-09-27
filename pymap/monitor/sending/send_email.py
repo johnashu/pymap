@@ -20,17 +20,19 @@ def send_email(subject: str, message: str) -> None:
         print("Email sending not turned on, no email sent!")
         return
 
-    msg = MIMEMultipart("related")
+    msg = MIMEMultipart("alternative")
 
     msg["From"] = alert_envs.EMAIL_FROM
     msg["To"] = alert_envs.EMAIL_TO
     msg["Subject"] = subject
 
-    # msg.attach(MIMEText(message))
     ServerConnect = False
 
-    html_output = f"<body>{message}</body>"
+    html_output = f"<html> <head></head><body>{message}</body></html>"
 
+    # # text must be the first one
+    # msg.attach(MIMEText(message, 'plain')) 
+    # html must be the last one
     msg.attach(MIMEText(html_output, "html"))
 
     try:
