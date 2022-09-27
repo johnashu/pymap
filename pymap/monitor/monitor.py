@@ -75,7 +75,7 @@ class Monitor(BaseMixin, General, Alerts):
                     peers_res, total_validators, num_peers = self.check_peers()
 
                     alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n\n"
-                    alert_msg += f"\n\nNumber of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
+                    alert_msg += f"Number of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
                     alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
 
                     problem = (
@@ -83,7 +83,7 @@ class Monitor(BaseMixin, General, Alerts):
                     )
 
                     if problem:
-                        self.build_send_error_message(alert_msg)
+                        self.build_send_error_message(alert_msg, epoch)
                     else:
                         self.times_sent = self.happy_alert(
                             self.times_sent,

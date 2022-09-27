@@ -20,6 +20,7 @@ def test_alert() -> None:
 if __name__ == "__main__":
     m = Monitor(**from_env)
     m.start_monitor()
+
     # print(m.check_peers())
 
     # test_alert()
