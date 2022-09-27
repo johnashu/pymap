@@ -34,7 +34,7 @@ class Alerts(AlertsBase):
 
             # Error here, highlight this row
             if not res:
-                s = f'<p style="color:red;"><strong>{s}</strong></p>'
+                s = f'<p color="red"><b>{s}</b></p>'
 
             if v == "":
                 s = space        

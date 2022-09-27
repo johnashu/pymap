@@ -77,7 +77,7 @@ class Monitor(BaseMixin, General, Alerts):
                     peers_res, total_validators, num_peers = self.check_peers()
 
                     msg_dict = {
-                        "Node Statistics:": " ",
+                        "Node Statistics": " ",
                         "Epoch": epoch,
                         "Difference": (synced, sync_res),
                         "Local Block": local_block,
