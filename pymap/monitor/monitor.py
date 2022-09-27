@@ -59,7 +59,7 @@ class Monitor(BaseMixin, General, Alerts):
     def check_peers(self) -> tuple:
         peers = self.num_peers
         data = self.query_validator_data()
-        total_validators = data["count"]
+        total_validators = data.get("count")
 
         return total_validators == peers, total_validators, peers
 
