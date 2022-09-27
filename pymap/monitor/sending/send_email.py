@@ -31,7 +31,7 @@ def send_email(subject: str, message: str) -> None:
     html_output = f"<html> <head></head><body>{message}</body></html>"
 
     # # text must be the first one
-    # msg.attach(MIMEText(message, 'plain')) 
+    # msg.attach(MIMEText(message, 'plain'))
     # html must be the last one
     msg.attach(MIMEText(html_output, "html"))
 
@@ -61,9 +61,3 @@ def send_email(subject: str, message: str) -> None:
 
 
 # send_email('VOLUME Resized', 'HELLO TEST')
-
-from tabulate import tabulate
-table = [["Sun",696000,1989100000],["Earth",6371,5973.6],
-         ["<p style='color:red'>Moon</p>",1737,73.5], 
-         ["Mars",3390,641.85]]
-print(tabulate(table, tablefmt='unsafehtml'))

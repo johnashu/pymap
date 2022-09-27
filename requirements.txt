@@ -3,3 +3,4 @@ colorama
 requests
 pycryptodome
 curlify
+tabulate
