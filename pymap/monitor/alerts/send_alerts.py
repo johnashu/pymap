@@ -29,7 +29,8 @@ class Alerts(AlertsBase):
             if isinstance(v, (tuple, list, set)):
                 v, res = v
                 if not res:
-                    v = f"<p style='color:red'>{v}</p>"
+                    v = f"<p style='font-weight: bold;color:red'>{v}</p>"
+                    k = f"<p style='font-weight: bold;color:red'>{k}</p>"
             table.append([k, v])
         return tabulate(table, tablefmt='unsafehtml')
 
