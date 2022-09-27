@@ -151,6 +151,7 @@ class PrintStuff:
         # Items to multiply by 100 to create a proper % of 100%
         mulitply = ("voteReward",)
         rtn_str = ""
+        rtn_dict = {}
         if not items:
             return False, rtn_str
 
@@ -182,8 +183,9 @@ class PrintStuff:
                 v = f" {pre} {v}{post}"
 
                 msg += f"{k:<{c}} :: {v:<{c}}\n"
+                rtn_dict[k] = v
 
             if show:
                 self.star_surround(msg)
             rtn_str += msg
-        return True, rtn_str
+        return True, rtn_str, rtn_dict

@@ -174,14 +174,14 @@ class MakaluApiMethods(RpcRequest):
 
             ignore = "pk1, pk2"
 
-            res, msg = self.display_dict(
+            res, msg, msg_dict = self.display_dict(
                 [validator_info], meta=meta, ignore=ignore, show=show
             )
             if show:
                 if not res:
                     print(f"Error with displaying:  {validator_info}")
                 print(f"Information for Validator [ {address} ]\n")
-        return validator_info, msg
+        return validator_info, msg, msg_dict
 
     def calc_num_pages(self, page: int, size: int, d: dict) -> tuple:
         total = d.get("total")

@@ -19,14 +19,13 @@ class Alerts(AlertsBase):
             f"Epoch: [ {epoch} ] Problem With Node -- {self.hostname}",
         )
 
-    def dict_to_table(self, d: dict, ignore:tuple = ()) -> str:
+    def dict_to_table(self, d: dict) -> str:
         table = """
         <table border="1" class="dataframe">
             <tbody>                
                 """
         for k, v in d.items():
-            if k not in ignore:
-                table += f"""
+            table += f"""
             <tr>
                 <td>{k}</td>
                 <td>{v}</td>
@@ -38,10 +37,10 @@ class Alerts(AlertsBase):
         """
         return table
 
-    def build_html_message(self, msg: str, d: dict = None, ignore:tuple = ()):
+    def build_html_message(self, msg: str, d: dict = None):
         table = ""
         if d:
-            table = self.dict_to_table(d, ignore=ignore)
+            table = self.dict_to_table(d)
 
         try:
             message = msg.replace("\n", "<br>").replace('\t', '    ')
