@@ -8,6 +8,7 @@ class AtlasAttachMethods:
     """
 
     local_block = 0
+    num_peers = 0
 
     def __init__(self, **kw) -> None:
         super(AtlasAttachMethods, self).__init__(**kw)
@@ -33,11 +34,17 @@ class AtlasAttachMethods:
         )
 
     def admin_peers_length(self, context: dict = dict(keystore=str())) -> None:
-        context.update(self.handle_input(context))
+        context.update(
+            {**self.handle_input(context), **{"attachValue": self.num_peers}}
+        )
         msg = f"Number of connected Peers "
         self.handle_attach(context, msg)
 
     def eth_blockNumber(self, context: dict = dict(keystore=str())) -> None:
-        context.update(self.handle_input(context))
+        context.update(
+            {**self.handle_input(context), **{"attachValue": self.eth_blockNumber}}
+        )
+
         msg = f"Block Number "
+
         self.handle_attach(context, msg, localBlock=True)

@@ -20,6 +20,7 @@ class RunProcess:
         isAttach: bool = False,
         isECDSA: bool = False,
         localBlock: bool = False,
+        attachValue: int = 0,
     ):
         async for line in stream:
             l = line.decode().strip()
@@ -37,8 +38,9 @@ class RunProcess:
 
             if isAttach:
                 if self.attach_prompt_found:
+                    attachValue = l
                     if localBlock:
-                        self.local_block = l
+                        # self.local_block = l
                         l = readable_price(l, d=0, show_decimals=False)
                     print(f"{prefix}: {l}")
                     self.attach_prompt_found = False

@@ -56,27 +56,26 @@ class Monitor(BaseMixin, General, Alerts):
                 return False, info_str, uptime
         return True, info_str, uptime
 
+    def check_peers(self) -> tuple:
+        peers = self.num_peers
+        return True, peers
+
     def start_monitor(self) -> None:
         while 1:
-            problem = False
             try:
                 if self.is_time_to_check():
                     epoch = self.get_epoch_data()
                     _, rpc_block, local_block, msg = self.compare_block_numbers()
                     sync_res, synced = self.check_sync(rpc_block, local_block)
-                    if not sync_res:
-                        problem = True
-
-                    alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n"
-
                     uptime_res, info_str, uptime = self.check_uptime()
+                    peers_res, num_peers = self.check_peers()
+
+                    alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n\nNumber of Peers Connected:  {num_peers}"
                     alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n{info_str}"
 
-                    if not uptime_res:
-                        problem = True
-
-                    else:
-                        self.build_send_error_message(alert_msg)
+                    problem = (
+                        True if False in (sync_res, uptime_res, peers_res) else False
+                    )
 
                     if problem:
                         self.build_send_error_message(alert_msg)
