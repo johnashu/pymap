@@ -29,12 +29,17 @@ class Alerts(AlertsBase):
             res = True
             if isinstance(v, (tuple, list, set)):
                 v, res = v
+                
             s = f"<td>{k}:</td><td>{v}</td>"
+
             # Error here, highlight this row
             if not res:
                 s = f'<font color="red"><strong>{s}</strong></font>'
+
             if v == "":
-                s = space           
+                s = space  
+            print(res) 
+            print(s)        
             table += f"<tr>{s}</tr>"
         table += """
             </tbody>
