@@ -23,19 +23,17 @@ class Alerts(AlertsBase):
     def dict_to_table(self, d: dict) -> str:
         table = []
         for k, v in d.items():
-            k = f"<p>{k}:</p>"
+            style = "style='padding: 0px;margin: 0px;{}'"
+            k = f"<p {style}>{k}:</p>"
             if v == "title":
-                k = f"<p style='font-weight: bold;'>{k}</p>"
+                k = f"<p {style.format('font-weight: bold;color:red')}>{k}</p>"
                 v = ""
             if isinstance(v, (tuple, list, set)):
                 v, res = v
                 if not res:
-                    v = f"<p style='font-weight: bold;color:red'>{v}</p>"
-                    k = f"<p style='font-weight: bold;color:red'>{k}</p>"
-            else:
-                v = f"<p>{v}</p>"
+                    v = f"<p {style.format('font-weight: bold;color:red')}>{v}</p>"
+                    k = f"<p {style.format('font-weight: bold;color:red')}>{k}</p>"
             table.append([k, v])
-        print(table)
         return tabulate(table, tablefmt="unsafehtml")
 
     def build_html_message(self, msg: str, d: dict = None):
