@@ -5,7 +5,9 @@ class MarkerMethods:
     def create_account(self, context: dict = dict(name=str())) -> None:
         """
         https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
-
+        # toggle between namePrefix (mainnet) and name (testnet)
+        # Will be removed when mainnet is updated.
+        # --namePrefix change to --name in v1.2.1
         if self.rpcaddr == self.mainnet:
             context = dict(namePrefix=str())
 
