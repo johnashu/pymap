@@ -2,33 +2,33 @@ import os
 from colorama import Fore
 from pymap.tools.utils import askYesNo
 
-from pymap.interactive.menu_mixin import MenuMixin
+from pymap.base.base_mixin import BaseMixin
 
 
-class Menu(MenuMixin):
+class Menu(BaseMixin):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
     def choose_network(self) -> None:
         while 1:
             try:
-                testnet = int(
+                choice = int(
                     input(
                         "Please indicate if you wish to use Testnet or Mainnet or setup monitoring\n\t* [1] Testnet\n\t* [2] Mainnet\n\t* [3] Create Monitoring Service\n\t>>> "
                     )
                 )
-                if testnet in (1, 2, 3):
+                if choice in (1, 2, 3):
                     break
             except ValueError:
                 pass
 
-        if testnet == 3:
+        if choice == 3:
             self.setup_monitor_service()
             return input("Press Enter to show menu or CTRL+C to exit..")
 
-        if testnet == 1:
+        if choice == 1:
             rpcaddr = self.testnet
-        elif testnet == 2:
+        elif choice == 2:
             rpcaddr = self.mainnet
 
         self.base_context.update(

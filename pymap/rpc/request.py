@@ -81,6 +81,7 @@ class RpcRequest:
                 endpoint = f"{endpoint}{method}"
 
             resp = requests.request(call_type, endpoint, **kw)
+
             self.star_surround(curlify.to_curl(resp.request))
             return resp.content
         except requests.exceptions.Timeout as err:

@@ -1,13 +1,13 @@
 class MarkerMethods:
     def __init__(self, **kw) -> None:
         super(MarkerMethods, self).__init__(**kw)
- 
-    def create_account(self, context: dict = dict( name =str())) -> None:
+
+    def create_account(self, context: dict = dict(name=str())) -> None:
         """
         https://docs.maplabs.io/develop/map-relay-chain/marker/aboutcommon#createaccount"""
 
         if self.rpcaddr == self.mainnet:
-            context = dict( namePrefix =str())
+            context = dict(namePrefix=str())
 
         context.update(
             self.handle_input(

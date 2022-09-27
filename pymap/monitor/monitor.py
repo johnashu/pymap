@@ -1,16 +1,16 @@
 import logging as log
 from time import sleep
 import datetime
+from pymap.base.base_mixin import BaseMixin
 
 from pymap.includes.config import alert_envs
-from pymap.process.methods.marker.marker_methods import MarkerMethods
-from pymap.rpc.methods.makalu_api_methods import MakaluApiMethods
+
 from pymap.tools.general import General
 from pymap.monitor.alerts.send_alerts import Alerts
 from pymap.monitor.includes.monitor_setup import times_sent
 
 
-class Monitor(MarkerMethods, MakaluApiMethods, General, Alerts):
+class Monitor(BaseMixin, General, Alerts):
 
     start_time = datetime.datetime.now()
     current_block = 0

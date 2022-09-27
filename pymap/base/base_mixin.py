@@ -1,4 +1,4 @@
-from pymap.tools.methods_base import MethodsBase
+from pymap.base.methods_base import MethodsBase
 from pymap.interactive.display import PrintStuff
 from pymap.process.methods.atlas.altas_methods import AtlasMethods
 from pymap.process.methods.atlas.atlas_attach_methods import AtlasAttachMethods
@@ -10,7 +10,7 @@ from pymap.tools.handle_input import HandleInput
 from pymap.process.methods.marker.marker_methods import MarkerMethods
 
 
-class MenuMixin(
+class BaseMixin(
     MethodsBase,
     MarkerMethods,
     RunProcess,
@@ -23,4 +23,4 @@ class MenuMixin(
     HandleInput,
 ):
     def __init__(self, **kw) -> None:
-        super(MenuMixin, self).__init__(**kw)
+        super(BaseMixin, self).__init__(**kw)
