@@ -24,7 +24,6 @@ class Alerts(AlertsBase):
         table = []
         for k, v in d.items():
             k = f"<p>{k}:</p>"
-            v = f"<p>{v}:</p>"
             if v == "title":
                 k = f"<p style='font-weight: bold;'>{k}</p>"
             if isinstance(v, (tuple, list, set)):
@@ -32,6 +31,8 @@ class Alerts(AlertsBase):
                 if not res:
                     v = f"<p style='font-weight: bold;color:red'>{v}</p>"
                     k = f"<p style='font-weight: bold;color:red'>{k}</p>"
+            else:
+                v = f"<p>{v}:</p>"
             table.append([k, v])
         return tabulate(table, tablefmt="unsafehtml")
 
