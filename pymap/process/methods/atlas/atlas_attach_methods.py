@@ -13,7 +13,9 @@ class AtlasAttachMethods:
     def __init__(self, **kw) -> None:
         super(AtlasAttachMethods, self).__init__(**kw)
 
-    def handle_attach(self, context: dict, msg: str, localBlock: bool = False) -> None:
+    def handle_attach(
+        self, context: dict, msg: str, localBlock: bool = False, attachValue: int = 0
+    ) -> None:
         method = inspect.stack()[1][3].replace("_", ".")
         attach = "attach"
         keystore = context.get("keystore")
@@ -31,6 +33,7 @@ class AtlasAttachMethods:
             isAttach=True,
             prefix=msg + f"for {args[-1]}",
             localBlock=localBlock,
+            attachValue=attachValue,
         )
 
     def admin_peers_length(self, context: dict = dict(keystore=str())) -> None:
