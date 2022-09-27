@@ -9,7 +9,7 @@ class Menu(MenuMixin):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
-    def is_testnet(self) -> None:
+    def choose_network(self) -> None:
         while 1:
             try:
                 testnet = int(
@@ -43,7 +43,7 @@ class Menu(MenuMixin):
             0: self.finish_node,
             999: self.reboot_server,
         }
-        self.is_testnet()
+        self.choose_network()
         while True:
             os.system("clear")
             self.create_menu()
