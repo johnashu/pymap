@@ -1,38 +1,6 @@
-from pymap.process.process_command import RunProcess
-from pymap.interactive.display import PrintStuff
-from pymap.methods.altas_methods import AtlasMethods
-from pymap.methods.atlas_attach_methods import AtlasAttachMethods
-from pymap.methods.rpc_methods import RpcMethods
-from pymap.methods.makalu_api_methods import MakaluApiMethods
-from pymap.methods.staking_methods import StakingGraph
-from pymap.tools.handle_input import HandleInput
-
-
-class MarkerMethods(
-    RunProcess,
-    PrintStuff,
-    AtlasMethods,
-    AtlasAttachMethods,
-    RpcMethods,
-    MakaluApiMethods,
-    StakingGraph,
-    HandleInput,
-):
-
-    base_fields = ("rpcaddr", "rpcport", "keystore", "password")
-    automatic = False
-
-    def __init__(self, **kw: dict) -> None:
-        self.base_field_keys = kw.keys()
-        self.set_fields(**kw)
-        self.base_context = {
-            k: v for k, v in kw.items() if k in self.base_fields if v != False
-        }
+class MarkerMethods:
+    def __init__(self, **kw) -> None:
         super(MarkerMethods, self).__init__(**kw)
-
-    def set_fields(self, **base_fields) -> None:
-        for k, v in base_fields.items():
-            setattr(self, k, str(v) if not isinstance(v, bool) else v)
 
     def create_account(self, context: dict = dict(name=str())) -> None:
         """
@@ -41,9 +9,6 @@ class MarkerMethods(
         context.update(
             self.handle_input(
                 {**self.base_context, **context},
-                # Signer does not require an account, only keystore..
-                # ask_is_signer=True,
-                # signer_fields=("name", "password", "passwordFile"),
             )
         )
         self.run_method("createAccount", context)

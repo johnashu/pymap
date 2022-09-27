@@ -1,10 +1,11 @@
 import os
 from colorama import Fore
 from pymap.tools.utils import askYesNo
-from pymap.methods.marker_methods import MarkerMethods
+
+from pymap.interactive.menu_mixin import MenuMixin
 
 
-class Menu(MarkerMethods):
+class Menu(MenuMixin):
     def __init__(self, **base_fields: dict) -> None:
         super(Menu, self).__init__(**base_fields)
 
