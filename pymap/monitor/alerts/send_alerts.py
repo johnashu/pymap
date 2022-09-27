@@ -34,7 +34,6 @@ class Alerts(AlertsBase):
             </tbody>
             </table>
         """
-        print(table)
         return table
 
     def build_html_message(self, msg: str, d: dict = None):

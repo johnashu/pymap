@@ -76,21 +76,30 @@ class Monitor(BaseMixin, General, Alerts):
                     uptime_res, _, info_dict, uptime = self.check_uptime()
                     peers_res, total_validators, num_peers = self.check_peers()
 
-                    msg_dict =  {
-                            "Sync Statistics:": " ",
-                            "Epoch": epoch,
-                            "Difference": synced,
-                            "sp1": "",
-                            "Local Block": local_block,
-                            "RPC Block": rpc_block,
-                            "sp2": "",
-                            "Connected Peers": f"{num_peers} / {total_validators}",
-                            "upTime": f"{uptime}%",
-                             "sp3": "",
-                            "Full Data:": " ",
-                        }
-                    ignore = 'version', 'createdAt', 'signAddress', 'accountAddress'
-                    msg_dict.update({k:v for k, v in info_dict.items() if k not in ignore})
+                    msg_dict = {
+                        "Sync Statistics:": " ",
+                        "Epoch": epoch,
+                        "Difference": synced,
+                        "sp1": "",
+                        "Local Block": local_block,
+                        "RPC Block": rpc_block,
+                        "sp2": "",
+                        "Connected Peers": f"{num_peers} / {total_validators}",
+                        "upTime": f"{uptime}%",
+                        "sp3": "",
+                        "Full Data:": " ",
+                    }
+                    ignore = (
+                        "version",
+                        "createdAt",
+                        "signAddress",
+                        "accountAddress",
+                        "id",
+                        "blockNumber",
+                    )
+                    msg_dict.update(
+                        {k: v for k, v in info_dict.items() if k not in ignore}
+                    )
                     alert_msg = self.build_html_message("", msg_dict)
                     problem = (
                         True if False in (sync_res, uptime_res, peers_res) else False
