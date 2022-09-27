@@ -1,5 +1,6 @@
 import logging as log
 import socket
+from tabulate import tabulate
 from pymap.monitor.alerts.alerts_base import AlertsBase
 from pymap.monitor.util.tools import check_hours_alert
 from pymap.includes.config import alert_envs
@@ -20,44 +21,27 @@ class Alerts(AlertsBase):
         )
 
     def dict_to_table(self, d: dict) -> str:
-        space = "<td></td><td></td>"
-        table = """
-        <table border="0" cellspacing="0" cellpadding="5">
-            <tbody>                
-                """
+
+        table =[
+
+        ]
         for k, v in d.items():
-            res = True
             if isinstance(v, (tuple, list, set)):
                 v, res = v
-                
-            s = f"<td>{k}:</td><td>{v}</td>"
-
-            # Error here, highlight this row
-            if not res:
-                s = f'<td>{k}:</td><td color="red">{v}</td>'
-
-            if v == "":
-                s = space        
-            table += f"<tr>{s}</tr>"
-        table += """
-            </tbody>
-            </table>
-        """
-        return table
+                if not res:
+                    v = f"<p style='color:red'>{v}</p>"
+            table.append([k, v])
+        return tabulate(table, tablefmt='unsafehtml')
 
     def build_html_message(self, msg: str, d: dict = None):
-        table = ""
-        if d:
-            table = self.dict_to_table(d)
-
         try:
-            message = msg.replace("\n", "<br>").replace("\t", "    ")
-            html = f"""{message}{table}"""
+            table = self.dict_to_table(d) 
+            print(table)
+            return table
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
             log.error(msg)
             return msg
-        return html
 
     def generic_error(self, e: str):
         self.send_alert(
