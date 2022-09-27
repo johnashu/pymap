@@ -48,13 +48,15 @@ class Monitor(BaseMixin, General, Alerts):
 
     def check_uptime(self) -> tuple:
         address = alert_envs.VALIDATOR_ADDRESS
-        _, info_str, info_dict = self.get_commitee_info_by_address(address, show=False)
-        uptime = info_dict.get("upTime")
+        raw, info_str, info_dict = self.get_commitee_info_by_address(
+            address, show=False
+        )
+        uptime = raw.get("upTime")
         if uptime:
             uptime = round(float(uptime), 2)
             if uptime < float(alert_envs.ACCEPTABLE_UPTIME):
                 return False, info_str, info_dict, uptime
-        return True, info_str, uptime
+        return True, info_str, info_dict, uptime
 
     def check_peers(self) -> tuple:
         self.admin_peers_length()
@@ -76,8 +78,8 @@ class Monitor(BaseMixin, General, Alerts):
 
                     alert_msg = f"Sync Statistics:\n\n        Epoch: {epoch}\n        Difference: {synced}\n{msg}\n\n"
                     alert_msg += f"Number of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
-                    alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}\n\nFull Data:\n\n"
-                    
+                    alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n"
+
                     alert_msg = self.build_html_message(alert_msg, info_dict)
                     problem = (
                         True if False in (sync_res, uptime_res, peers_res) else False

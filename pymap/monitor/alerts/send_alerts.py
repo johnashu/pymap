@@ -43,7 +43,7 @@ class Alerts(AlertsBase):
             table = self.dict_to_table(d)
 
         try:
-            message = msg.replace("\n", "<br>").replace('\t', '    ')
+            message = msg.replace("\n", "<br>").replace("\t", "    ")
             html = f"""{message}{table}"""
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
