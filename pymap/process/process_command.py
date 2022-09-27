@@ -40,16 +40,12 @@ class RunProcess:
                 if self.attach_prompt_found:
                     self.__dict__[attachValue] = l
                     if localBlock:
-                        # self.local_block = l
                         l = readable_price(l, d=0, show_decimals=False)
                     print(f"{prefix}: {l}")
                     self.attach_prompt_found = False
                     return
                 if l == ">":
                     self.attach_prompt_found = True
-
-                # if l_split[0].endswith('block'):
-                #     log.info(f"Block Number of Node:  {l_split[1].split()[0]}")
             else:
                 if not scrolling:
                     log.info(f"{prefix}  {l}")

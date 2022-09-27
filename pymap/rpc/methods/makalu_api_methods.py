@@ -12,6 +12,41 @@ class MakaluApiMethods(RpcRequest):
     def __init__(self, **kw) -> None:
         super(MakaluApiMethods, self).__init__(**kw)
 
+    def _get_validator_data(self) -> list:
+        """
+        Get the current validator data.
+
+        Returns
+        -------
+        Json Response
+
+        Raises
+        ------
+        InvalidRPCReplyError
+            If received unknown result from endpoint
+
+        API Reference
+        -------------
+
+        """
+
+        method = "queryValidatorData"
+        params = None
+        try:
+            return self.rpc_request(
+                method,
+                params=params,
+                endpoint=self._makalu_api_url,
+                timeout=self._timeout,
+                call_type="GET",
+            )["data"]
+        except KeyError as e:
+            raise InvalidRPCReplyError(method, self._makalu_api_url) from e
+
+    def query_validator_data(self) -> tuple:
+        data = self._get_validator_data()
+        return data
+
     def _get_rewards_list(self, address, page=1, size=10) -> list:
         """
         Get the current rewards for a validator.
