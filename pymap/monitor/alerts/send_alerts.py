@@ -20,22 +20,16 @@ class Alerts(AlertsBase):
         )
 
     def dict_to_table(self, d: dict) -> str:
-        space = "<td></td>"
+        space = "<td></td><td></td>"
         table = """
         <table border="0" cellspacing="0" cellpadding="5">
             <tbody>                
                 """
         for k, v in d.items():
-            s = ""
+            s = f"<td>{k}</td><td>{v}</td>"
             if not v:
                 s = space
-            table += f"""
-            <tr>
-                <td>{k}</td>
-                <td>{v}</td>
-                {s}
-                </tr>
-                """
+            table += f"<tr>{s} </tr>"
         table += """
             </tbody>
             </table>
