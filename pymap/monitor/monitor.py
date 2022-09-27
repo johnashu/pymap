@@ -85,7 +85,7 @@ class Monitor(BaseMixin, General, Alerts):
                             "Local Block": local_block,
                             "RPC Block": rpc_block,
                             "sp2": "",
-                            "Connected Peers": {num_peers} / {total_validators},
+                            "Connected Peers": f"{num_peers} / {total_validators}",
                             "Uptime": f"{uptime}%",
                             "Full Data": "",
                         }
