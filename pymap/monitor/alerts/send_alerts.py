@@ -26,9 +26,11 @@ class Alerts(AlertsBase):
             <tbody>                
                 """
         for k, v in d.items():
+            res = True
             if isinstance(v, (tuple, list, set)):
                 v, res = v
             s = f"<td>{k}:</td><td>{v}</td>"
+            # Error here, highlight this row
             if not res:
                 s = f'<font color="red"><strong>{s}</strong></font>'
             if v == "":
