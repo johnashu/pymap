@@ -29,11 +29,12 @@ class Alerts(AlertsBase):
             s = f"<td>{k}</td><td>{v}</td>"
             if not v:
                 s = space
-            table += f"<tr>{s} </tr>"
+            table += f"<tr>{s}</tr>"
         table += """
             </tbody>
             </table>
         """
+        print(table)
         return table
 
     def build_html_message(self, msg: str, d: dict = None):

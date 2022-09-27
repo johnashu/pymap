@@ -88,8 +88,10 @@ class Monitor(BaseMixin, General, Alerts):
                             "Uptime": f"{uptime}%",
                             "Full Data:": " ",
                         }
-
-                    alert_msg = self.build_html_message("", msg_dict.update(info_dict))
+                    
+                    msg_dict.update(info_dict)
+                    print(msg_dict)
+                    alert_msg = self.build_html_message("", msg_dict)
                     problem = (
                         True if False in (sync_res, uptime_res, peers_res) else False
                     )
