@@ -78,13 +78,13 @@ class Monitor(BaseMixin, General, Alerts):
                     alert_msg += f"Number of Peers Connected:  {num_peers} / {total_validators} Peers\n\n"
                     alert_msg += f"Uptime Statistics:\n\n        Epoch: {epoch}\n        Uptime: {uptime}%\n\nFull Data:\n\n"
                     
-                    alert_msg = self.build_message(alert_msg, info_dict)
+                    alert_msg = self.build_html_message(alert_msg, info_dict)
                     problem = (
                         True if False in (sync_res, uptime_res, peers_res) else False
                     )
 
                     if problem:
-                        self.build_send_error_message(alert_msg, epoch)
+                        self.send_error_message(alert_msg, epoch)
                     else:
                         self.times_sent = self.happy_alert(
                             self.times_sent,

@@ -9,7 +9,7 @@ class Alerts(AlertsBase):
 
     hostname = socket.gethostname()
 
-    def build_send_error_message(self, err_msg, epoch, *a, **kw) -> None:
+    def send_error_message(self, err_msg, epoch, *a, **kw) -> None:
         # err_msg = self.build_error_message(*a, **kw)
         self.send_alert(
             f"Epoch: [ {epoch} ] Problem With Node -- {self.hostname}",
