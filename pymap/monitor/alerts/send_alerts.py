@@ -34,12 +34,10 @@ class Alerts(AlertsBase):
 
             # Error here, highlight this row
             if not res:
-                s = f'<font color="red"><strong>{s}</strong></font>'
+                s = f'<p style="color:red;"><strong>{s}</strong></p>'
 
             if v == "":
-                s = space  
-            print(res) 
-            print(s)        
+                s = space        
             table += f"<tr>{s}</tr>"
         table += """
             </tbody>
