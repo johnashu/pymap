@@ -1,4 +1,5 @@
 from re import M
+from wsgiref.validate import validator
 from pymap.rpc.request import RpcRequest
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
@@ -159,8 +160,10 @@ class MakaluApiMethods(RpcRequest):
         if validator_info:
             validator_info = validator_info.get("committeeBasicInfo")
             apy = self.get_apy(address)
-            validator_info.update({"apy": apy})
-
+            validator_info = {
+                **{"apy": apy},
+                **validator_info
+            }
             meta = {
                 "voteReward": (None, "%", True, {}),
                 "apy": (None, "%", False, {}),
