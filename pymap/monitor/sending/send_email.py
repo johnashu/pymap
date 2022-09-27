@@ -28,12 +28,10 @@ def send_email(subject: str, message: str) -> None:
 
     ServerConnect = False
 
-    html_output = f"<html> <head></head><body>{message}</body></html>"
-
     # # text must be the first one
     # msg.attach(MIMEText(message, 'plain'))
     # html must be the last one
-    msg.attach(MIMEText(html_output, "html"))
+    msg.attach(MIMEText(message, "html"))
 
     try:
         smtp_server = SMTP(alert_envs.EMAIL_SMTP, alert_envs.PORT)

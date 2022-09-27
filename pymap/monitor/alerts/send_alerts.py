@@ -40,7 +40,9 @@ class Alerts(AlertsBase):
     def build_html_message(self, msg: str, d: dict = None):
         try:
             table = self.dict_to_table(d)
-            return table
+            print(table)
+            print(d)
+            return f"<html> <head></head><body>{table}</body></html>"
         except KeyError as e:
             msg = f"Problem Sending alert [ build_error_message ] {e}"
             log.error(msg)
