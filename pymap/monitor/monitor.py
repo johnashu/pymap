@@ -51,7 +51,7 @@ class Monitor(BaseMixin, General, Alerts):
         )
         uptime = raw.get("upTime")
         uptime = round(float(uptime), 2)
-        return uptime < float(alert_envs.ACCEPTABLE_UPTIME), info_str, info_dict, uptime
+        return uptime >= float(alert_envs.ACCEPTABLE_UPTIME), info_str, info_dict, uptime
 
     def check_peers(self) -> tuple:
         self.admin_peers_length()

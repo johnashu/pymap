@@ -26,6 +26,7 @@ class Alerts(AlertsBase):
             k = f"<p>{k}:</p>"
             if v == "title":
                 k = f"<p style='font-weight: bold;'>{k}</p>"
+                v = ""
             if isinstance(v, (tuple, list, set)):
                 v, res = v
                 if not res:
