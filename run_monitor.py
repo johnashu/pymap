@@ -23,4 +23,3 @@ if __name__ == "__main__":
 
     # test_alert()
     # m.setup_monitor_service()
-

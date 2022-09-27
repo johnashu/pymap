@@ -22,17 +22,20 @@ class Alerts(AlertsBase):
 
     def dict_to_table(self, d: dict) -> str:
         table = []
+        style = "style='padding: 0px;margin: 0px;{}'"
+        bold = "font-weight: bold;"
+        bold_red = f"{bold}color:red;"
         for k, v in d.items():
-            style = "style='padding: 0px;margin: 0px;{}'"
+
             k = f"<p {style}>{k}:</p>"
             if v == "title":
-                k = f"<p {style.format('font-weight: bold;color:red')}>{k}</p>"
+                k = f"<p {style.format(bold)}>{k}</p>"
                 v = ""
             if isinstance(v, (tuple, list, set)):
                 v, res = v
                 if not res:
-                    v = f"<p {style.format('font-weight: bold;color:red')}>{v}</p>"
-                    k = f"<p {style.format('font-weight: bold;color:red')}>{k}</p>"
+                    v = f"<p {style.format(bold_red)}>{v}</p>"
+                    k = f"<p {style.format(bold_red)}>{k}</p>"
             table.append([k, v])
         return tabulate(table, tablefmt="unsafehtml")
 
