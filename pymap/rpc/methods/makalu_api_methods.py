@@ -93,7 +93,6 @@ class MakaluApiMethods(RpcRequest):
             )
             address = vals.get("default_address")
             paginate = vals.get("paginate")
-            print("paginate", paginate)
 
         rewards_list = self._get_rewards_list(address, page=page, size=size)
         pages_msg, m = self.calc_num_pages(page, size, rewards_list)
@@ -196,6 +195,8 @@ class MakaluApiMethods(RpcRequest):
         self, func, m, *args, page: int = 1, size: int = 2, paginate: str = "Yes", **kw
     ) -> None:
         next_page = page + 1
+        if not paginate:
+            paginate = 'No'
         do_paginate = askYesNo("", paginate)
         if do_paginate and next_page <= m:
             input(f"Press any key to load page {next_page}")
