@@ -14,4 +14,5 @@ name_map = {
     "syncmode": "Syncing mode required",
     "port": "Port to run Node on",
     "default_address": "Enter address to check",
+    "epochs_range": "Enter a single epoch [32] or a range [1-10] or [all]",
 }

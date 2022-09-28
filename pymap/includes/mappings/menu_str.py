@@ -31,6 +31,7 @@ menu_items = {
     "Get Local Peer Count": "admin_peers_length",
     "Get Validator Reward Info": "get_validator_reward_info",
     "Get Validator Rewards List": "get_rewards_list",
+    "Get Total Rewards": "get_total_rewards",
     "Get Validator Information MARKER": "get_validator",
     "Get Validator Info MAKALU": "get_commitee_info_by_address",
     "Check if Elected": "check_if_selected",

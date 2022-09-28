@@ -1,4 +1,4 @@
-from re import M
+from cgitb import reset
 from wsgiref.validate import validator
 from pymap.rpc.request import RpcRequest
 from pymap.rpc.exceptions import (
@@ -7,6 +7,7 @@ from pymap.rpc.exceptions import (
 )
 from pymap.tools.utils import readable_price, askYesNo
 import math
+import logging
 
 
 class MakaluApiMethods(RpcRequest):
@@ -85,6 +86,7 @@ class MakaluApiMethods(RpcRequest):
         page: int = 1,
         size: int = 2,
         paginate: str = "Yes",
+        auto_paginate: bool = True,
         show: bool = True,
     ) -> int:
         if not address:
@@ -95,9 +97,10 @@ class MakaluApiMethods(RpcRequest):
             paginate = vals.get("paginate")
 
         rewards_list = self._get_rewards_list(address, page=page, size=size)
+        self.total_list += rewards_list.get("list")
         pages_msg, m = self.calc_num_pages(page, size, rewards_list)
 
-        if show:
+        if show and not auto_paginate:
             meta = {
                 "voterReward": ("", " $MAP", False, {}),
                 "reward": ("", " $MAP", False, {}),
@@ -108,15 +111,90 @@ class MakaluApiMethods(RpcRequest):
             self.display_dict(rewards_list["list"], meta=meta, ignore=ignore)
             print(f"Rewards for [ {address} ]\n{pages_msg}")
 
-            self.run_pagniate(
-                self.get_rewards_list,
-                m,
-                *(address,),
-                page=page,
-                size=size,
-                paginate=paginate,
-            )
+        self.run_pagniate(
+            self.get_rewards_list,
+            m,
+            *(address,),
+            page=page,
+            size=size,
+            paginate=paginate,
+            auto_paginate=auto_paginate,
+        )
         return rewards_list
+
+    total_list = []
+
+    def get_epochs_in_range(self, epochs_range: str) -> list:
+        epochs_in_range = None
+
+        if epochs_range.lower().strip() != "all":
+            epochs = epochs_range.split("-")
+            if len(epochs) == 2:
+                _from, _to = epochs
+            else:
+                _from = _to = epochs_range
+            try:
+                epochs_in_range = [x for x in range(int(_from), int(_to) + 1)]
+                return True, epochs_in_range
+            except ValueError as e:
+                logging.error(
+                    f"Incorrect epoch passed.  Got {epochs_range} expected a single epoch 32 or a range 1-10 or all "
+                )
+                return False, []
+        return True, []
+
+    def aggregate_rewards_list(self, epochs_in_range: list = []) -> float:
+        total_rewards = 0
+        total_voter_rewards = 0
+
+        for x in self.total_list:
+            e = int(x.get("epoch"))
+            r = float(x.get("reward"))
+            v = float(x.get("voterReward"))
+            if not epochs_in_range:
+                total_rewards += r
+                total_voter_rewards += v
+            else:
+                if e in epochs_in_range:
+                    total_rewards += r
+                    total_voter_rewards += v
+
+        return round(total_rewards, 2), round(total_voter_rewards, 2)
+
+    def get_total_rewards(self, address: str = "", epochs_range: str = "all") -> dict:
+        self.total_list = []
+        if not address:
+            vals = self.handle_input(
+                {"default_address": self.default_address, "epochs_range": epochs_range}
+            )
+            address = vals.get("default_address")
+            epochs_range = vals.get("epochs_range")
+
+        found, epochs_in_range = self.get_epochs_in_range(epochs_range)
+
+        if not found:
+            return 0, 0
+
+        self.get_rewards_list(
+            address, show=False, page=1, size=2, paginate="Yes", auto_paginate=True
+        )
+
+        total_rewards, total_voter_rewards = self.aggregate_rewards_list(
+            epochs_in_range
+        )
+
+        result = {
+            "Epoch Range": epochs_range,
+            "Rewards": total_rewards,
+            "Voter Rewards": total_voter_rewards,
+        }
+
+        msg = "Total Rewards summary:\n\n"
+        msg += "".join([f"{k:>13}: {v}\n" for k, v in result.items()])
+
+        self.star_surround(msg)
+
+        return result
 
     def _get_commitee_info_by_address(self, address) -> list:
         """
@@ -195,12 +273,28 @@ class MakaluApiMethods(RpcRequest):
         )
 
     def run_pagniate(
-        self, func, m, *args, page: int = 1, size: int = 2, paginate: str = "Yes", **kw
+        self,
+        func,
+        m,
+        *args,
+        page: int = 1,
+        size: int = 2,
+        paginate: str = "Yes",
+        auto_paginate: bool = False,
+        **kw,
     ) -> None:
         next_page = page + 1
         if not paginate:
             paginate = "No"
         do_paginate = askYesNo("", paginate)
         if do_paginate and next_page <= m:
-            input(f"Press any key to load page {next_page}")
-            return func(*args, page=next_page, size=size, paginate=paginate, **kw)
+            if not auto_paginate:
+                input(f"Press any key to load page {next_page}")
+            return func(
+                *args,
+                page=next_page,
+                size=size,
+                paginate=paginate,
+                auto_paginate=auto_paginate,
+                **kw,
+            )
