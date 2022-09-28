@@ -176,7 +176,7 @@ class MakaluApiMethods(RpcRequest):
             return 0, 0
 
         self.get_rewards_list(
-            address, show=False, page=1, size=2, paginate="Yes", auto_paginate=True
+            address, show=False, page=1, size=50, paginate="Yes", auto_paginate=True
         )
 
         total_rewards, total_voter_rewards = self.aggregate_rewards_list(
