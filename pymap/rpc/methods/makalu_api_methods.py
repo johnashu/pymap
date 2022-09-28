@@ -151,6 +151,7 @@ class MakaluApiMethods(RpcRequest):
         self, address: str = "", show: bool = True
     ) -> dict:
         msg = None
+        msg_dict = {}
         if not address:
             vals = self.handle_input({"default_address": self.default_address})
             address = vals.get("default_address")
