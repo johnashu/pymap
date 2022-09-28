@@ -98,9 +98,12 @@ class MakaluApiMethods(RpcRequest):
         pages_msg, m = self.calc_num_pages(page, size, rewards_list)
 
         if show:
-            meta = {"voterReward": ("Block: ", "", True, {})}
+            meta = {
+                "voterReward": ("", " $MAP", False, {}),
+                "reward": ("", " $MAP", False, {}),
+            }
 
-            ignore = "rewardStr, voterRewardStr"
+            ignore = "rewardStr", "voterRewardStr"
 
             self.display_dict(rewards_list["list"], meta=meta, ignore=ignore)
             print(f"Rewards for [ {address} ]\n{pages_msg}")
@@ -196,7 +199,7 @@ class MakaluApiMethods(RpcRequest):
     ) -> None:
         next_page = page + 1
         if not paginate:
-            paginate = 'No'
+            paginate = "No"
         do_paginate = askYesNo("", paginate)
         if do_paginate and next_page <= m:
             input(f"Press any key to load page {next_page}")

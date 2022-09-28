@@ -168,19 +168,20 @@ class PrintStuff:
                 if k in mulitply:
                     v = int(v) * 100
 
-                pre, post, readable, kw = (
-                    meta.get(k) if meta.get(k) else ("", "", False, {})
-                )
-                pre = pre if pre else ""
-                post = post if post else ""
+                if meta:
+                    pre, post, readable, kw = (
+                        meta.get(k) if meta.get(k) else ("", "", False, {})
+                    )
+                    pre = pre if pre else ""
+                    post = post if post else ""
 
-                if readable:
-                    kwargs = {**{"num": v}, **kw} if kw else {"num": v}
-                    v = readable_price(**kwargs) if readable else v
+                    if readable:
+                        kwargs = {**{"num": v}, **kw} if kw else {"num": v}
+                        v = readable_price(**kwargs) if readable else v
 
-                if post == "%":
-                    v = round(float(v), 2)
-                v = f" {pre} {v}{post}"
+                    if post.strip() in ("%", "$MAP"):
+                        v = round(float(v), 2)
+                    v = f" {pre} {v}{post}"
 
                 msg += f"{k:<{c}} :: {v:<{c}}\n"
                 rtn_dict[k] = v

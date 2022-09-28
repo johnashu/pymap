@@ -94,7 +94,7 @@ class Monitor(BaseMixin, General, Alerts):
                         "accountAddress",
                         "id",
                         "blockNumber",
-                        "upTime"
+                        "upTime",
                     )
                     msg_dict.update(
                         {k: v for k, v in info_dict.items() if k not in ignore}
