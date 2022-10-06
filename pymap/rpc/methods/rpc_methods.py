@@ -1,10 +1,9 @@
-from os import read
 from pymap.rpc.request import RpcRequest
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
-from pymap.tools.utils import log, readable_price
+from pymap.tools.utils import readable_price
 
 
 class RpcMethods(RpcRequest):

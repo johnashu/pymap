@@ -1,11 +1,9 @@
-from cgitb import reset
-from wsgiref.validate import validator
 from pymap.rpc.request import RpcRequest
 from pymap.rpc.exceptions import (
     TxConfirmationTimedoutError,
     InvalidRPCReplyError,
 )
-from pymap.tools.utils import readable_price, askYesNo
+from pymap.tools.utils import askYesNo
 import math
 import logging
 

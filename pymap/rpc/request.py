@@ -1,6 +1,4 @@
 import json
-from textwrap import indent
-
 import requests
 import curlify
 
