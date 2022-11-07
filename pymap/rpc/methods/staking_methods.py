@@ -10,6 +10,7 @@ class StakingGraph(RpcRequest):
         super(StakingGraph, self).__init__(**kw)
 
     def _get_staking_validators(self) -> list:
+
         """
         Get the current staking validators.
 

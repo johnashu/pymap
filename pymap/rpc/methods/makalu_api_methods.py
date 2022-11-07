@@ -249,6 +249,7 @@ class MakaluApiMethods(RpcRequest):
                 "upTime": (None, "%", False, {}),
                 "blockNumber": (None, "", True, dict(d=0, show_decimals=False)),
                 "votedAmount": (None, "", True, dict(show_decimals=False)),
+                "activeAmount": (None, "", True, dict(show_decimals=False)),
             }
 
             ignore = "pk1, pk2"
