@@ -61,7 +61,6 @@ class RpcRequest:
             list if call_type == "POST" and not graph else dict, params
         )
         try:
-
             if call_type == "POST":
                 if not graph:
                     payload = {
@@ -72,12 +71,14 @@ class RpcRequest:
                     }
                 else:
                     payload = params
+
                 kw["data"] = json.dumps(payload, indent=4)
 
             elif call_type == "GET":
                 kw["params"] = params
                 endpoint = f"{endpoint}{method}"
 
+            kw["cookies"] = None
             resp = requests.request(call_type, endpoint, **kw)
 
             self.star_surround(curlify.to_curl(resp.request))

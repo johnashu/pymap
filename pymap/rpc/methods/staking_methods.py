@@ -49,9 +49,12 @@ class StakingGraph(RpcRequest):
         if not address:
             vals = self.handle_input({"default_address": self.default_address})
             address = vals.get("default_address")
-        validators = self._get_staking_validators()
-        for x in validators:
-            if x.get("validator") == address:
-                apy = x.get("apy")
-                return apy
+        try:
+            validators = self._get_staking_validators()
+            for x in validators:
+                if x.get("validator") == address:
+                    return x.get("apy")
+        except:
+            ...
+
         return 0
