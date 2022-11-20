@@ -242,7 +242,7 @@ class MakaluApiMethods(RpcRequest):
             validator_info = {**{"apy": apy}, **validator_info}
             meta = {
                 "voteReward": (None, "%", True, {}),
-                "apy": (None, "%", False, {}),
+                "apy": (None, "%" + "Error" if apy == "0" else "", False, {}),
                 "lockedAmount": (None, None, True, dict(show_decimals=False)),
                 "votePercent": (None, "%", False, {}),
                 "version": (" Epoch", None, False, {}),
