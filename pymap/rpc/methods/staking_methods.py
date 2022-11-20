@@ -57,4 +57,4 @@ class StakingGraph(RpcRequest):
         except:
             ...
 
-        return 0
+        return "0"
