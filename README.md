@@ -1,6 +1,6 @@
 # pymap
 
-Python interface for validators for interacting with the MAP protocol
+Python interface for validators for interacting with the MAP protocol.
 
 # Install Python / pip
 
