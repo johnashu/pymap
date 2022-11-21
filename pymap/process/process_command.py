@@ -54,17 +54,17 @@ class RunProcess:
 
     async def create_process(self, cmd):
 
-        p = await asyncio.create_subprocess_exec(
+        return await asyncio.create_subprocess_exec(
             *cmd,
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
 
-        return p
-
     async def run(self, cmd, std_in: str = "", **kw):
+
         p = await self.create_process(cmd)
+
         if std_in:
             p.stdin.write(std_in)
         if kw.get("isAttach"):
