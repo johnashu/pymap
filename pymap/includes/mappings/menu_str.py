@@ -1,3 +1,13 @@
+# TODO: Segredate into areas for better navigation. (less on 1 page)
+# i.e.
+# "atlas methods": {
+#    "Atlas Version Info": "get_atlas_version",
+#    ...
+# },
+# "marker methods: {
+#    ...
+    
+
 menu_items = {
     "List / Update Input Data": "display_and_update_env",
     "Atlas Version Info": "get_atlas_version",
