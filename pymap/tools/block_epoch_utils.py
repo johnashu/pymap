@@ -19,6 +19,7 @@ def get_current_epoch(current_block, blocks_per_epoch) -> int:
 
 
 def time_to_next_block(current_block, blocks_per_epoch) -> datetime:
+    # TODO: Get Block Time from API if possible
     block_time = 4.5  # seconds
     epoch = get_current_epoch(current_block, blocks_per_epoch)
     next_epoch = (epoch * blocks_per_epoch) + 1
