@@ -37,8 +37,8 @@ ignore = ("binaries",)
 #     os.path.dirname(os.path.abspath(__file__)), "messages", "fullmenu.txt"
 # )
 
-rpc_url = "https://poc3-rpc.maplabs.io"
-makalu_api_url = "https://makalu-api.mapscan.io/scan/"
+rpc_url = "https://poc3-rpc.maplabs.io" 
+makalu_api_url = "https://ms-mainnet-api.chainservice.io//scan/api/"
 staking_graph_url = "https://staking.maplabs.io/graphql"
 
 _rpc_endpoint = rpc_url
